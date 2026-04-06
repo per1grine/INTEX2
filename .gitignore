@@ -1,0 +1,52 @@
+## Environment / secrets
+.env
+.env.*
+!.env.example
+
+## Node / Vite / React
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+dist/
+build/
+.vite/
+.cache/
+.parcel-cache/
+
+## .NET / ASP.NET
+**/bin/
+**/obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.dbmdl
+*.jfm
+*.pfx
+*.snk
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Visual Studio
+.vs/
+
+## VS Code / Cursor
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+## OS cruft
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+## Logs
+*.log
+

@@ -1,0 +1,69 @@
+using System.Security.Claims;
+using BCrypt.Net;
+using IntexApi.Contracts;
+using IntexApi.Data;
+using IntexApi.Models;
+using IntexApi.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace IntexApi.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public sealed class AuthController(AppDbContext db, IJwtTokenService jwt) : ControllerBase
+{
+    [HttpPost("register")]
+    public async Task<ActionResult<AuthResponse>> Register(RegisterRequest req, CancellationToken ct)
+    {
+        var usernameTaken = await db.Users.AnyAsync(x => x.Username == req.Username, ct);
+        if (usernameTaken) return Conflict(new { message = "Username already exists." });
+
+        var emailTaken = await db.Users.AnyAsync(x => x.Email == req.Email, ct);
+        if (emailTaken) return Conflict(new { message = "Email already exists." });
+
+        var user = new User
+        {
+            FirstName = req.FirstName.Trim(),
+            Email = req.Email.Trim().ToLowerInvariant(),
+            Username = req.Username.Trim(),
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(req.Password),
+        };
+
+        db.Users.Add(user);
+        await db.SaveChangesAsync(ct);
+
+        var token = jwt.CreateToken(user);
+        return Ok(new AuthResponse(token, new UserDto(user.Id, user.FirstName, user.Email, user.Username)));
+    }
+
+    [HttpPost("login")]
+    public async Task<ActionResult<AuthResponse>> Login(LoginRequest req, CancellationToken ct)
+    {
+        var user = await db.Users.SingleOrDefaultAsync(x => x.Username == req.Username, ct);
+        if (user is null) return Unauthorized(new { message = "Invalid username or password." });
+
+        var ok = BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash);
+        if (!ok) return Unauthorized(new { message = "Invalid username or password." });
+
+        var token = jwt.CreateToken(user);
+        return Ok(new AuthResponse(token, new UserDto(user.Id, user.FirstName, user.Email, user.Username)));
+    }
+
+    [Authorize]
+    [HttpGet("me")]
+    public async Task<ActionResult<UserDto>> Me(CancellationToken ct)
+    {
+        var sub = User.FindFirstValue(ClaimTypes.NameIdentifier)
+                  ?? User.FindFirstValue("sub");
+
+        if (!Guid.TryParse(sub, out var userId)) return Unauthorized();
+
+        var user = await db.Users.FindAsync([userId], ct);
+        if (user is null) return Unauthorized();
+
+        return Ok(new UserDto(user.Id, user.FirstName, user.Email, user.Username));
+    }
+}
+

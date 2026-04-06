@@ -1,0 +1,87 @@
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from 'react'
+import { apiGetMe, apiLogin, apiRegister, type UserDto } from '../utils/api'
+
+type AuthState = {
+  user: UserDto | null
+  token: string | null
+  login: (username: string, password: string) => Promise<void>
+  register: (firstName: string, email: string, username: string, password: string) => Promise<void>
+  logout: () => void
+  refreshMe: () => Promise<void>
+}
+
+const AuthContext = createContext<AuthState | undefined>(undefined)
+
+const LS_TOKEN = 'intex.token'
+const LS_USER = 'intex.user'
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [token, setToken] = useState<string | null>(() => localStorage.getItem(LS_TOKEN))
+  const [user, setUser] = useState<UserDto | null>(() => {
+    const raw = localStorage.getItem(LS_USER)
+    return raw ? (JSON.parse(raw) as UserDto) : null
+  })
+
+  const persist = useCallback((nextToken: string | null, nextUser: UserDto | null) => {
+    setToken(nextToken)
+    setUser(nextUser)
+    if (nextToken) localStorage.setItem(LS_TOKEN, nextToken)
+    else localStorage.removeItem(LS_TOKEN)
+    if (nextUser) localStorage.setItem(LS_USER, JSON.stringify(nextUser))
+    else localStorage.removeItem(LS_USER)
+  }, [])
+
+  const login = useCallback(async (username: string, password: string) => {
+    const res = await apiLogin({ username, password })
+    persist(res.token, res.user)
+  }, [persist])
+
+  const register = useCallback(
+    async (firstName: string, email: string, username: string, password: string) => {
+      const res = await apiRegister({ firstName, email, username, password })
+      persist(res.token, res.user)
+    },
+    [persist],
+  )
+
+  const logout = useCallback(() => {
+    persist(null, null)
+  }, [persist])
+
+  const refreshMe = useCallback(async () => {
+    if (!token) return
+    try {
+      const me = await apiGetMe(token)
+      persist(token, me)
+    } catch {
+      persist(null, null)
+    }
+  }, [persist, token])
+
+  useEffect(() => {
+    void refreshMe()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const value = useMemo<AuthState>(
+    () => ({ user, token, login, register, logout, refreshMe }),
+    [user, token, login, register, logout, refreshMe],
+  )
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+}
+
+export function useAuth() {
+  const ctx = useContext(AuthContext)
+  if (!ctx) throw new Error('useAuth must be used within AuthProvider')
+  return ctx
+}
+
