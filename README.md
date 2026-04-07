@@ -1,24 +1,57 @@
-# INTEX2 – PERN-style starter (Postgres + React) with .NET 10 API
+# INTEX2
 
-This repo contains:
+This repo currently contains:
 
-- `backend/` – .NET 10 Web API (JWT auth + EF Core + Postgres)
-- `frontend/` – Vite + React + TypeScript UI (Home/Login/Register/Welcome)
+- `backend/` – .NET 10 Web API with JWT auth, EF Core, and Postgres
+- `frontend/` – the active Vite + React + TypeScript frontend
+- `lighthouse_csv_v7/` – project data assets
+
+The old frontend has been replaced. The current `frontend/` is the migrated Lovable-based UI with the previous app's auth and protected-route functionality moved into it.
+
+## Current app structure
+
+The frontend now includes:
+
+- public marketing pages
+- backend-backed login and registration
+- persisted auth state
+- donor-only and admin-only routes
+- admin placeholder routes for future internal tools
+
+Key frontend routes:
+
+- `/`
+- `/donors`
+- `/impact`
+- `/volunteer`
+- `/privacy`
+- `/login`
+- `/register`
+- `/donor`
+- `/admin`
+- `/admin/caseloads`
+- `/admin/process-recording`
+- `/admin/visits`
+- `/admin/reports`
 
 ## Backend setup
 
-### 1) Configure Postgres connection + JWT key
+### 1. Configure Postgres and JWT
 
-Edit `backend/IntexApi/appsettings.json`:
+Edit [backend/IntexApi/appsettings.json](/Users/phoenixfisher/Projects/INTEX2/backend/IntexApi/appsettings.json):
 
-- `ConnectionStrings:Default`: set Host/Database/Username/Password for your local Postgres
-- `Jwt:Key`: set to a long random secret
+- `ConnectionStrings:Default`: your local Postgres connection string
+- `Jwt:Key`: a long random secret
 
-You can also set the connection string via environment variable instead of editing JSON:
+You can also override the connection string via environment variable:
 
-- `ConnectionStrings__Default="Host=...;Port=5432;Database=...;Username=...;Password=..."`
+```bash
+ConnectionStrings__Default="Host=...;Port=5432;Database=...;Username=...;Password=..."
+```
 
-### 2) Create the DB tables
+Development defaults live in [backend/IntexApi/appsettings.Development.json](/Users/phoenixfisher/Projects/INTEX2/backend/IntexApi/appsettings.Development.json).
+
+### 2. Apply the database
 
 From the repo root:
 
@@ -26,44 +59,57 @@ From the repo root:
 dotnet ef database update --project backend/IntexApi/IntexApi.csproj
 ```
 
-### 3) Run the API
+### 3. Run the API
 
 ```bash
 dotnet run --project backend/IntexApi/IntexApi.csproj
 ```
 
-The API runs on `http://localhost:5178` by default (see `launchSettings.json`).
-The API runs on `http://localhost:5180` by default (see `launchSettings.json`).
+The API development profile runs on `http://localhost:5180` per [backend/IntexApi/Properties/launchSettings.json](/Users/phoenixfisher/Projects/INTEX2/backend/IntexApi/Properties/launchSettings.json).
 
 Auth endpoints:
 
 - `POST /api/auth/register`
 - `POST /api/auth/login`
-- `GET /api/auth/me` (Bearer token)
+- `GET /api/auth/me`
 
 ## Frontend setup
 
-### 1) Install + run
+### 1. Install dependencies
 
 ```bash
 cd frontend
 npm install
+```
+
+### 2. Run the frontend
+
+```bash
 npm run dev
 ```
 
-Frontend uses `VITE_API_URL` (see `frontend/.env`) and expects the API at `http://localhost:5180`.
+The Vite dev server is currently configured for `http://localhost:5173` in [frontend/vite.config.ts](/Users/phoenixfisher/Projects/INTEX2/frontend/vite.config.ts).
 
-## Database scripts (npm)
+### 3. API base URL
 
-These scripts are run from **`frontend/`** and use `frontend/.env` `DATABASE_URL`:
+The frontend expects:
 
-- `npm run db:reset` – drops/recreates the `public` schema (wipes all data)
-- `npm run db:setup` – creates required tables/indexes (`Users`)
-- `npm run db:seed` – inserts a couple test users
-
-Example `DATABASE_URL`:
-
-```text
-DATABASE_URL=postgresql://YOUR_USER:YOUR_PASSWORD@localhost:5432/intex
+```bash
+VITE_API_URL=http://localhost:5180
 ```
 
+If `VITE_API_URL` is not set, the frontend falls back to `http://localhost:5178`, so setting `VITE_API_URL` is recommended.
+
+## Verification
+
+From `frontend/`:
+
+```bash
+npm run build
+npm run lint
+```
+
+Current status:
+
+- build passes
+- lint passes with warnings only from generated/shared UI helper files
