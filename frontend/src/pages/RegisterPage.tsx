@@ -12,6 +12,7 @@ export function RegisterPage() {
   const [password, setPassword] = useState('')
   const [isDonor, setIsDonor] = useState(true)
   const [isAdmin, setIsAdmin] = useState(false)
+  const [adminCode, setAdminCode] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
@@ -33,7 +34,9 @@ export function RegisterPage() {
             setLoading(true)
             try {
               if (!isAdmin && !isDonor) throw new Error('Select at least one role (Donor and/or Admin).')
-              const user = await register(firstName, email, username, password, isDonor, isAdmin)
+              if (isAdmin && adminCode.trim().length === 0)
+                throw new Error('Admin code is required to register as an admin.')
+              const user = await register(firstName, email, username, password, isDonor, isAdmin, adminCode)
               navigate(user.isAdmin ? '/admin' : user.isDonor ? '/donor' : '/')
             } catch (err) {
               setError(err instanceof Error ? err.message : 'Registration failed')
@@ -78,8 +81,22 @@ export function RegisterPage() {
             </label>
             <label className="checkRow">
               Admin:
-              <input type="checkbox" checked={isAdmin} onChange={(event) => setIsAdmin(event.target.checked)} />
+              <input
+                type="checkbox"
+                checked={isAdmin}
+                onChange={(event) => {
+                  const next = event.target.checked
+                  setIsAdmin(next)
+                  if (!next) setAdminCode('')
+                }}
+              />
             </label>
+            {isAdmin ? (
+              <label className="field">
+                <span>Admin code</span>
+                <input value={adminCode} onChange={(event) => setAdminCode(event.target.value)} required />
+              </label>
+            ) : null}
           </fieldset>
 
           {error ? <div className="error">{error}</div> : null}

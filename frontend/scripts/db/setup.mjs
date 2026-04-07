@@ -18,6 +18,13 @@ await withClient(async (client) => {
   await client.query(`CREATE UNIQUE INDEX IF NOT EXISTS "IX_Users_Username" ON "Users" ("Username");`)
   await client.query(`CREATE UNIQUE INDEX IF NOT EXISTS "IX_Users_Email" ON "Users" ("Email");`)
 
+  await client.query(`
+    CREATE TABLE IF NOT EXISTS "AddCodes" (
+      "Code" varchar(64) PRIMARY KEY,
+      "CreatedAtUtc" timestamptz NOT NULL
+    );
+  `)
+
   console.log('Database setup complete: tables/indexes ensured.')
 })
 

@@ -26,6 +26,15 @@ public sealed class AuthController(AppDbContext db, IJwtTokenService jwt) : Cont
         if (!req.IsAdmin && !req.IsDonor)
             return BadRequest(new { message = "Select at least one role (Donor and/or Admin)." });
 
+        if (req.IsAdmin)
+        {
+            var code = (req.AdminCode ?? "").Trim();
+            if (code.Length == 0) return BadRequest(new { message = "Admin code is required to register as an admin." });
+
+            var valid = await db.AddCodes.AnyAsync(x => x.Code == code, ct);
+            if (!valid) return BadRequest(new { message = "Invalid admin code." });
+        }
+
         var user = new User
         {
             FirstName = req.FirstName.Trim(),

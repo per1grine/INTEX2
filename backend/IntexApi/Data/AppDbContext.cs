@@ -6,6 +6,7 @@ namespace IntexApi.Data;
 public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<User> Users => Set<User>();
+    public DbSet<AddCode> AddCodes => Set<AddCode>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -15,6 +16,11 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbCon
         {
             b.HasIndex(x => x.Username).IsUnique();
             b.HasIndex(x => x.Email).IsUnique();
+        });
+
+        modelBuilder.Entity<AddCode>(b =>
+        {
+            b.HasKey(x => x.Code);
         });
     }
 }

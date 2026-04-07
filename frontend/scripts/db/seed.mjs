@@ -23,7 +23,20 @@ const users = [
   },
 ]
 
+const addCodes = ['NORTHSTAR2026', 'ADMIN123', 'INTERNAL-OPS']
+
 await withClient(async (client) => {
+  for (const code of addCodes) {
+    await client.query(
+      `
+      INSERT INTO "AddCodes" ("Code","CreatedAtUtc")
+      VALUES ($1,$2)
+      ON CONFLICT ("Code") DO NOTHING;
+      `,
+      [code, now],
+    )
+  }
+
   for (const u of users) {
     const id = randomUUID()
     const passwordHash = await bcrypt.hash(u.password, 10)
@@ -36,6 +49,6 @@ await withClient(async (client) => {
       [id, u.firstName, u.email.toLowerCase(), u.username, passwordHash, u.isDonor, u.isAdmin, now],
     )
   }
-  console.log(`Seed complete: ensured ${users.length} test users.`)
+  console.log(`Seed complete: ensured ${addCodes.length} admin codes and ${users.length} test users.`)
 })
 

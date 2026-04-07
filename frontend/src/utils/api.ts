@@ -30,6 +30,7 @@ export async function apiRegister(input: {
   password: string
   isDonor: boolean
   isAdmin: boolean
+  adminCode?: string
 }): Promise<AuthResponse> {
   const res = await fetch(`${API_URL}/api/auth/register`, {
     method: 'POST',

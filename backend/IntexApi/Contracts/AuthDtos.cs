@@ -8,7 +8,8 @@ public sealed record RegisterRequest(
     [param: Required, StringLength(64, MinimumLength = 3)] string Username,
     [param: Required, StringLength(128, MinimumLength = 6)] string Password,
     bool IsDonor,
-    bool IsAdmin
+    bool IsAdmin,
+    string? AdminCode
 );
 
 public sealed record LoginRequest(

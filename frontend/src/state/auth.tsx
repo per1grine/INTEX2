@@ -20,6 +20,7 @@ type AuthState = {
     password: string,
     isDonor: boolean,
     isAdmin: boolean,
+    adminCode?: string,
   ) => Promise<UserDto>
   logout: () => void
   refreshMe: () => Promise<void>
@@ -60,8 +61,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       password: string,
       isDonor: boolean,
       isAdmin: boolean,
+      adminCode?: string,
     ) => {
-      const res = await apiRegister({ firstName, email, username, password, isDonor, isAdmin })
+      const res = await apiRegister({ firstName, email, username, password, isDonor, isAdmin, adminCode })
       persist(res.token, res.user)
       return res.user
     },
