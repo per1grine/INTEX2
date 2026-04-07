@@ -9,6 +9,8 @@ await withClient(async (client) => {
       "Email" varchar(256) NOT NULL,
       "Username" varchar(64) NOT NULL,
       "PasswordHash" text NOT NULL,
+      "IsDonor" boolean NOT NULL DEFAULT false,
+      "IsAdmin" boolean NOT NULL DEFAULT false,
       "CreatedAtUtc" timestamptz NOT NULL
     );
   `)

@@ -23,19 +23,27 @@ public sealed class AuthController(AppDbContext db, IJwtTokenService jwt) : Cont
         var emailTaken = await db.Users.AnyAsync(x => x.Email == req.Email, ct);
         if (emailTaken) return Conflict(new { message = "Email already exists." });
 
+        if (!req.IsAdmin && !req.IsDonor)
+            return BadRequest(new { message = "Select at least one role (Donor and/or Admin)." });
+
         var user = new User
         {
             FirstName = req.FirstName.Trim(),
             Email = req.Email.Trim().ToLowerInvariant(),
             Username = req.Username.Trim(),
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(req.Password),
+            IsDonor = req.IsDonor,
+            IsAdmin = req.IsAdmin,
         };
 
         db.Users.Add(user);
         await db.SaveChangesAsync(ct);
 
         var token = jwt.CreateToken(user);
-        return Ok(new AuthResponse(token, new UserDto(user.Id, user.FirstName, user.Email, user.Username)));
+        return Ok(new AuthResponse(
+            token,
+            new UserDto(user.Id, user.FirstName, user.Email, user.Username, user.IsDonor, user.IsAdmin)
+        ));
     }
 
     [HttpPost("login")]
@@ -48,7 +56,10 @@ public sealed class AuthController(AppDbContext db, IJwtTokenService jwt) : Cont
         if (!ok) return Unauthorized(new { message = "Invalid username or password." });
 
         var token = jwt.CreateToken(user);
-        return Ok(new AuthResponse(token, new UserDto(user.Id, user.FirstName, user.Email, user.Username)));
+        return Ok(new AuthResponse(
+            token,
+            new UserDto(user.Id, user.FirstName, user.Email, user.Username, user.IsDonor, user.IsAdmin)
+        ));
     }
 
     [Authorize]
@@ -63,7 +74,7 @@ public sealed class AuthController(AppDbContext db, IJwtTokenService jwt) : Cont
         var user = await db.Users.FindAsync([userId], ct);
         if (user is null) return Unauthorized();
 
-        return Ok(new UserDto(user.Id, user.FirstName, user.Email, user.Username));
+        return Ok(new UserDto(user.Id, user.FirstName, user.Email, user.Username, user.IsDonor, user.IsAdmin));
     }
 }
 

@@ -10,6 +10,8 @@ export function RegisterPage() {
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [isDonor, setIsDonor] = useState(true)
+  const [isAdmin, setIsAdmin] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
@@ -30,8 +32,9 @@ export function RegisterPage() {
             setError(null)
             setLoading(true)
             try {
-              await register(firstName, email, username, password)
-              navigate('/impact')
+              if (!isAdmin && !isDonor) throw new Error('Select at least one role (Donor and/or Admin).')
+              const user = await register(firstName, email, username, password, isDonor, isAdmin)
+              navigate(user.isAdmin ? '/admin' : user.isDonor ? '/donor' : '/')
             } catch (err) {
               setError(err instanceof Error ? err.message : 'Registration failed')
             } finally {
@@ -66,6 +69,18 @@ export function RegisterPage() {
               required
             />
           </label>
+
+          <fieldset className="field">
+            <legend>Role(s)</legend>
+            <label className="checkRow">
+              Donor:
+              <input type="checkbox" checked={isDonor} onChange={(event) => setIsDonor(event.target.checked)} />
+            </label>
+            <label className="checkRow">
+              Admin:
+              <input type="checkbox" checked={isAdmin} onChange={(event) => setIsAdmin(event.target.checked)} />
+            </label>
+          </fieldset>
 
           {error ? <div className="error">{error}</div> : null}
 

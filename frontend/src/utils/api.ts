@@ -3,6 +3,8 @@ export type UserDto = {
   firstName: string
   email: string
   username: string
+  isDonor: boolean
+  isAdmin: boolean
 }
 
 export type AuthResponse = {
@@ -26,6 +28,8 @@ export async function apiRegister(input: {
   email: string
   username: string
   password: string
+  isDonor: boolean
+  isAdmin: boolean
 }): Promise<AuthResponse> {
   const res = await fetch(`${API_URL}/api/auth/register`, {
     method: 'POST',

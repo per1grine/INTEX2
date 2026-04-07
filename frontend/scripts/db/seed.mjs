@@ -10,12 +10,16 @@ const users = [
     email: 'test@example.com',
     username: 'testuser',
     password: 'Password123!',
+    isDonor: true,
+    isAdmin: false,
   },
   {
     firstName: 'Allen',
     email: 'allen@example.com',
     username: 'allen',
     password: 'Password123!',
+    isDonor: true,
+    isAdmin: true,
   },
 ]
 
@@ -25,11 +29,11 @@ await withClient(async (client) => {
     const passwordHash = await bcrypt.hash(u.password, 10)
     await client.query(
       `
-      INSERT INTO "Users" ("Id","FirstName","Email","Username","PasswordHash","CreatedAtUtc")
-      VALUES ($1,$2,$3,$4,$5,$6)
+      INSERT INTO "Users" ("Id","FirstName","Email","Username","PasswordHash","IsDonor","IsAdmin","CreatedAtUtc")
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
       ON CONFLICT ("Username") DO NOTHING;
       `,
-      [id, u.firstName, u.email.toLowerCase(), u.username, passwordHash, now],
+      [id, u.firstName, u.email.toLowerCase(), u.username, passwordHash, u.isDonor, u.isAdmin, now],
     )
   }
   console.log(`Seed complete: ensured ${users.length} test users.`)

@@ -55,14 +55,22 @@ export function Header() {
           <nav className="primaryNav" aria-label="Primary">
             {user ? (
               <>
-                {authGroup1.map((item) => (
-                  <HeaderNavLink key={`a1-${item.to}`} {...item} />
-                ))}
-                <Pipe />
-                {authGroup2.map((item) => (
-                  <HeaderNavLink key={`a2-${item.to}`} {...item} />
-                ))}
-                <Pipe />
+                {user.isDonor ? (
+                  <>
+                    {authGroup1.map((item) => (
+                      <HeaderNavLink key={`a1-${item.to}`} {...item} />
+                    ))}
+                    <Pipe />
+                  </>
+                ) : null}
+                {user.isAdmin ? (
+                  <>
+                    {authGroup2.map((item) => (
+                      <HeaderNavLink key={`a2-${item.to}`} {...item} />
+                    ))}
+                    <Pipe />
+                  </>
+                ) : null}
               </>
             ) : null}
 
