@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const footerGroups = [
   {
-    title: 'North Star',
+    title: 'Explore',
     links: [
       { label: 'Home', to: '/' },
       { label: 'Impact dashboard', to: '/impact' },
@@ -27,18 +27,18 @@ const footerGroups = [
   },
 ]
 
+const socialLinks = [
+  { label: 'Instagram', href: '#', icon: '/insta_icon.svg' },
+  { label: 'Facebook', href: '#', icon: '/fb_icon.svg' },
+  { label: 'LinkedIn', href: '#', icon: '/linkedin_icon.svg' },
+  { label: 'YouTube', href: '#', icon: '/youtube_icon.svg' },
+  { label: 'X', href: '#', icon: null },
+]
+
 export function Footer() {
   return (
     <footer className="siteFooter">
       <div className="footerWrap">
-        <div className="footerIntro">
-          <img src="/kid_stars.svg" alt="" className="footerIcon" />
-          <p>
-            North Star exists to provide immediate refuge, trauma-informed support, and stable
-            pathways forward for children recovering from trafficking and abuse in Colombia.
-          </p>
-        </div>
-
         {footerGroups.map((group) => (
           <div key={group.title} className="footerGroup">
             <h2>{group.title}</h2>
@@ -49,6 +49,38 @@ export function Footer() {
             ))}
           </div>
         ))}
+
+        <div className="footerGroup">
+          <h2>Connect</h2>
+          <div className="socialRow" aria-label="Social media links">
+            {socialLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="socialButton"
+                aria-label={link.label}
+              >
+                {link.icon ? <img src={link.icon} alt="" /> : <span>{link.label}</span>}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="footerBottom">
+          <div className="footerIdentity">
+            <img src="/kid_stars.svg" alt="" className="footerIcon" />
+            <strong>North Star</strong>
+          </div>
+          <div className="footerMeta">
+            <button className="langToggle" type="button" aria-label="Switch language">
+              EN | ES
+            </button>
+          </div>
+          <p>
+            North Star exists to provide immediate refuge, trauma-informed support, and stable
+            pathways forward for children recovering from trafficking and abuse in Colombia.
+          </p>
+        </div>
       </div>
     </footer>
   )

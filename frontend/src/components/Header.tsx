@@ -48,50 +48,48 @@ export function Header() {
       <div className="headerWrap">
         <NavLink to="/" className="brandMark" aria-label="North Star home">
           <img src="/kid_stars.svg" alt="" className="brandIcon" />
-          <div>
-            <strong>North Star</strong>
-            <span>Refuge, restoration, and long-term care</span>
-          </div>
+          <strong>North Star</strong>
         </NavLink>
 
-        <nav className="primaryNav" aria-label="Primary">
-          {user ? (
-            <>
-              {authGroup1.map((item) => (
-                <HeaderNavLink key={`a1-${item.label}`} {...item} />
-              ))}
-              <Pipe />
-              {authGroup2.map((item) => (
-                <HeaderNavLink key={`a2-${item.label}`} {...item} />
-              ))}
-              <Pipe />
-            </>
-          ) : null}
+        <div className="headerRight">
+          <nav className="primaryNav" aria-label="Primary">
+            {user ? (
+              <>
+                {authGroup1.map((item) => (
+                  <HeaderNavLink key={`a1-${item.to}`} {...item} />
+                ))}
+                <Pipe />
+                {authGroup2.map((item) => (
+                  <HeaderNavLink key={`a2-${item.to}`} {...item} />
+                ))}
+                <Pipe />
+              </>
+            ) : null}
 
-          {publicGroup.map((item) => (
-            <HeaderNavLink key={`p-${item.to}`} {...item} />
-          ))}
-        </nav>
+            {publicGroup.map((item) => (
+              <HeaderNavLink key={`p-${item.to}`} {...item} />
+            ))}
+          </nav>
 
-        <div className="headerActions">
-          {user ? (
-            <button
-              className="button buttonGhost"
-              onClick={() => {
-                logout()
-                navigate('/')
-              }}
-            >
-              Log Out
-            </button>
-          ) : (
-            <NavLink to="/login" className="actionLink">
-              Staff Login
-            </NavLink>
-          )}
+          <div className="headerActions">
+            {user ? (
+              <button
+                className="button buttonGhost"
+                onClick={() => {
+                  logout()
+                  navigate('/')
+                }}
+              >
+                Log Out
+              </button>
+            ) : (
+              <NavLink to="/login" className="button">
+                Log In
+              </NavLink>
+            )}
+          </div>
         </div>
       </div>
     </header>
   )
 }
-
