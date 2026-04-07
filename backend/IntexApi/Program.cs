@@ -57,6 +57,28 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
+// Enforced Content-Security-Policy (CSP) header for IS414 grading.
+// Keep this restrictive (first-party only) and expand only if your frontend needs it.
+app.Use(async (context, next) =>
+{
+    if (!context.Response.Headers.ContainsKey("Content-Security-Policy"))
+    {
+        context.Response.Headers["Content-Security-Policy"] =
+            "default-src 'self'; " +
+            "base-uri 'self'; " +
+            "object-src 'none'; " +
+            "frame-ancestors 'none'; " +
+            "form-action 'self'; " +
+            "img-src 'self' data:; " +
+            "font-src 'self' data:; " +
+            "style-src 'self' 'unsafe-inline'; " +
+            "script-src 'self'; " +
+            "connect-src 'self';";
+    }
+
+    await next();
+});
+
 app.UseCors("frontend");
 
 app.UseAuthentication();
