@@ -47,7 +47,7 @@ export function Header() {
     <header className="siteHeader">
       <div className="headerWrap">
         <NavLink to="/" className="brandMark" aria-label="North Star home">
-          <img src="/kid_stars.svg" alt="" className="brandIcon" />
+          <img src="/logo/kid_stars.svg" alt="" className="brandIcon" />
           <strong>North Star</strong>
         </NavLink>
 

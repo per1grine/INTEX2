@@ -28,10 +28,10 @@ const footerGroups = [
 ]
 
 const socialLinks = [
-  { label: 'Instagram', href: '#', icon: '/insta_icon.svg' },
-  { label: 'Facebook', href: '#', icon: '/fb_icon.svg' },
-  { label: 'LinkedIn', href: '#', icon: '/linkedin_icon.svg' },
-  { label: 'YouTube', href: '#', icon: '/youtube_icon.svg' },
+  { label: 'Instagram', href: '#', icon: '/icons/insta_icon.svg' },
+  { label: 'Facebook', href: '#', icon: '/icons/fb_icon.svg' },
+  { label: 'LinkedIn', href: '#', icon: '/icons/linkedin_icon.svg' },
+  { label: 'YouTube', href: '#', icon: '/icons/youtube_icon.svg' },
   { label: 'X', href: '#', icon: null },
 ]
 
@@ -68,7 +68,7 @@ export function Footer() {
 
         <div className="footerBottom">
           <div className="footerIdentity">
-            <img src="/kid_stars.svg" alt="" className="footerIcon" />
+            <img src="/logo/kid_stars.svg" alt="" className="footerIcon" />
             <strong>North Star</strong>
           </div>
           <div className="footerMeta">
