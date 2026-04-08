@@ -9,6 +9,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
+    libgssapi-krb5-2 \
     && rm -rf /var/lib/apt/lists/*
 
 COPY ml-pipelines/requirements.txt ./ml-pipelines/requirements.txt
