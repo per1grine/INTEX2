@@ -155,6 +155,7 @@ const Register = () => {
                       <label className="text-sm font-medium text-foreground" htmlFor="confirm-password">
                         Verify Password
                       </label>
+                      <p className="text-xs text-muted-foreground">Must be at least 14 characters.</p>
                       <div className="relative">
                         <Input
                           id="confirm-password"
