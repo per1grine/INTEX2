@@ -12,7 +12,7 @@ export type AuthResponse = {
   user: UserDto;
 };
 
-const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:5178";
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:5180";
 
 async function readErrorMessage(res: Response): Promise<string> {
   try {
@@ -72,4 +72,46 @@ export async function apiGetMe(token: string): Promise<UserDto> {
   }
 
   return (await res.json()) as UserDto;
+}
+
+export type DonationDto = {
+  donationId: number;
+  donationDate: string;
+  donationType: string;
+  amount: number | null;
+  currencyCode: string | null;
+  notes: string | null;
+  channelSource: string | null;
+};
+
+export async function apiListDonorDonations(token: string): Promise<DonationDto[]> {
+  const res = await fetch(`${API_URL}/api/donor/donations`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  if (!res.ok) {
+    throw new Error(await readErrorMessage(res));
+  }
+
+  return (await res.json()) as DonationDto[];
+}
+
+export async function apiCreateDonorDonation(
+  token: string,
+  body: { amount: number; notes?: string; currencyCode?: string },
+): Promise<DonationDto> {
+  const res = await fetch(`${API_URL}/api/donor/donations`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) {
+    throw new Error(await readErrorMessage(res));
+  }
+
+  return (await res.json()) as DonationDto;
 }
