@@ -1,0 +1,135 @@
+================================================================================
+REINTEGRATION READINESS FRAMEWORK — Clinical Reference Guide
+Lighthouse Sanctuary — Explanatory Analysis
+Generated: 2026-04-08
+================================================================================
+
+IMPORTANT: This framework describes historical patterns observed in our data.
+It does NOT predict individual outcomes or substitute for clinical judgment.
+All findings are associational — not causal.
+
+------------------------------------------------------------
+DOMAIN: EMOTIONAL
+------------------------------------------------------------
+
+Key Indicators:
+  - Emotional State Slope
+  - Progress Rate
+  - Recent Emotional State
+  - Recent Emotional Change
+
+Clinical Implication:
+  A stable positive emotional trajectory across counseling sessions suggests the girl is developing internal resilience and readiness for transition.
+
+Pathway Relevance:
+  - Family Reunification: Moderate
+  - Foster Care: High
+  - Independent Living: High
+
+------------------------------------------------------------
+DOMAIN: FAMILY
+------------------------------------------------------------
+
+Key Indicators:
+  - Cooperation Trend
+  - Favorable Outcome Rate 6M
+  - Reintegration Assessment Prop
+  - Recent Safety Concerns
+
+Clinical Implication:
+  Family cooperation trends and visit outcomes indicate whether the family environment can safely receive the girl. Cultural context of cooperation scores must be considered.
+
+Pathway Relevance:
+  - Family Reunification: Critical
+  - Foster Care: High
+  - Independent Living: Low
+
+------------------------------------------------------------
+DOMAIN: HEALTH
+------------------------------------------------------------
+
+Key Indicators:
+  - Composite Health Index
+  - Health Score Slope
+  - Sleep Score Slope
+  - Current Nutrition Score
+  - Bmi Healthy Range
+
+Clinical Implication:
+  Physical health trajectory supports the girls capacity for transition. Sleep quality is a sensitive indicator of psychological wellbeing.
+
+Pathway Relevance:
+  - Family Reunification: Moderate
+  - Foster Care: Moderate
+  - Independent Living: High
+
+Statistical Evidence:
+  - composite_health_trend: OR=2.8929760643099195e+152, p=0.2228
+
+------------------------------------------------------------
+DOMAIN: EDUCATIONAL
+------------------------------------------------------------
+
+Key Indicators:
+  - Current Attendance Rate
+  - Current Progress Percent
+  - Has Completed Program
+  - Progress Above 75
+
+Clinical Implication:
+  Education completion is both a practical prerequisite for certain pathways and a signal of cognitive engagement and future-orientation.
+
+Pathway Relevance:
+  - Family Reunification: Moderate
+  - Foster Care: Moderate
+  - Independent Living: Critical
+
+Statistical Evidence:
+  - current_attendance_rate: OR=0.434, p=0.799
+  - attendance_slope_3m: OR=0.0, p=0.557
+
+------------------------------------------------------------
+DOMAIN: BEHAVIORAL
+------------------------------------------------------------
+
+Key Indicators:
+  - Composite Behavioral Stability Index
+  - Days Since Last High Severity
+  - Incident Frequency Trend
+  - Risk Level Improvement
+
+Clinical Implication:
+  Behavioral stability is a minimum threshold for readiness. A declining incident trajectory over 6+ months is a strong positive signal.
+
+Pathway Relevance:
+  - Family Reunification: High
+  - Foster Care: High
+  - Independent Living: High
+
+------------------------------------------------------------
+DOMAIN: ADMINISTRATIVE
+------------------------------------------------------------
+
+Key Indicators:
+  - Overall Achievement Rate
+  - Has Reintegration Plan
+  - Legal Docs Complete
+  - Days Since Conference
+
+Clinical Implication:
+  Administrative completeness gates the formal reintegration process. Legal documentation and plan achievement rates are practical prerequisites.
+
+Pathway Relevance:
+  - Family Reunification: High
+  - Foster Care: High
+  - Independent Living: High
+
+================================================================================
+LIMITATIONS AND USE POLICY
+================================================================================
+
+1. Reintegration readiness is a clinical and legal determination, not a model output.
+2. The girl's own voice is not in this dataset.
+3. Association does not equal causation.
+4. Family cooperation scores carry cultural context.
+5. This guide should be used for case conference preparation, not automated decisions.

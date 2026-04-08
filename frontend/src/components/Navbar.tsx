@@ -11,10 +11,11 @@ const Navbar = () => {
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/donors", label: user?.isAdmin ? "Donors & Contributions" : "Ways to Help" },
-    { to: "/impact", label: "Impact Dashboard" },
+    { to: "/impact", label: "Our Impact" },
     { to: "/volunteer", label: "Volunteer" },
     ...(user?.isDonor ? [{ to: "/donor", label: "Donor Dashboard" }] : []),
     ...(user?.isAdmin ? [{ to: "/admin", label: "Admin Dashboard" }] : []),
+    ...(user?.isAdmin ? [{ to: "/admin/report", label: "Report" }] : []),
   ];
 
   return (

@@ -1,0 +1,110 @@
+{
+  "Emotional": {
+    "indicators": [
+      "emotional_state_slope",
+      "progress_rate",
+      "recent_emotional_state",
+      "recent_emotional_change"
+    ],
+    "model_evidence": [],
+    "clinical_implication": "A stable positive emotional trajectory across counseling sessions suggests the girl is developing internal resilience and readiness for transition.",
+    "pathway_relevance": {
+      "Family Reunification": "Moderate",
+      "Foster Care": "High",
+      "Independent Living": "High"
+    }
+  },
+  "Family": {
+    "indicators": [
+      "cooperation_trend",
+      "favorable_outcome_rate_6m",
+      "reintegration_assessment_prop",
+      "recent_safety_concerns"
+    ],
+    "model_evidence": [],
+    "clinical_implication": "Family cooperation trends and visit outcomes indicate whether the family environment can safely receive the girl. Cultural context of cooperation scores must be considered.",
+    "pathway_relevance": {
+      "Family Reunification": "Critical",
+      "Foster Care": "High",
+      "Independent Living": "Low"
+    }
+  },
+  "Health": {
+    "indicators": [
+      "composite_health_index",
+      "health_score_slope",
+      "sleep_score_slope",
+      "current_nutrition_score",
+      "bmi_healthy_range"
+    ],
+    "model_evidence": [
+      {
+        "feature": "composite_health_trend",
+        "OR": 2.8929760643099195e+152,
+        "p": 0.2228
+      }
+    ],
+    "clinical_implication": "Physical health trajectory supports the girls capacity for transition. Sleep quality is a sensitive indicator of psychological wellbeing.",
+    "pathway_relevance": {
+      "Family Reunification": "Moderate",
+      "Foster Care": "Moderate",
+      "Independent Living": "High"
+    }
+  },
+  "Educational": {
+    "indicators": [
+      "current_attendance_rate",
+      "current_progress_percent",
+      "has_completed_program",
+      "progress_above_75"
+    ],
+    "model_evidence": [
+      {
+        "feature": "current_attendance_rate",
+        "OR": 0.434,
+        "p": 0.799
+      },
+      {
+        "feature": "attendance_slope_3m",
+        "OR": 0.0,
+        "p": 0.557
+      }
+    ],
+    "clinical_implication": "Education completion is both a practical prerequisite for certain pathways and a signal of cognitive engagement and future-orientation.",
+    "pathway_relevance": {
+      "Family Reunification": "Moderate",
+      "Foster Care": "Moderate",
+      "Independent Living": "Critical"
+    }
+  },
+  "Behavioral": {
+    "indicators": [
+      "composite_behavioral_stability_index",
+      "days_since_last_high_severity",
+      "incident_frequency_trend",
+      "risk_level_improvement"
+    ],
+    "model_evidence": [],
+    "clinical_implication": "Behavioral stability is a minimum threshold for readiness. A declining incident trajectory over 6+ months is a strong positive signal.",
+    "pathway_relevance": {
+      "Family Reunification": "High",
+      "Foster Care": "High",
+      "Independent Living": "High"
+    }
+  },
+  "Administrative": {
+    "indicators": [
+      "overall_achievement_rate",
+      "has_reintegration_plan",
+      "legal_docs_complete",
+      "days_since_conference"
+    ],
+    "model_evidence": [],
+    "clinical_implication": "Administrative completeness gates the formal reintegration process. Legal documentation and plan achievement rates are practical prerequisites.",
+    "pathway_relevance": {
+      "Family Reunification": "High",
+      "Foster Care": "High",
+      "Independent Living": "High"
+    }
+  }
+}

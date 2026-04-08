@@ -1,0 +1,81 @@
+LOGISTIC REGRESSION SUMMARY — is_ever_recurring
+========================================================================
+
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                      y   No. Observations:                   59
+Model:                          Logit   Df Residuals:                       31
+Method:                           MLE   Df Model:                           27
+Date:                Wed, 08 Apr 2026   Pseudo R-squ.:                   1.000
+Time:                        07:03:46   Log-Likelihood:            -1.8725e-06
+converged:                       True   LL-Null:                       -36.292
+Covariance Type:            nonrobust   LLR p-value:                 4.765e-06
+===============================================================================================================
+                                                  coef    std err          z      P>|z|      [0.025      0.975]
+---------------------------------------------------------------------------------------------------------------
+const                                         -76.8794        nan        nan        nan         nan         nan
+total_donation_count                           71.2295        nan        nan        nan         nan         nan
+donation_type_diversity                       -56.7290        nan        nan        nan         nan         nan
+first_campaign_associated                     -12.8064        nan        nan        nan         nan         nan
+days_to_second_donation                        -0.5244        nan        nan        nan         nan         nan
+allocation_safehouse_count                    -15.3823        nan        nan        nan         nan         nan
+log_first_donation_amount                      -1.0030        nan        nan        nan         nan         nan
+acquisition_channel_Event                    -197.7249        nan        nan        nan         nan         nan
+acquisition_channel_Partnerreferral          -126.6988        nan        nan        nan         nan         nan
+acquisition_channel_Socialmedia               -77.6356        nan        nan        nan         nan         nan
+acquisition_channel_Website                   -72.5016        nan        nan        nan         nan         nan
+acquisition_channel_Wordofmouth               -43.4360        nan        nan        nan         nan         nan
+relationship_type_Local                       -35.4224        nan        nan        nan         nan         nan
+relationship_type_Partnerorganization         -63.1695        nan        nan        nan         nan         nan
+supporter_type_Monetarydonor                   26.9851        nan        nan        nan         nan         nan
+supporter_type_Partnerorganization             54.5878        nan        nan        nan         nan         nan
+supporter_type_Skillscontributor               83.5005        nan        nan        nan         nan         nan
+supporter_type_Socialmediaadvocate            -90.9547        nan        nan        nan         nan         nan
+supporter_type_Volunteer                      -99.9842        nan        nan        nan         nan         nan
+allocation_primary_program_area_Maintenance   253.1893        nan        nan        nan         nan         nan
+allocation_primary_program_area_Operations     12.2242        nan        nan        nan         nan         nan
+allocation_primary_program_area_Outreach     -153.8061        nan        nan        nan         nan         nan
+allocation_primary_program_area_Transport     -72.6246        nan        nan        nan         nan         nan
+allocation_primary_program_area_Wellbeing     167.2230        nan        nan        nan         nan         nan
+first_channel_source_Direct                  -267.7434        nan        nan        nan         nan         nan
+first_channel_source_Event                      2.1781        nan        nan        nan         nan         nan
+first_channel_source_Partnerreferral           62.5304        nan        nan        nan         nan         nan
+first_channel_source_Socialmedia               -3.2438        nan        nan        nan         nan         nan
+===============================================================================================================
+
+Complete Separation: The results show that there iscomplete separation or perfect prediction.
+In this case the Maximum Likelihood Estimator does not exist and the parameters
+are not identified.
+
+========================================================================
+ODDS RATIOS
+========================================================================
+                                                   coef                                                                                                            odds_ratio  p_value  or_ci_lower  or_ci_upper
+const                                        -76.879433                                                                                                              0.000000      NaN          NaN          NaN
+total_donation_count                          71.229520                                                                                8601759060254793738031399436288.000000      NaN          NaN          NaN
+donation_type_diversity                      -56.728960                                                                                                              0.000000      NaN          NaN          NaN
+first_campaign_associated                    -12.806410                                                                                                              0.000003      NaN          NaN          NaN
+days_to_second_donation                       -0.524384                                                                                                              0.591920      NaN          NaN          NaN
+allocation_safehouse_count                   -15.382274                                                                                                              0.000000      NaN          NaN          NaN
+log_first_donation_amount                     -1.002980                                                                                                              0.366785      NaN          NaN          NaN
+acquisition_channel_Event                   -197.724891                                                                                                              0.000000      NaN          NaN          NaN
+acquisition_channel_Partnerreferral         -126.698767                                                                                                              0.000000      NaN          NaN          NaN
+acquisition_channel_Socialmedia              -77.635586                                                                                                              0.000000      NaN          NaN          NaN
+acquisition_channel_Website                  -72.501606                                                                                                              0.000000      NaN          NaN          NaN
+acquisition_channel_Wordofmouth              -43.436017                                                                                                              0.000000      NaN          NaN          NaN
+relationship_type_Local                      -35.422404                                                                                                              0.000000      NaN          NaN          NaN
+relationship_type_Partnerorganization        -63.169546                                                                                                              0.000000      NaN          NaN          NaN
+supporter_type_Monetarydonor                  26.985139                                                                                                   524200171707.373413      NaN          NaN          NaN
+supporter_type_Partnerorganization            54.587833                                                                                       509559211548402109120512.000000      NaN          NaN          NaN
+supporter_type_Skillscontributor              83.500469                                                                          1835662781021743517104383409097015296.000000      NaN          NaN          NaN
+supporter_type_Socialmediaadvocate           -90.954679                                                                                                              0.000000      NaN          NaN          NaN
+supporter_type_Volunteer                     -99.984240                                                                                                              0.000000      NaN          NaN          NaN
+allocation_primary_program_area_Maintenance  253.189261 90928231285980865650544256885971661926230844914284370935423033713715331291869977640686115165655373425206624256.000000      NaN          NaN          NaN
+allocation_primary_program_area_Operations    12.224219                                                                                                         203662.430499      NaN          NaN          NaN
+allocation_primary_program_area_Outreach    -153.806123                                                                                                              0.000000      NaN          NaN          NaN
+allocation_primary_program_area_Transport    -72.624587                                                                                                              0.000000      NaN          NaN          NaN
+allocation_primary_program_area_Wellbeing    167.223040                                      4207686292305832704438912454004957346944030277254435954076151250402934784.000000      NaN          NaN          NaN
+first_channel_source_Direct                 -267.743446                                                                                                              0.000000      NaN          NaN          NaN
+first_channel_source_Event                     2.178108                                                                                                              8.829585      NaN          NaN          NaN
+first_channel_source_Partnerreferral          62.530362                                                                                   1434138846139309819605024768.000000      NaN          NaN          NaN
+first_channel_source_Socialmedia              -3.243844                                                                                                              0.039014      NaN          NaN          NaN

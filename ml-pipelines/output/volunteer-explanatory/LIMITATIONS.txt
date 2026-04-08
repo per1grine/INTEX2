@@ -1,0 +1,53 @@
+
+This is an EXPLANATORY analysis, not causal inference. The models identify
+ASSOCIATIONS, not causal mechanisms. The following limitations must be acknowledged:
+
+1. SELF-SELECTION BIAS
+   - Volunteers self-select into the program based on unmeasured motivations
+   - More committed individuals may both volunteer AND donate monetarily
+   - We cannot determine whether acquisition channel CAUSES differences in value
+     or merely selects for different volunteer types
+
+2. ORGANIZATIONAL EFFECTS (PARTNER ORGANIZATIONS)
+   - Since supporters table lacks direct partner_id, we proxy with relationship_type
+   - Partner-affiliated volunteers may have institutional support/resources
+   - We cannot isolate individual motivation from organizational context
+   - Causality unclear: does partner affiliation IMPROVE engagement,
+     or do more motivated individuals SEEK partner roles?
+
+3. MEASUREMENT ERROR & OMITTED VARIABLES
+   - The donations table captures TRANSACTION HISTORY, not volunteer experience quality
+   - Missing: satisfaction scores, retention reasons, exit interviews, interaction quality
+   - A volunteer contributing 40 hours once (leaving) is recorded same as one with 40 hours over 2 years
+   - Hidden variables: personal life changes, employment status, family situation
+
+4. REVERSE CAUSALITY
+   - Top quartile value → higher organizational support → MORE ENGAGEMENT
+   - vs: Better match/skills → HIGH VALUE → recognized as top contributor
+   - Directionality cannot be determined from observational data
+
+5. DATA LIMITATIONS
+   - Small population (n=40 volunteers) limits statistical power
+   - Binary outcome (is_top_quartile) derived from continuous measure
+   - Campaign association sparse (only 24/65 donations campaign-linked)
+   - No control variables: demographic characteristics, volunteer type, program area
+
+6. TEMPORAL STRUCTURE
+   - Snapshot analysis: no time-series or prospective design
+   - Cannot track progression/trajectory at individual level
+   - Future engagement cannot be predicted from historical patterns alone
+
+INTERPRETATION GUIDANCE:
+- Use coefficients to identify ASSOCIATIONS, not prescriptive relationships
+- "Volunteers with higher frequency are associated with higher value"
+  ≠ "Increasing volunteer frequency will increase total value"
+- Policy changes based on this analysis should be TESTED, not assumed effective
+- Conduct qualitative interviews with top-quartile and at-risk volunteers
+  to validate quantitative insights
+
+RECOMMENDED FOLLOW-UP:
+1. Prospective volunteer satisfaction survey
+2. Exit interviews with departed volunteers
+3. A/B testing of retention interventions
+4. Qualitative case studies of highly engaged vs departed volunteers
+5. Time-series tracking of cohorts entering program

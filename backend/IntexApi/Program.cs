@@ -19,6 +19,14 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Jwt"));
 builder.Services.AddSingleton<IJwtTokenService, JwtTokenService>();
 
+builder.Services.AddSingleton<IntexApi.Services.ImpactCacheService>();
+builder.Services.AddHostedService(sp => sp.GetRequiredService<IntexApi.Services.ImpactCacheService>());
+
+builder.Services.Configure<IntexApi.Services.MlOptions>(builder.Configuration.GetSection("ML"));
+builder.Services.AddSingleton<IntexApi.Services.NotebookRunnerService>();
+builder.Services.AddHostedService(sp => sp.GetRequiredService<IntexApi.Services.NotebookRunnerService>());
+builder.Services.AddHostedService<IntexApi.Services.MlRetrainCronService>();
+
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("frontend", p =>

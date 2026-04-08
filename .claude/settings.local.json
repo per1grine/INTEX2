@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ':*)",
+      "Bash(DATABASE_URL=\"postgresql://postgres:admin@localhost:5432/intex\" python -m jupyter nbconvert --to notebook --execute --inplace \"VolunteerExplanatory.ipynb\" --ExecutePreprocessor.timeout=600)",
+      "Bash(dotnet build:*)",
+      "Bash('C:\\\\Users\\\\camjw\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313\\\\python.exe' -c ':*)",
+      "Bash(python -c \" import json nb = json.load\\(open\\('DonorAcquisitionPrediction.ipynb'\\)\\) for i, cell in enumerate\\(nb['cells']\\): src = ''.join\\(cell['source']\\) if 'decision_rules' in src or 'score' in src.lower\\(\\) or 'predict_proba' in src.lower\\(\\) or 'tier' in src.lower\\(\\): print\\(f'--- Cell {i} ---'\\) print\\(src[:400]\\) print\\(\\) \")",
+      "Bash(python3 -c \" import json nb = json.load\\(open\\('DonorAcquisitionPrediction.ipynb'\\)\\) for i, cell in enumerate\\(nb['cells']\\): src = ''.join\\(cell['source']\\) if 'decision_rules' in src or 'predict_proba' in src.lower\\(\\) or 'tier' in src.lower\\(\\) or 'probability' in src.lower\\(\\): print\\(f'--- Cell {i} ---'\\) print\\(src[:600]\\) print\\(\\) \")",
+      "Bash(python \"c:/Users/camjw/OneDrive/Desktop/BYU/9. Winter 2026/Intex2/Intex2/INTEX2/ml-pipelines/parse_nb.py\")",
+      "Bash(npx tsc:*)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(node scripts/db/setup.mjs)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(node -e ':*)",
+      "Bash(python -m jupyter nbconvert --to notebook --execute --inplace \"DonorChurnPrediction.ipynb\" --ExecutePreprocessor.timeout=120)",
+      "Bash(DATABASE_URL=\"postgresql://postgres:admin@localhost:5432/intex\" python -m jupyter nbconvert --to notebook --execute --inplace \"DonorChurnPrediction.ipynb\" --ExecutePreprocessor.timeout=120)",
+      "Bash(python3 -c ':*)"
+    ]
+  }
+}

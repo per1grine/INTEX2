@@ -1,0 +1,17 @@
+{
+  "logistic_regression": {
+    "pseudo_r_squared": 0.9999999265938324,
+    "aic": 138.0000080905331,
+    "bic": 317.7567509237115,
+    "n_observations": 100,
+    "significant_features": -1
+  },
+  "ols_regression": {
+    "r_squared": 0.8428371264177779,
+    "adj_r_squared": 0.44388521655521396,
+    "aic": 81.99558081139364,
+    "bic": 251.6797468526618,
+    "n_observations": 93,
+    "significant_features": 7
+  }
+}

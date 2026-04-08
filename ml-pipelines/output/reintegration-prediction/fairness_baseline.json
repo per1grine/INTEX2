@@ -1,0 +1,240 @@
+{
+  "readiness": {
+    "safehouse": {
+      "1": {
+        "n": 24,
+        "pred_rate": 0.0
+      },
+      "2": {
+        "n": 16,
+        "pred_rate": 0.0
+      },
+      "4": {
+        "n": 24,
+        "pred_rate": 0.0
+      },
+      "5": {
+        "n": 8,
+        "pred_rate": 0.0
+      },
+      "6": {
+        "n": 16,
+        "pred_rate": 0.0
+      },
+      "7": {
+        "n": 24,
+        "pred_rate": 0.0
+      },
+      "8": {
+        "n": 15,
+        "pred_rate": 0.0
+      }
+    },
+    "case_category": {
+      "Abandoned": {
+        "n": 24,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Foundling": {
+        "n": 32,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Neglected": {
+        "n": 24,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Surrendered": {
+        "n": 47,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      }
+    },
+    "referral_source": {
+      "Community": {
+        "n": 8,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Court Order": {
+        "n": 47,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Government Agency": {
+        "n": 24,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "NGO": {
+        "n": 16,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Police": {
+        "n": 32,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      }
+    },
+    "initial_risk_level": {
+      "Critical": {
+        "n": 8,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "High": {
+        "n": 40,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Low": {
+        "n": 47,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Medium": {
+        "n": 32,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      }
+    },
+    "is_pwd": {
+      "False": {
+        "n": 127,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      }
+    }
+  },
+  "pathway": {
+    "safehouse": {
+      "1": {
+        "n": 8,
+        "pred_rate": 0.0
+      },
+      "2": {
+        "n": 17,
+        "pred_rate": 0.0
+      },
+      "3": {
+        "n": 11,
+        "pred_rate": 0.0
+      },
+      "4": {
+        "n": 8,
+        "pred_rate": 0.0
+      },
+      "5": {
+        "n": 8,
+        "pred_rate": 0.0
+      },
+      "6": {
+        "n": 8,
+        "pred_rate": 0.0
+      },
+      "7": {
+        "n": 19,
+        "pred_rate": 0.0
+      },
+      "8": {
+        "n": 16,
+        "pred_rate": 0.0
+      },
+      "9": {
+        "n": 8,
+        "pred_rate": 0.0
+      }
+    },
+    "case_category": {
+      "Abandoned": {
+        "n": 29,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Foundling": {
+        "n": 30,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Neglected": {
+        "n": 17,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Surrendered": {
+        "n": 27,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      }
+    },
+    "referral_source": {
+      "Community": {
+        "n": 32,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Court Order": {
+        "n": 3,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Government Agency": {
+        "n": 16,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "NGO": {
+        "n": 8,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Police": {
+        "n": 14,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Self-Referral": {
+        "n": 30,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      }
+    },
+    "initial_risk_level": {
+      "Critical": {
+        "n": 16,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "High": {
+        "n": 40,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Low": {
+        "n": 23,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "Medium": {
+        "n": 24,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      }
+    },
+    "is_pwd": {
+      "False": {
+        "n": 97,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "True": {
+        "n": 6,
+        "pred_rate": 0.0,
+        "accuracy": 1.0
+      }
+    }
+  }
+}

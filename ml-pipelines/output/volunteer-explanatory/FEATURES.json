@@ -1,0 +1,30 @@
+{
+  "all_vif_reduced_features": [
+    "is_weekend_contributor",
+    "is_one_time_contributor",
+    "total_time_contributions",
+    "freq_365d",
+    "primary_dow",
+    "recency",
+    "consistency_score",
+    "is_decelerating",
+    "freq_90d",
+    "most_active_month",
+    "skills_diversity_index",
+    "skills_to_time_ratio",
+    "is_skills_contributor",
+    "has_independent_contributions",
+    "conversion_lag",
+    "time_to_second_contribution",
+    "avg_estimated_value_per_contribution",
+    "tenure_days",
+    "is_organization",
+    "has_partner",
+    "avg_skills_contribution_value"
+  ],
+  "target_ols": "log_total_estimated_value",
+  "target_logit": "is_top_quartile",
+  "target_conversion": "ever_became_monetary_donor",
+  "n_samples": 40,
+  "model_type": "explanatory"
+}

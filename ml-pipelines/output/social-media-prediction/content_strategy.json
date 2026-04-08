@@ -1,0 +1,50 @@
+{
+  "s1_top10": [
+    "is_evening",
+    "post_type_Eventpromotion",
+    "sentiment_tone_Informative",
+    "post_hour_cos",
+    "post_type_Impactstory",
+    "campaign_name_Year-End Hope",
+    "content_topic_Eventrecap",
+    "features_resident_story",
+    "is_business_hours",
+    "platform_Instagram_x_post_type_Impactstory"
+  ],
+  "s2_top10": [
+    "features_resident_story",
+    "caption_length",
+    "log1p_campaign_hist_avg_donation",
+    "platform_post_count_last_30d_x_post_type_Impactstory",
+    "avg_recent_donation_amount",
+    "post_hour_cos",
+    "log1p_platform_avg_donation_last_30d",
+    "days_since_last_snapshot",
+    "post_hour_sin",
+    "log1p_org_total_donation_value_last_30d"
+  ],
+  "both_stages": [
+    "features_resident_story",
+    "post_hour_cos"
+  ],
+  "conversion_only": [
+    "campaign_name_Year-End Hope",
+    "content_topic_Eventrecap",
+    "is_business_hours",
+    "is_evening",
+    "platform_Instagram_x_post_type_Impactstory",
+    "post_type_Eventpromotion",
+    "post_type_Impactstory",
+    "sentiment_tone_Informative"
+  ],
+  "value_only": [
+    "avg_recent_donation_amount",
+    "caption_length",
+    "days_since_last_snapshot",
+    "log1p_campaign_hist_avg_donation",
+    "log1p_org_total_donation_value_last_30d",
+    "log1p_platform_avg_donation_last_30d",
+    "platform_post_count_last_30d_x_post_type_Impactstory",
+    "post_hour_sin"
+  ]
+}

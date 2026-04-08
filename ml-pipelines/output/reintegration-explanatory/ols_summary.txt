@@ -1,0 +1,30 @@
+                                OLS Regression Results                               
+=====================================================================================
+Dep. Variable:     log_days_to_reintegration   R-squared:                       0.029
+Model:                                   OLS   Adj. R-squared:                 -0.042
+Method:                        Least Squares   F-statistic:                     1.543
+Date:                       Wed, 08 Apr 2026   Prob (F-statistic):              0.278
+Time:                               07:16:44   Log-Likelihood:                -59.772
+No. Observations:                         60   AIC:                             129.5
+Df Residuals:                             55   BIC:                             140.0
+Df Model:                                  4                                         
+Covariance Type:                     cluster                                         
+===========================================================================================
+                              coef    std err          z      P>|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------------
+const                       3.9060      0.587      6.657      0.000       2.756       5.056
+recent_psych_checkup       -0.1756      0.269     -0.652      0.514      -0.703       0.352
+composite_health_trend    -77.1067    106.286     -0.725      0.468    -285.423     131.210
+current_attendance_rate    -0.0654      0.720     -0.091      0.928      -1.477       1.346
+attendance_slope_3m        56.0764     38.483      1.457      0.145     -19.349     131.501
+==============================================================================
+Omnibus:                       21.317   Durbin-Watson:                   1.830
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               28.957
+Skew:                          -1.396   Prob(JB):                     5.15e-07
+Kurtosis:                       4.947   Cond. No.                     2.34e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors are robust to cluster correlation (cluster)
+[2] The condition number is large, 2.34e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.

@@ -12,10 +12,12 @@ import Register from "./pages/Register.tsx";
 import Volunteer from "./pages/Volunteer.tsx";
 import Privacy from "./pages/Privacy.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
+import Report from "./pages/Report.tsx";
 import DonorDashboard from "./pages/DonorDashboard.tsx";
 import AdminUtilityPage from "./pages/AdminUtilityPage.tsx";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider, useAuth } from "./state/auth";
+import { MlRefreshProvider } from "./state/mlRefresh";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +40,10 @@ const AppRoutes = () => {
       <Route
         path="/admin"
         element={<ProtectedRoute role="admin" element={<AdminDashboard />} />}
+      />
+      <Route
+        path="/admin/report"
+        element={<ProtectedRoute role="admin" element={<Report />} />}
       />
       <Route
         path="/admin/caseloads"
@@ -107,13 +113,15 @@ const AppRoutes = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
-      </TooltipProvider>
+      <MlRefreshProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
+        </TooltipProvider>
+      </MlRefreshProvider>
     </AuthProvider>
   </QueryClientProvider>
 );

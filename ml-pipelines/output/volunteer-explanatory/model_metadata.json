@@ -1,0 +1,13 @@
+{
+  "pipeline_name": "Volunteer Engagement Explanatory Pipeline",
+  "analysis_type": "explanatory",
+  "data_reference_date": "2026-04-06 00:00:00",
+  "n_volunteers": 40,
+  "n_features_before_vif": 52,
+  "n_features_after_vif": 21,
+  "vif_threshold": 10,
+  "significance_level": 0.05,
+  "ols_r_squared": 0.9798536925429826,
+  "ols_features": 21,
+  "logit_available": false
+}
