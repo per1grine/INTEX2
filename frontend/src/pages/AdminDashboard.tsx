@@ -60,16 +60,12 @@ const AdminDashboard = () => {
 
   useEffect(() => { fetchStats(); }, [fetchStats]);
 
-  const reintegrationRate = stats
-    ? Math.round((stats.reintegrationProgressCount / stats.totalResidents) * 100)
-    : 0;
-
   const summaryCards = stats
     ? [
-        { label: t("adminChildrenInCare"),     value: stats.activeResidents.toString() },
-        { label: t("adminTotalContributions"), value: `$${Math.round(stats.totalContributionsValue).toLocaleString()}` },
-        { label: t("adminReintegrationRate"),  value: `~${reintegrationRate}%` },
-        { label: t("adminActiveSupporters"),   value: stats.uniqueSuporters.toString() },
+        { label: t("adminChildrenInCare"),           value: stats.activeResidents.toString() },
+        { label: t("adminTotalContributions"),        value: `$${Math.round(stats.totalContributionsValue).toLocaleString()}` },
+        { label: "Avg Donation per Individual",       value: `$${Math.round(stats.avgDonationPerIndividual).toLocaleString()}` },
+        { label: "Avg Donation per Organization",     value: `$${Math.round(stats.avgDonationPerOrganization).toLocaleString()}` },
       ]
     : [];
 

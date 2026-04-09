@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Heart, Clock, Wrench, Users, Building2, Share2 } from "lucide-react";
 import { useLanguage } from "@/state/language";
+import { useAuth } from "@/state/auth";
 
 const WaysToHelp = () => {
   const { t } = useLanguage();
+  const { user } = useAuth();
+  const isLoggedIn = !!user;
 
   const WAYS = [
     { icon: Heart,     title: t("volunteerWay1Title"), description: t("volunteerWay1Desc") },
@@ -14,44 +17,6 @@ const WaysToHelp = () => {
     { icon: Building2, title: t("volunteerWay5Title"), description: t("volunteerWay5Desc") },
     { icon: Share2,    title: t("volunteerWay6Title"), description: t("volunteerWay6Desc") },
   ];
-import { useAuth } from "@/state/auth";
-
-const WAYS = [
-  {
-    icon: Heart,
-    title: "Make a Monetary Donation",
-    description: "Fund safe housing, meals, counseling, and education for children in our care.",
-  },
-  {
-    icon: Clock,
-    title: "Volunteer Your Time",
-    description: "Mentor, tutor, or lead activities in our safehouses. Consistent presence matters deeply.",
-  },
-  {
-    icon: Wrench,
-    title: "Contribute Skills & Services",
-    description: "Medical, legal, counseling, education, and tech professionals can give their expertise directly.",
-  },
-  {
-    icon: Users,
-    title: "In-Kind Donations",
-    description: "Clothing, school supplies, hygiene products, and food are always needed.",
-  },
-  {
-    icon: Building2,
-    title: "Become a Partner Organization",
-    description: "Churches, businesses, and nonprofits can build sustained partnerships aligned with our mission.",
-  },
-  {
-    icon: Share2,
-    title: "Advocate on Social Media",
-    description: "Share our mission and impact stories to grow awareness and bring in new supporters.",
-  },
-];
-
-const WaysToHelp = () => {
-  const { user } = useAuth();
-  const isLoggedIn = !!user;
 
   return (
     <Layout>
@@ -121,23 +86,25 @@ const WaysToHelp = () => {
             </div>
           </div>
 
-          {/* Bottom CTA */}
-          <div className="mt-16 border border-border p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div>
-              <p className="font-heading text-xl font-semibold text-foreground">
-                {t("volunteerNotSure")}
-              </p>
-              <p className="mt-1 text-sm text-muted-foreground max-w-md">
-                {t("volunteerNotSureDesc")}
-              </p>
+          {/* Bottom CTA — only shown to unauthenticated users */}
+          {!isLoggedIn && (
+            <div className="mt-16 border border-border p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div>
+                <p className="font-heading text-xl font-semibold text-foreground">
+                  {t("volunteerNotSure")}
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground max-w-md">
+                  {t("volunteerNotSureDesc")}
+                </p>
+              </div>
+              <Link
+                to="/register"
+                className="shrink-0 inline-flex items-center justify-center px-6 py-3 text-sm font-medium bg-accent text-accent-foreground hover:bg-gold-dark transition-colors"
+              >
+                {t("volunteerCreateAccount")}
+              </Link>
             </div>
-            <Link
-              to="/register"
-              className="shrink-0 inline-flex items-center justify-center px-6 py-3 text-sm font-medium bg-accent text-accent-foreground hover:bg-gold-dark transition-colors"
-            >
-              {t("volunteerCreateAccount")}
-            </Link>
-          </div>
+          )}
 
         </div>
       </section>

@@ -164,19 +164,19 @@ const Index = () => {
                 title: t("homeGiveMonthly"),
                 desc: t("homeGiveMonthlyDesc"),
                 cta: t("homeStartGiving"),
-                to: "/register",
+                to: ctaTarget,
               },
               {
                 title: t("homeVolunteerSkills"),
                 desc: t("homeVolunteerSkillsDesc"),
                 cta: t("homeSeeOpportunities"),
-                to: "/volunteer",
+                to: ctaTarget,
               },
               {
                 title: t("homeCorporatePartnership"),
                 desc: t("homeCorporatePartnershipDesc"),
                 cta: t("homePartnerWithUs"),
-                to: "/register",
+                to: ctaTarget,
               },
             ].map((card) => (
               <div key={card.title} className="border border-border p-8 flex flex-col">
