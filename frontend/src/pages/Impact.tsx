@@ -123,7 +123,7 @@ const Impact = () => {
                 <div className="md:col-span-2 px-6 md:pr-12">
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-14">
                     {summaryCards.map((card) => (
-                      <div key={card.label} className="border border-border p-5">
+                      <div key={card.label} className="border border-border p-5 bg-background">
                         <div className="text-sm text-muted-foreground mb-2">{card.label}</div>
                         <div className="font-heading text-2xl md:text-3xl font-bold text-foreground">
                           {card.value}
