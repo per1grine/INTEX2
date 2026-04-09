@@ -291,7 +291,10 @@ const Staff = () => {
     }
   };
 
-  const thCls = "px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground cursor-pointer select-none hover:text-foreground transition-colors whitespace-nowrap";
+  const thCls = "px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground whitespace-nowrap";
+  const thBtnCls = "inline-flex items-center gap-1 select-none hover:text-foreground transition-colors";
+  const ariaSort = (key: keyof StaffUser) =>
+    sort.key !== key ? "none" : sort.dir === "asc" ? "ascending" : "descending";
   const inputCls = "w-full border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-accent";
   const labelCls = "block text-xs font-semibold text-muted-foreground mb-1.5 uppercase tracking-wide";
   const selectCls = "border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-accent";
@@ -359,13 +362,37 @@ const Staff = () => {
           <table className="w-full text-sm table-fixed min-w-[980px]">
             <thead>
               <tr className="border-b border-border bg-secondary">
-                <th className={`text-left ${thCls} w-[14%]`} onClick={() => cycleSort("firstName")}>Name <SortIcon col="firstName" /></th>
-                <th className={`text-left ${thCls} w-[22%]`} onClick={() => cycleSort("email")}>Email <SortIcon col="email" /></th>
-                <th className={`text-left ${thCls} w-[15%]`} onClick={() => cycleSort("username")}>Username <SortIcon col="username" /></th>
+                <th className={`text-left ${thCls} w-[14%]`} aria-sort={ariaSort("firstName")}>
+                  <button type="button" className={thBtnCls} onClick={() => cycleSort("firstName")} aria-label="Name: sort">
+                    Name <SortIcon col="firstName" />
+                  </button>
+                </th>
+                <th className={`text-left ${thCls} w-[22%]`} aria-sort={ariaSort("email")}>
+                  <button type="button" className={thBtnCls} onClick={() => cycleSort("email")} aria-label="Email: sort">
+                    Email <SortIcon col="email" />
+                  </button>
+                </th>
+                <th className={`text-left ${thCls} w-[15%]`} aria-sort={ariaSort("username")}>
+                  <button type="button" className={thBtnCls} onClick={() => cycleSort("username")} aria-label="Username: sort">
+                    Username <SortIcon col="username" />
+                  </button>
+                </th>
                 <th className={`text-left ${thCls} w-[10%]`}>Roles</th>
-                <th className={`text-left ${thCls} w-[11%]`} onClick={() => cycleSort("createdAtUtc")}>Joined <SortIcon col="createdAtUtc" /></th>
-                <th className={`text-right ${thCls} w-[11%] whitespace-nowrap`} onClick={() => cycleSort("donationCount")}># Donations <SortIcon col="donationCount" /></th>
-                <th className={`text-right ${thCls} w-[12%] whitespace-nowrap`} onClick={() => cycleSort("totalDonations")}>Total Given <SortIcon col="totalDonations" /></th>
+                <th className={`text-left ${thCls} w-[11%]`} aria-sort={ariaSort("createdAtUtc")}>
+                  <button type="button" className={thBtnCls} onClick={() => cycleSort("createdAtUtc")} aria-label="Joined: sort">
+                    Joined <SortIcon col="createdAtUtc" />
+                  </button>
+                </th>
+                <th className={`text-right ${thCls} w-[11%] whitespace-nowrap`} aria-sort={ariaSort("donationCount")}>
+                  <button type="button" className={thBtnCls} onClick={() => cycleSort("donationCount")} aria-label="Donations count: sort">
+                    # Donations <SortIcon col="donationCount" />
+                  </button>
+                </th>
+                <th className={`text-right ${thCls} w-[12%] whitespace-nowrap`} aria-sort={ariaSort("totalDonations")}>
+                  <button type="button" className={thBtnCls} onClick={() => cycleSort("totalDonations")} aria-label="Total given: sort">
+                    Total Given <SortIcon col="totalDonations" />
+                  </button>
+                </th>
                 <th className="w-[5%] px-3 py-2.5"></th>
               </tr>
             </thead>
@@ -400,6 +427,7 @@ const Staff = () => {
                       type="button"
                       onClick={() => openEditing(u)}
                       className="text-muted-foreground hover:text-foreground transition-colors"
+                      aria-label={`Edit user ${u.username ?? u.email ?? u.firstName}`}
                     >
                       <Pencil size={15} />
                     </button>

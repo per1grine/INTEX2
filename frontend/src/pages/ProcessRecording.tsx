@@ -425,7 +425,10 @@ const ProcessRecordingPage = () => {
     return <ChevronDown size={11} className="inline ml-1" />;
   };
 
-  const thCls = "text-left px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground cursor-pointer select-none hover:text-foreground transition-colors whitespace-nowrap";
+  const thCls = "text-left px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground whitespace-nowrap";
+  const thBtnCls = "inline-flex items-center gap-1 select-none hover:text-foreground transition-colors";
+  const ariaSort = (key: keyof ProcessRecordingDto) =>
+    sort.key !== key ? "none" : sort.dir === "asc" ? "ascending" : "descending";
 
   const selectCls = "border border-border bg-background px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-accent";
 
@@ -490,19 +493,19 @@ const ProcessRecordingPage = () => {
             />
           </div>
 
-          <select className={selectCls} value={filterResident} onChange={e => setFilterResident(e.target.value)}>
+          <select aria-label="Filter by resident" className={selectCls} value={filterResident} onChange={e => setFilterResident(e.target.value)}>
             <option value="">All residents</option>
             {(filters?.residents ?? []).map(r => (
               <option key={r.residentId} value={r.residentId}>{r.label}</option>
             ))}
           </select>
 
-          <select className={selectCls} value={filterSW} onChange={e => setFilterSW(e.target.value)}>
+          <select aria-label="Filter by social worker" className={selectCls} value={filterSW} onChange={e => setFilterSW(e.target.value)}>
             <option value="">All social workers</option>
             {(filters?.socialWorkers ?? []).map(sw => <option key={sw}>{sw}</option>)}
           </select>
 
-          <select className={selectCls} value={filterType} onChange={e => setFilterType(e.target.value)}>
+          <select aria-label="Filter by session type" className={selectCls} value={filterType} onChange={e => setFilterType(e.target.value)}>
             <option value="">All session types</option>
             {(filters?.sessionTypes ?? []).map(t => <option key={t}>{t}</option>)}
           </select>
@@ -521,11 +524,11 @@ const ProcessRecordingPage = () => {
           </p>
           {totalPages > 1 && (
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <button onClick={() => fetchRecordings(page - 1)} disabled={page <= 1 || loading} className="p-1 hover:text-foreground disabled:opacity-40">
+              <button onClick={() => fetchRecordings(page - 1)} disabled={page <= 1 || loading} className="p-1 hover:text-foreground disabled:opacity-40" aria-label="Previous page">
                 <ChevronLeft size={14} />
               </button>
               <span>Page {page} of {totalPages}</span>
-              <button onClick={() => fetchRecordings(page + 1)} disabled={page >= totalPages || loading} className="p-1 hover:text-foreground disabled:opacity-40">
+              <button onClick={() => fetchRecordings(page + 1)} disabled={page >= totalPages || loading} className="p-1 hover:text-foreground disabled:opacity-40" aria-label="Next page">
                 <ChevronRight size={14} />
               </button>
             </div>
@@ -540,13 +543,41 @@ const ProcessRecordingPage = () => {
             <table className="w-full text-sm table-fixed min-w-[1100px]">
               <thead>
                 <tr className="border-b border-border bg-secondary">
-                  <th className={`${thCls} w-[10%]`} onClick={() => cycleSort("residentCode")}>Resident<SortIcon col="residentCode" /></th>
-                  <th className={`${thCls} w-[9%]`} onClick={() => cycleSort("sessionDate")}>Date<SortIcon col="sessionDate" /></th>
-                  <th className={`${thCls} w-[10%]`} onClick={() => cycleSort("socialWorker")}>Social Worker<SortIcon col="socialWorker" /></th>
-                  <th className={`${thCls} w-[9%]`} onClick={() => cycleSort("sessionType")}>Type<SortIcon col="sessionType" /></th>
-                  <th className={`${thCls} w-[8%]`} onClick={() => cycleSort("emotionalStateObserved")}>Emotional State<SortIcon col="emotionalStateObserved" /></th>
-                  <th className={`${thCls} w-[28%]`} onClick={() => cycleSort("sessionNarrative")}>Narrative<SortIcon col="sessionNarrative" /></th>
-                  <th className={`${thCls} w-[14%]`} onClick={() => cycleSort("interventionsApplied")}>Interventions<SortIcon col="interventionsApplied" /></th>
+                  <th className={`${thCls} w-[10%]`} aria-sort={ariaSort("residentCode")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("residentCode")} aria-label="Resident: sort">
+                      Resident<SortIcon col="residentCode" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[9%]`} aria-sort={ariaSort("sessionDate")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("sessionDate")} aria-label="Date: sort">
+                      Date<SortIcon col="sessionDate" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[10%]`} aria-sort={ariaSort("socialWorker")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("socialWorker")} aria-label="Social worker: sort">
+                      Social Worker<SortIcon col="socialWorker" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[9%]`} aria-sort={ariaSort("sessionType")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("sessionType")} aria-label="Type: sort">
+                      Type<SortIcon col="sessionType" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[8%]`} aria-sort={ariaSort("emotionalStateObserved")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("emotionalStateObserved")} aria-label="Emotional state: sort">
+                      Emotional State<SortIcon col="emotionalStateObserved" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[28%]`} aria-sort={ariaSort("sessionNarrative")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("sessionNarrative")} aria-label="Narrative: sort">
+                      Narrative<SortIcon col="sessionNarrative" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[14%]`} aria-sort={ariaSort("interventionsApplied")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("interventionsApplied")} aria-label="Interventions: sort">
+                      Interventions<SortIcon col="interventionsApplied" />
+                    </button>
+                  </th>
                   <th className="text-left px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground w-[8%]">Flags</th>
                   <th className="w-[4%] px-3 py-2.5"></th>
                 </tr>
@@ -606,6 +637,7 @@ const ProcessRecordingPage = () => {
                       <button
                         onClick={() => openEdit(r)}
                         className="text-muted-foreground hover:text-foreground transition-colors"
+                        aria-label={`Edit process recording ${r.recordingId}`}
                         title="Edit"
                       >
                         <Pencil size={13} />
@@ -621,11 +653,11 @@ const ProcessRecordingPage = () => {
         {/* Bottom pagination */}
         {totalPages > 1 && !loading && (
           <div className="flex items-center justify-center gap-3 mt-6 text-xs text-muted-foreground">
-            <button onClick={() => fetchRecordings(page - 1)} disabled={page <= 1} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
+            <button aria-label="Previous page" onClick={() => fetchRecordings(page - 1)} disabled={page <= 1} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
               <ChevronLeft size={14} />
             </button>
             <span>Page {page} of {totalPages}</span>
-            <button onClick={() => fetchRecordings(page + 1)} disabled={page >= totalPages} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
+            <button aria-label="Next page" onClick={() => fetchRecordings(page + 1)} disabled={page >= totalPages} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
               <ChevronRight size={14} />
             </button>
           </div>

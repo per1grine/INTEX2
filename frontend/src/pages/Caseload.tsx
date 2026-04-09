@@ -530,7 +530,10 @@ const Caseload = () => {
     return <ChevronDown size={11} className="inline ml-1" />;
   };
 
-  const thCls = "text-left px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground cursor-pointer select-none hover:text-foreground transition-colors whitespace-nowrap";
+  const thCls = "text-left px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground whitespace-nowrap";
+  const thBtnCls = "inline-flex items-center gap-1 select-none hover:text-foreground transition-colors";
+  const ariaSort = (key: keyof ResidentListItem) =>
+    sort.key !== key ? "none" : sort.dir === "asc" ? "ascending" : "descending";
 
   const selectCls = "border border-border bg-background px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-accent";
 
@@ -595,27 +598,27 @@ const Caseload = () => {
             />
           </div>
 
-          <select className={selectCls} value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
+          <select aria-label="Filter by status" className={selectCls} value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
             <option value="">{t("caseloadAllStatuses")}</option>
             {(filters?.statuses ?? []).map(s => <option key={s}>{s}</option>)}
           </select>
 
-          <select className={selectCls} value={filterSafehouse} onChange={e => setFilterSafehouse(e.target.value)}>
+          <select aria-label="Filter by safehouse" className={selectCls} value={filterSafehouse} onChange={e => setFilterSafehouse(e.target.value)}>
             <option value="">{t("caseloadAllSafehouses")}</option>
             {(filters?.safehouseIds ?? []).map(id => <option key={id} value={id}>Safehouse {id}</option>)}
           </select>
 
-          <select className={selectCls} value={filterCategory} onChange={e => setFilterCategory(e.target.value)}>
+          <select aria-label="Filter by category" className={selectCls} value={filterCategory} onChange={e => setFilterCategory(e.target.value)}>
             <option value="">{t("caseloadAllCategories")}</option>
             {(filters?.categories ?? []).map(c => <option key={c}>{c}</option>)}
           </select>
 
-          <select className={selectCls} value={filterReintegration} onChange={e => setFilterReintegration(e.target.value)}>
+          <select aria-label="Filter by reintegration status" className={selectCls} value={filterReintegration} onChange={e => setFilterReintegration(e.target.value)}>
             <option value="">{t("caseloadAllReintegration")}</option>
             {(filters?.reintegrationStatuses ?? []).map(s => <option key={s}>{s}</option>)}
           </select>
 
-          <select className={selectCls} value={filterSW} onChange={e => setFilterSW(e.target.value)}>
+          <select aria-label="Filter by social worker" className={selectCls} value={filterSW} onChange={e => setFilterSW(e.target.value)}>
             <option value="">{t("caseloadAllSocialWorkers")}</option>
             {(filters?.socialWorkers ?? []).map(sw => <option key={sw}>{sw}</option>)}
           </select>
@@ -638,6 +641,7 @@ const Caseload = () => {
                 onClick={() => fetchResidents(page - 1)}
                 disabled={page <= 1 || loading}
                 className="p-1 hover:text-foreground disabled:opacity-40"
+                aria-label="Previous page"
               >
                 <ChevronLeft size={14} />
               </button>
@@ -646,6 +650,7 @@ const Caseload = () => {
                 onClick={() => fetchResidents(page + 1)}
                 disabled={page >= totalPages || loading}
                 className="p-1 hover:text-foreground disabled:opacity-40"
+                aria-label="Next page"
               >
                 <ChevronRight size={14} />
               </button>
@@ -661,14 +666,46 @@ const Caseload = () => {
             <table className="w-full text-sm table-fixed min-w-[980px]">
               <thead>
                 <tr className="border-b border-border bg-secondary">
-                  <th className={`${thCls} w-[10%]`} onClick={() => cycleSort("caseControlNo")}>{t("caseloadCaseNo")}<SortIcon col="caseControlNo" /></th>
-                  <th className={`${thCls} w-[8%]`} onClick={() => cycleSort("caseStatus")}>{t("caseloadStatus")}<SortIcon col="caseStatus" /></th>
-                  <th className={`${thCls} w-[7%]`} onClick={() => cycleSort("safehouseId")}>SH<SortIcon col="safehouseId" /></th>
-                  <th className={`${thCls} w-[13%]`} onClick={() => cycleSort("caseCategory")}>{t("caseloadCategory")}<SortIcon col="caseCategory" /></th>
-                  <th className={`${thCls} w-[10%]`} onClick={() => cycleSort("dateOfAdmission")}>{t("caseloadAdmitted")}<SortIcon col="dateOfAdmission" /></th>
-                  <th className={`${thCls} w-[10%]`} onClick={() => cycleSort("assignedSocialWorker")}>{t("caseloadSocialWorker")}<SortIcon col="assignedSocialWorker" /></th>
-                  <th className={`${thCls} w-[14%]`} onClick={() => cycleSort("reintegrationStatus")}>{t("caseloadReintegration")}<SortIcon col="reintegrationStatus" /></th>
-                  <th className={`${thCls} w-[9%]`} onClick={() => cycleSort("currentRiskLevel")}>{t("caseloadRisk")}<SortIcon col="currentRiskLevel" /></th>
+                  <th className={`${thCls} w-[10%]`} aria-sort={ariaSort("caseControlNo")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("caseControlNo")} aria-label={`${t("caseloadCaseNo")}: sort`}>
+                      {t("caseloadCaseNo")}<SortIcon col="caseControlNo" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[8%]`} aria-sort={ariaSort("caseStatus")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("caseStatus")} aria-label={`${t("caseloadStatus")}: sort`}>
+                      {t("caseloadStatus")}<SortIcon col="caseStatus" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[7%]`} aria-sort={ariaSort("safehouseId")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("safehouseId")} aria-label="Safehouse: sort">
+                      SH<SortIcon col="safehouseId" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[13%]`} aria-sort={ariaSort("caseCategory")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("caseCategory")} aria-label={`${t("caseloadCategory")}: sort`}>
+                      {t("caseloadCategory")}<SortIcon col="caseCategory" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[10%]`} aria-sort={ariaSort("dateOfAdmission")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("dateOfAdmission")} aria-label={`${t("caseloadAdmitted")}: sort`}>
+                      {t("caseloadAdmitted")}<SortIcon col="dateOfAdmission" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[10%]`} aria-sort={ariaSort("assignedSocialWorker")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("assignedSocialWorker")} aria-label={`${t("caseloadSocialWorker")}: sort`}>
+                      {t("caseloadSocialWorker")}<SortIcon col="assignedSocialWorker" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[14%]`} aria-sort={ariaSort("reintegrationStatus")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("reintegrationStatus")} aria-label={`${t("caseloadReintegration")}: sort`}>
+                      {t("caseloadReintegration")}<SortIcon col="reintegrationStatus" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[9%]`} aria-sort={ariaSort("currentRiskLevel")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("currentRiskLevel")} aria-label={`${t("caseloadRisk")}: sort`}>
+                      {t("caseloadRisk")}<SortIcon col="currentRiskLevel" />
+                    </button>
+                  </th>
                   <th className="w-[8%] px-3 py-2.5"></th>
                 </tr>
               </thead>
@@ -716,6 +753,7 @@ const Caseload = () => {
                         <button
                           onClick={() => openEdit(r)}
                           className="text-muted-foreground hover:text-foreground transition-colors"
+                          aria-label={`Edit ${r.caseControlNo ?? r.internalCode ?? `resident ${r.residentId}`}`}
                           title="Edit"
                         >
                           <Pencil size={13} />
@@ -732,11 +770,11 @@ const Caseload = () => {
         {/* Bottom pagination */}
         {totalPages > 1 && !loading && (
           <div className="flex items-center justify-center gap-3 mt-6 text-xs text-muted-foreground">
-            <button onClick={() => fetchResidents(page - 1)} disabled={page <= 1} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
+            <button aria-label="Previous page" onClick={() => fetchResidents(page - 1)} disabled={page <= 1} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
               <ChevronLeft size={14} />
             </button>
             <span>Page {page} of {totalPages}</span>
-            <button onClick={() => fetchResidents(page + 1)} disabled={page >= totalPages} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
+            <button aria-label="Next page" onClick={() => fetchResidents(page + 1)} disabled={page >= totalPages} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
               <ChevronRight size={14} />
             </button>
           </div>

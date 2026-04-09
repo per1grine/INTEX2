@@ -34,9 +34,9 @@ const Footer = () => {
 
           {/* Organization */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-primary-foreground/50 mb-4">
+            <h2 className="text-xs font-semibold uppercase tracking-widest text-primary-foreground/50 mb-4">
               {t("footerOrganization")}
-            </h4>
+            </h2>
             <ul className="space-y-2.5 text-sm">
               <li>
                 <button
@@ -64,9 +64,9 @@ const Footer = () => {
 
           {/* Get Involved */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-primary-foreground/50 mb-4">
+            <h2 className="text-xs font-semibold uppercase tracking-widest text-primary-foreground/50 mb-4">
               {t("footerGetInvolved")}
-            </h4>
+            </h2>
             <ul className="space-y-2.5 text-sm">
               <li>
                 <Link to="/register" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
@@ -88,9 +88,9 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-primary-foreground/50 mb-4">
+            <h2 className="text-xs font-semibold uppercase tracking-widest text-primary-foreground/50 mb-4">
               {t("footerContact")}
-            </h4>
+            </h2>
             <ul className="space-y-2.5 text-sm text-primary-foreground/70">
               <li>info@northstar.com</li>
               <li>Bogotá, Colombia</li>

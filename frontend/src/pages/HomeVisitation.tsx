@@ -769,7 +769,12 @@ const HomeVisitationPage = () => {
     return <ChevronDown size={11} className="inline ml-1" />;
   };
 
-  const thCls = "text-left px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground cursor-pointer select-none hover:text-foreground transition-colors whitespace-nowrap";
+  const thCls = "text-left px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground whitespace-nowrap";
+  const thBtnCls = "inline-flex items-center gap-1 select-none hover:text-foreground transition-colors";
+  const ariaSort = (key: keyof HomeVisitationDto) =>
+    sort.key !== key ? "none" : sort.dir === "asc" ? "ascending" : "descending";
+  const confAriaSort = (key: keyof InterventionPlanDto) =>
+    confSort.key !== key ? "none" : confSort.dir === "asc" ? "ascending" : "descending";
 
   const selectCls = "border border-border bg-background px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-accent";
 
@@ -860,24 +865,24 @@ const HomeVisitationPage = () => {
             />
           </div>
 
-          <select className={selectCls} value={filterResident} onChange={e => setFilterResident(e.target.value)}>
+          <select aria-label="Filter by resident" className={selectCls} value={filterResident} onChange={e => setFilterResident(e.target.value)}>
             <option value="">All residents</option>
             {(filters?.residents ?? []).map(r => (
               <option key={r.residentId} value={r.residentId}>{r.label}</option>
             ))}
           </select>
 
-          <select className={selectCls} value={filterType} onChange={e => setFilterType(e.target.value)}>
+          <select aria-label="Filter by visit type" className={selectCls} value={filterType} onChange={e => setFilterType(e.target.value)}>
             <option value="">All visit types</option>
             {(filters?.visitTypes ?? VISIT_TYPES).map(t => <option key={t}>{t}</option>)}
           </select>
 
-          <select className={selectCls} value={filterSW} onChange={e => setFilterSW(e.target.value)}>
+          <select aria-label="Filter by social worker" className={selectCls} value={filterSW} onChange={e => setFilterSW(e.target.value)}>
             <option value="">All social workers</option>
             {(filters?.socialWorkers ?? []).map(sw => <option key={sw}>{sw}</option>)}
           </select>
 
-          <select className={selectCls} value={filterSafety} onChange={e => setFilterSafety(e.target.value)}>
+          <select aria-label="Filter by safety flag" className={selectCls} value={filterSafety} onChange={e => setFilterSafety(e.target.value)}>
             <option value="">All safety flags</option>
             <option value="true">Safety concerns only</option>
             <option value="false">No safety concerns</option>
@@ -897,11 +902,11 @@ const HomeVisitationPage = () => {
           </p>
           {totalPages > 1 && (
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <button onClick={() => fetchVisits(page - 1)} disabled={page <= 1 || loading} className="p-1 hover:text-foreground disabled:opacity-40">
+              <button onClick={() => fetchVisits(page - 1)} disabled={page <= 1 || loading} className="p-1 hover:text-foreground disabled:opacity-40" aria-label="Previous page">
                 <ChevronLeft size={14} />
               </button>
               <span>Page {page} of {totalPages}</span>
-              <button onClick={() => fetchVisits(page + 1)} disabled={page >= totalPages || loading} className="p-1 hover:text-foreground disabled:opacity-40">
+              <button onClick={() => fetchVisits(page + 1)} disabled={page >= totalPages || loading} className="p-1 hover:text-foreground disabled:opacity-40" aria-label="Next page">
                 <ChevronRight size={14} />
               </button>
             </div>
@@ -916,14 +921,46 @@ const HomeVisitationPage = () => {
             <table className="w-full text-sm table-fixed min-w-[1100px]">
               <thead>
                 <tr className="border-b border-border bg-secondary">
-                  <th className={`${thCls} w-[9%]`} onClick={() => cycleSort("residentCode")}>Resident<SortIcon col="residentCode" /></th>
-                  <th className={`${thCls} w-[8%]`} onClick={() => cycleSort("visitDate")}>Date<SortIcon col="visitDate" /></th>
-                  <th className={`${thCls} w-[14%]`} onClick={() => cycleSort("visitType")}>Visit Type<SortIcon col="visitType" /></th>
-                  <th className={`${thCls} w-[9%]`} onClick={() => cycleSort("socialWorker")}>Worker<SortIcon col="socialWorker" /></th>
-                  <th className={`${thCls} w-[9%]`} onClick={() => cycleSort("locationVisited")}>Location<SortIcon col="locationVisited" /></th>
-                  <th className={`${thCls} w-[20%]`} onClick={() => cycleSort("observations")}>Observations<SortIcon col="observations" /></th>
-                  <th className={`${thCls} w-[10%]`} onClick={() => cycleSort("familyCooperationLevel")}>Cooperation<SortIcon col="familyCooperationLevel" /></th>
-                  <th className={`${thCls} w-[9%]`} onClick={() => cycleSort("visitOutcome")}>Outcome<SortIcon col="visitOutcome" /></th>
+                  <th className={`${thCls} w-[9%]`} aria-sort={ariaSort("residentCode")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("residentCode")} aria-label="Resident: sort">
+                      Resident<SortIcon col="residentCode" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[8%]`} aria-sort={ariaSort("visitDate")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("visitDate")} aria-label="Date: sort">
+                      Date<SortIcon col="visitDate" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[14%]`} aria-sort={ariaSort("visitType")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("visitType")} aria-label="Visit type: sort">
+                      Visit Type<SortIcon col="visitType" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[9%]`} aria-sort={ariaSort("socialWorker")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("socialWorker")} aria-label="Worker: sort">
+                      Worker<SortIcon col="socialWorker" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[9%]`} aria-sort={ariaSort("locationVisited")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("locationVisited")} aria-label="Location: sort">
+                      Location<SortIcon col="locationVisited" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[20%]`} aria-sort={ariaSort("observations")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("observations")} aria-label="Observations: sort">
+                      Observations<SortIcon col="observations" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[10%]`} aria-sort={ariaSort("familyCooperationLevel")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("familyCooperationLevel")} aria-label="Cooperation: sort">
+                      Cooperation<SortIcon col="familyCooperationLevel" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[9%]`} aria-sort={ariaSort("visitOutcome")}>
+                    <button type="button" className={thBtnCls} onClick={() => cycleSort("visitOutcome")} aria-label="Outcome: sort">
+                      Outcome<SortIcon col="visitOutcome" />
+                    </button>
+                  </th>
                   <th className="text-left px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground w-[5%]">Flags</th>
                   <th className="w-[7%] px-3 py-2.5"></th>
                 </tr>
@@ -974,6 +1011,7 @@ const HomeVisitationPage = () => {
                       <button
                         onClick={() => openEdit(v)}
                         className="text-muted-foreground hover:text-foreground transition-colors"
+                        aria-label={`Edit home visit ${v.visitationId}`}
                         title="Edit"
                       >
                         <Pencil size={13} />
@@ -989,11 +1027,11 @@ const HomeVisitationPage = () => {
         {/* Bottom pagination */}
         {totalPages > 1 && !loading && (
           <div className="flex items-center justify-center gap-3 mt-6 text-xs text-muted-foreground">
-            <button onClick={() => fetchVisits(page - 1)} disabled={page <= 1} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
+            <button aria-label="Previous page" onClick={() => fetchVisits(page - 1)} disabled={page <= 1} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
               <ChevronLeft size={14} />
             </button>
             <span>Page {page} of {totalPages}</span>
-            <button onClick={() => fetchVisits(page + 1)} disabled={page >= totalPages} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
+            <button aria-label="Next page" onClick={() => fetchVisits(page + 1)} disabled={page >= totalPages} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
               <ChevronRight size={14} />
             </button>
           </div>
@@ -1015,19 +1053,19 @@ const HomeVisitationPage = () => {
             />
           </div>
 
-          <select className={selectCls} value={confFilterResident} onChange={e => setConfFilterResident(e.target.value)}>
+          <select aria-label="Filter conferences by resident" className={selectCls} value={confFilterResident} onChange={e => setConfFilterResident(e.target.value)}>
             <option value="">All residents</option>
             {(confFilters?.residents ?? []).map(r => (
               <option key={r.residentId} value={r.residentId}>{r.label}</option>
             ))}
           </select>
 
-          <select className={selectCls} value={confFilterStatus} onChange={e => setConfFilterStatus(e.target.value)}>
+          <select aria-label="Filter conferences by status" className={selectCls} value={confFilterStatus} onChange={e => setConfFilterStatus(e.target.value)}>
             <option value="">All statuses</option>
             {(confFilters?.statuses ?? PLAN_STATUSES).map(s => <option key={s}>{s}</option>)}
           </select>
 
-          <select className={selectCls} value={confFilterCategory} onChange={e => setConfFilterCategory(e.target.value)}>
+          <select aria-label="Filter conferences by category" className={selectCls} value={confFilterCategory} onChange={e => setConfFilterCategory(e.target.value)}>
             <option value="">All categories</option>
             {(confFilters?.categories ?? PLAN_CATEGORIES).map(c => <option key={c}>{c}</option>)}
           </select>
@@ -1051,11 +1089,11 @@ const HomeVisitationPage = () => {
           </p>
           {confTotalPages > 1 && (
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <button onClick={() => fetchConferences(confPage - 1)} disabled={confPage <= 1 || confLoading} className="p-1 hover:text-foreground disabled:opacity-40">
+              <button onClick={() => fetchConferences(confPage - 1)} disabled={confPage <= 1 || confLoading} className="p-1 hover:text-foreground disabled:opacity-40" aria-label="Previous page">
                 <ChevronLeft size={14} />
               </button>
               <span>Page {confPage} of {confTotalPages}</span>
-              <button onClick={() => fetchConferences(confPage + 1)} disabled={confPage >= confTotalPages || confLoading} className="p-1 hover:text-foreground disabled:opacity-40">
+              <button onClick={() => fetchConferences(confPage + 1)} disabled={confPage >= confTotalPages || confLoading} className="p-1 hover:text-foreground disabled:opacity-40" aria-label="Next page">
                 <ChevronRight size={14} />
               </button>
             </div>
@@ -1070,13 +1108,41 @@ const HomeVisitationPage = () => {
             <table className="w-full text-sm table-fixed min-w-[1100px]">
               <thead>
                 <tr className="border-b border-border bg-secondary">
-                  <th className={`${thCls} w-[10%]`} onClick={() => confCycleSort("residentCode")}>Resident<ConfSortIcon col="residentCode" /></th>
-                  <th className={`${thCls} w-[11%]`} onClick={() => confCycleSort("caseConferenceDate")}>Conference Date<ConfSortIcon col="caseConferenceDate" /></th>
-                  <th className={`${thCls} w-[11%]`} onClick={() => confCycleSort("planCategory")}>Category<ConfSortIcon col="planCategory" /></th>
-                  <th className={`${thCls} w-[28%]`} onClick={() => confCycleSort("planDescription")}>Description<ConfSortIcon col="planDescription" /></th>
-                  <th className={`${thCls} w-[15%]`} onClick={() => confCycleSort("servicesProvided")}>Services<ConfSortIcon col="servicesProvided" /></th>
-                  <th className={`${thCls} w-[9%]`} onClick={() => confCycleSort("targetDate")}>Target Date<ConfSortIcon col="targetDate" /></th>
-                  <th className={`${thCls} w-[8%]`} onClick={() => confCycleSort("status")}>Status<ConfSortIcon col="status" /></th>
+                  <th className={`${thCls} w-[10%]`} aria-sort={confAriaSort("residentCode")}>
+                    <button type="button" className={thBtnCls} onClick={() => confCycleSort("residentCode")} aria-label="Resident: sort">
+                      Resident<ConfSortIcon col="residentCode" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[11%]`} aria-sort={confAriaSort("caseConferenceDate")}>
+                    <button type="button" className={thBtnCls} onClick={() => confCycleSort("caseConferenceDate")} aria-label="Conference date: sort">
+                      Conference Date<ConfSortIcon col="caseConferenceDate" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[11%]`} aria-sort={confAriaSort("planCategory")}>
+                    <button type="button" className={thBtnCls} onClick={() => confCycleSort("planCategory")} aria-label="Category: sort">
+                      Category<ConfSortIcon col="planCategory" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[28%]`} aria-sort={confAriaSort("planDescription")}>
+                    <button type="button" className={thBtnCls} onClick={() => confCycleSort("planDescription")} aria-label="Description: sort">
+                      Description<ConfSortIcon col="planDescription" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[15%]`} aria-sort={confAriaSort("servicesProvided")}>
+                    <button type="button" className={thBtnCls} onClick={() => confCycleSort("servicesProvided")} aria-label="Services: sort">
+                      Services<ConfSortIcon col="servicesProvided" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[9%]`} aria-sort={confAriaSort("targetDate")}>
+                    <button type="button" className={thBtnCls} onClick={() => confCycleSort("targetDate")} aria-label="Target date: sort">
+                      Target Date<ConfSortIcon col="targetDate" />
+                    </button>
+                  </th>
+                  <th className={`${thCls} w-[8%]`} aria-sort={confAriaSort("status")}>
+                    <button type="button" className={thBtnCls} onClick={() => confCycleSort("status")} aria-label="Status: sort">
+                      Status<ConfSortIcon col="status" />
+                    </button>
+                  </th>
                   <th className="w-[4%] px-3 py-2.5"></th>
                 </tr>
               </thead>
@@ -1115,6 +1181,7 @@ const HomeVisitationPage = () => {
                         <button
                           onClick={() => confOpenEdit(c)}
                           className="text-muted-foreground hover:text-foreground transition-colors"
+                          aria-label={`Edit conference plan ${c.planId}`}
                           title="Edit"
                         >
                           <Pencil size={13} />
@@ -1131,11 +1198,11 @@ const HomeVisitationPage = () => {
         {/* Conference bottom pagination */}
         {confTotalPages > 1 && !confLoading && (
           <div className="flex items-center justify-center gap-3 mt-6 text-xs text-muted-foreground">
-            <button onClick={() => fetchConferences(confPage - 1)} disabled={confPage <= 1} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
+            <button aria-label="Previous page" onClick={() => fetchConferences(confPage - 1)} disabled={confPage <= 1} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
               <ChevronLeft size={14} />
             </button>
             <span>Page {confPage} of {confTotalPages}</span>
-            <button onClick={() => fetchConferences(confPage + 1)} disabled={confPage >= confTotalPages} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
+            <button aria-label="Next page" onClick={() => fetchConferences(confPage + 1)} disabled={confPage >= confTotalPages} className="p-1.5 border border-border hover:bg-secondary disabled:opacity-40">
               <ChevronRight size={14} />
             </button>
           </div>

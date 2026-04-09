@@ -264,7 +264,10 @@ const Donors = () => {
     return <ChevronDown size={11} className="inline ml-1" />;
   };
 
-  const thCls = "px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground cursor-pointer select-none hover:text-foreground transition-colors whitespace-nowrap";
+  const thCls = "px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground whitespace-nowrap";
+  const thBtnCls = "inline-flex items-center gap-1 select-none hover:text-foreground transition-colors";
+  const ariaSort = (key: keyof Donor) =>
+    sort.key !== key ? "none" : sort.dir === "asc" ? "ascending" : "descending";
 
   return (
     <Layout>
@@ -397,11 +400,31 @@ const Donors = () => {
           <table className="w-full text-sm table-fixed min-w-[900px]">
             <thead>
               <tr className="border-b border-border bg-secondary">
-                <th className={`text-left ${thCls} w-[28%]`} onClick={() => cycleSort("lastName")}>{t("donorsSupporter")}<SortIcon col="lastName" /></th>
-                <th className={`text-left ${thCls} w-[18%]`} onClick={() => cycleSort("supporterType")}>{t("donorsType")}<SortIcon col="supporterType" /></th>
-                <th className={`text-left ${thCls} w-[12%]`} onClick={() => cycleSort("status")}>{t("donorsStatus")}<SortIcon col="status" /></th>
-                <th className={`text-left ${thCls} w-[16%]`} onClick={() => cycleSort("phone")}>{t("donorsPhone")}<SortIcon col="phone" /></th>
-                <th className={`text-right ${thCls} w-[16%]`} onClick={() => cycleSort("totalGiven")}>{t("donorsTotalGiven")}<SortIcon col="totalGiven" /></th>
+                <th className={`text-left ${thCls} w-[28%]`} aria-sort={ariaSort("lastName")}>
+                  <button type="button" className={thBtnCls} onClick={() => cycleSort("lastName")} aria-label={`${t("donorsSupporter")}: sort`}>
+                    {t("donorsSupporter")}<SortIcon col="lastName" />
+                  </button>
+                </th>
+                <th className={`text-left ${thCls} w-[18%]`} aria-sort={ariaSort("supporterType")}>
+                  <button type="button" className={thBtnCls} onClick={() => cycleSort("supporterType")} aria-label={`${t("donorsType")}: sort`}>
+                    {t("donorsType")}<SortIcon col="supporterType" />
+                  </button>
+                </th>
+                <th className={`text-left ${thCls} w-[12%]`} aria-sort={ariaSort("status")}>
+                  <button type="button" className={thBtnCls} onClick={() => cycleSort("status")} aria-label={`${t("donorsStatus")}: sort`}>
+                    {t("donorsStatus")}<SortIcon col="status" />
+                  </button>
+                </th>
+                <th className={`text-left ${thCls} w-[16%]`} aria-sort={ariaSort("phone")}>
+                  <button type="button" className={thBtnCls} onClick={() => cycleSort("phone")} aria-label={`${t("donorsPhone")}: sort`}>
+                    {t("donorsPhone")}<SortIcon col="phone" />
+                  </button>
+                </th>
+                <th className={`text-right ${thCls} w-[16%]`} aria-sort={ariaSort("totalGiven")}>
+                  <button type="button" className={thBtnCls} onClick={() => cycleSort("totalGiven")} aria-label={`${t("donorsTotalGiven")}: sort`}>
+                    {t("donorsTotalGiven")}<SortIcon col="totalGiven" />
+                  </button>
+                </th>
                 <th className="w-[10%] px-3 py-2.5"></th>
               </tr>
             </thead>
@@ -472,16 +495,17 @@ const Donors = () => {
                     </span>
                   </div>
                   <div className="flex gap-2">
-                    <button onClick={() => openEdit(selectedDonor)} className="text-muted-foreground hover:text-foreground p-1">
+                    <button aria-label={`Edit ${donorDisplayName(selectedDonor)}`} onClick={() => openEdit(selectedDonor)} className="text-muted-foreground hover:text-foreground p-1">
                       <Pencil size={18} />
                     </button>
                     <button 
+                      aria-label={`Delete ${donorDisplayName(selectedDonor)}`}
                       onClick={() => handleDeleteDonor(selectedDonor.supporterId)} 
                       className="text-red-500 hover:text-red-700 p-1"
                     >
                       <Trash2 size={18} />
                     </button>
-                    <button onClick={() => setSelectedDonor(null)} className="text-muted-foreground hover:text-foreground p-1 ml-2">
+                    <button aria-label="Close donor details" onClick={() => setSelectedDonor(null)} className="text-muted-foreground hover:text-foreground p-1 ml-2">
                       <X size={20} />
                     </button>
                   </div>
