@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { apiGetImpactStats, type ImpactStats } from "@/utils/api";
-import { BarChart2, Users, ClipboardList, FileText, Home, RefreshCw, Heart } from "lucide-react";
+import { BarChart2, ClipboardList, FileText, Home, RefreshCw, Heart } from "lucide-react";
 
 const ADMIN_LINKS = [
   {
@@ -58,16 +58,12 @@ const AdminDashboard = () => {
 
   useEffect(() => { fetchStats(); }, [fetchStats]);
 
-  const reintegrationRate = stats
-    ? Math.round((stats.reintegrationProgressCount / stats.totalResidents) * 100)
-    : 0;
-
   const summaryCards = stats
     ? [
         { label: "Children Currently in Care", value: stats.activeResidents.toString() },
         { label: "Total Contributions", value: `$${Math.round(stats.totalContributionsValue).toLocaleString()}` },
-        { label: "Reintegration Rate", value: `~${reintegrationRate}%` },
-        { label: "Active Supporters", value: stats.uniqueSuporters.toString() },
+        { label: "Avg Donation per Individual", value: `$${Math.round(stats.avgDonationPerIndividual).toLocaleString()}` },
+        { label: "Avg Donation per Organization", value: `$${Math.round(stats.avgDonationPerOrganization).toLocaleString()}` },
       ]
     : [];
 
