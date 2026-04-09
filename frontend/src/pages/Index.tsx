@@ -5,8 +5,11 @@ import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import heroImage from "@/assets/hero-colombia.jpg";
 import { apiGetImpactStats, type ImpactStats } from "@/utils/api";
+import { useAuth } from "@/state/auth";
 
 const Index = () => {
+  const { user } = useAuth();
+  const ctaTarget = user ? "/donor" : "/register";
   const [stats, setStats] = useState<ImpactStats | null>(null);
 
   useEffect(() => {
@@ -158,19 +161,19 @@ const Index = () => {
                 title: "Give Monthly",
                 desc: "Consistent funding allows us to plan long-term care. $50/month covers a child's food and schooling for 30 days.",
                 cta: "Start Giving",
-                to: "/register",
+                to: ctaTarget,
               },
               {
                 title: "Volunteer Your Skills",
                 desc: "We need therapists, teachers, translators, grant writers, and tech professionals. Remote and on-site roles available.",
                 cta: "See Opportunities",
-                to: "/volunteer",
+                to: ctaTarget,
               },
               {
                 title: "Corporate Partnership",
                 desc: "Align your organization with our mission. We offer sponsorship tiers, impact reports, and co-branded campaigns.",
                 cta: "Partner With Us",
-                to: "/register",
+                to: ctaTarget,
               },
             ].map((card) => (
               <div key={card.title} className="border border-border p-8 flex flex-col">
@@ -198,7 +201,7 @@ const Index = () => {
             Every contribution—whether financial, professional, or personal—directly changes a child's life. Join us.
           </p>
           <Link
-            to="/register"
+            to={ctaTarget}
             className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-8 py-3 text-sm font-semibold hover:bg-gold-dark transition-colors"
           >
             Get Involved <ArrowRight size={16} />

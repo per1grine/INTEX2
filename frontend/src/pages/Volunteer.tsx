@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Heart, Clock, Wrench, Users, Building2, Share2 } from "lucide-react";
+import { useAuth } from "@/state/auth";
 
 const WAYS = [
   {
@@ -36,6 +37,9 @@ const WAYS = [
 ];
 
 const WaysToHelp = () => {
+  const { user } = useAuth();
+  const isLoggedIn = !!user;
+
   return (
     <Layout>
       <section className="px-6 py-20">
@@ -70,7 +74,7 @@ const WaysToHelp = () => {
                   View our impact
                 </Link>
                 <Link
-                  to="/register"
+                  to={isLoggedIn ? "/donor" : "/register"}
                   className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium border border-border hover:bg-secondary transition-colors"
                 >
                   Get involved
@@ -104,23 +108,25 @@ const WaysToHelp = () => {
             </div>
           </div>
 
-          {/* Bottom CTA */}
-          <div className="mt-16 border border-border p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div>
-              <p className="font-heading text-xl font-semibold text-foreground">
-                Not sure where to start?
-              </p>
-              <p className="mt-1 text-sm text-muted-foreground max-w-md">
-                Create an account and our team will help you find the right fit for your capacity and interests.
-              </p>
+          {/* Bottom CTA — only shown to unauthenticated users */}
+          {!isLoggedIn && (
+            <div className="mt-16 border border-border p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div>
+                <p className="font-heading text-xl font-semibold text-foreground">
+                  Not sure where to start?
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground max-w-md">
+                  Create an account and our team will help you find the right fit for your capacity and interests.
+                </p>
+              </div>
+              <Link
+                to="/register"
+                className="shrink-0 inline-flex items-center justify-center px-6 py-3 text-sm font-medium bg-accent text-accent-foreground hover:bg-gold-dark transition-colors"
+              >
+                Create an account
+              </Link>
             </div>
-            <Link
-              to="/register"
-              className="shrink-0 inline-flex items-center justify-center px-6 py-3 text-sm font-medium bg-accent text-accent-foreground hover:bg-gold-dark transition-colors"
-            >
-              Create an account
-            </Link>
-          </div>
+          )}
 
         </div>
       </section>
