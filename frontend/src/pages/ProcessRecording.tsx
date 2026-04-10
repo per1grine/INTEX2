@@ -425,8 +425,8 @@ const ProcessRecordingPage = () => {
     return <ChevronDown size={11} className="inline ml-1" />;
   };
 
-  const thCls = "text-left px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground whitespace-nowrap";
-  const thBtnCls = "inline-flex items-center gap-1 select-none hover:text-foreground transition-colors";
+  const thCls = "px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-widest text-muted-foreground";
+  const thBtnCls = "flex w-full items-center gap-1 text-left select-none hover:text-foreground transition-colors";
   const ariaSort = (key: keyof ProcessRecordingDto) =>
     sort.key !== key ? "none" : sort.dir === "asc" ? "ascending" : "descending";
 
@@ -540,46 +540,57 @@ const ProcessRecordingPage = () => {
         {/* Table */}
         {!error && (
           <div className="border border-border bg-background overflow-x-auto">
-            <table className="w-full text-sm table-fixed min-w-[1100px]">
+            <table className="w-full min-w-[1280px] text-sm">
+              <colgroup>
+                <col className="w-[110px]" />
+                <col className="w-[105px]" />
+                <col className="w-[135px]" />
+                <col className="w-[110px]" />
+                <col className="w-[185px]" />
+                <col className="w-[330px]" />
+                <col className="w-[180px]" />
+                <col className="w-[125px]" />
+                <col className="w-[60px]" />
+              </colgroup>
               <thead>
                 <tr className="border-b border-border bg-secondary">
-                  <th className={`${thCls} w-[10%]`} aria-sort={ariaSort("residentCode")}>
+                  <th className={thCls} aria-sort={ariaSort("residentCode")}>
                     <button type="button" className={thBtnCls} onClick={() => cycleSort("residentCode")} aria-label="Resident: sort">
                       Resident<SortIcon col="residentCode" />
                     </button>
                   </th>
-                  <th className={`${thCls} w-[9%]`} aria-sort={ariaSort("sessionDate")}>
+                  <th className={thCls} aria-sort={ariaSort("sessionDate")}>
                     <button type="button" className={thBtnCls} onClick={() => cycleSort("sessionDate")} aria-label="Date: sort">
                       Date<SortIcon col="sessionDate" />
                     </button>
                   </th>
-                  <th className={`${thCls} w-[10%]`} aria-sort={ariaSort("socialWorker")}>
+                  <th className={thCls} aria-sort={ariaSort("socialWorker")}>
                     <button type="button" className={thBtnCls} onClick={() => cycleSort("socialWorker")} aria-label="Social worker: sort">
                       Social Worker<SortIcon col="socialWorker" />
                     </button>
                   </th>
-                  <th className={`${thCls} w-[9%]`} aria-sort={ariaSort("sessionType")}>
+                  <th className={thCls} aria-sort={ariaSort("sessionType")}>
                     <button type="button" className={thBtnCls} onClick={() => cycleSort("sessionType")} aria-label="Type: sort">
                       Type<SortIcon col="sessionType" />
                     </button>
                   </th>
-                  <th className={`${thCls} w-[8%]`} aria-sort={ariaSort("emotionalStateObserved")}>
+                  <th className={thCls} aria-sort={ariaSort("emotionalStateObserved")}>
                     <button type="button" className={thBtnCls} onClick={() => cycleSort("emotionalStateObserved")} aria-label="Emotional state: sort">
                       Emotional State<SortIcon col="emotionalStateObserved" />
                     </button>
                   </th>
-                  <th className={`${thCls} w-[28%]`} aria-sort={ariaSort("sessionNarrative")}>
+                  <th className={thCls} aria-sort={ariaSort("sessionNarrative")}>
                     <button type="button" className={thBtnCls} onClick={() => cycleSort("sessionNarrative")} aria-label="Narrative: sort">
                       Narrative<SortIcon col="sessionNarrative" />
                     </button>
                   </th>
-                  <th className={`${thCls} w-[14%]`} aria-sort={ariaSort("interventionsApplied")}>
+                  <th className={thCls} aria-sort={ariaSort("interventionsApplied")}>
                     <button type="button" className={thBtnCls} onClick={() => cycleSort("interventionsApplied")} aria-label="Interventions: sort">
                       Interventions<SortIcon col="interventionsApplied" />
                     </button>
                   </th>
-                  <th className="text-left px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground w-[8%]">Flags</th>
-                  <th className="w-[4%] px-3 py-2.5"></th>
+                  <th className={thCls}>Flags</th>
+                  <th className="px-3 py-2.5"></th>
                 </tr>
               </thead>
               <tbody>
