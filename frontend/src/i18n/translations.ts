@@ -36,6 +36,26 @@ export type Translations = {
   profileErrNewPwdLen: string;
   profileErrPwdMismatch: string;
   profileErrFailed: string;
+  profileSecurity: string;
+  profileMfaTitle: string;
+  profileMfaEnabled: string;
+  profileMfaDisabled: string;
+  profileMfaSetupPasswordLabel: string;
+  profileMfaPasswordHelp: string;
+  profileMfaStartSetup: string;
+  profileMfaSetupReady: string;
+  profileMfaSetupHint: string;
+  profileMfaManualKey: string;
+  profileMfaCode: string;
+  profileMfaCodePlaceholder: string;
+  profileMfaEnable: string;
+  profileMfaDisable: string;
+  profileMfaRegenerateCodes: string;
+  profileMfaRecoveryCodes: string;
+  profileMfaRecoveryCodesHelp: string;
+  profileMfaSetupSuccess: string;
+  profileMfaDisableSuccess: string;
+  profileMfaRegenerateSuccess: string;
   // ── Footer ─────────────────────────────────────────────────────────────────
   footerTagline: string;
   footerOrganization: string;
@@ -149,6 +169,13 @@ export type Translations = {
   loginSigningIn: string;
   loginSignInBtn: string;
   loginCreateAccount: string;
+  loginMfaHeadline: string;
+  loginMfaSub: string;
+  loginMfaCodeLabel: string;
+  loginMfaCodeHelp: string;
+  loginMfaVerify: string;
+  loginMfaVerifying: string;
+  loginMfaBack: string;
   // ── Register page ──────────────────────────────────────────────────────────
   registerHeadline: string;
   registerSub: string;
@@ -602,6 +629,26 @@ export const en: Translations = {
   profileErrNewPwdLen: "New password must be at least 6 characters.",
   profileErrPwdMismatch: "New passwords do not match.",
   profileErrFailed: "Update failed.",
+  profileSecurity: "Security",
+  profileMfaTitle: "Two-Factor Authentication",
+  profileMfaEnabled: "MFA is enabled on this account.",
+  profileMfaDisabled: "Protect this account with a 6-digit code from Google Authenticator or any compatible app.",
+  profileMfaSetupPasswordLabel: "Password for MFA actions",
+  profileMfaPasswordHelp: "Enter your current password to start setup, disable MFA, or regenerate recovery codes.",
+  profileMfaStartSetup: "Start MFA setup",
+  profileMfaSetupReady: "Setup key ready",
+  profileMfaSetupHint: "In your authenticator app, choose manual setup and enter this secret key. Then type the current 6-digit code below.",
+  profileMfaManualKey: "Manual entry key",
+  profileMfaCode: "Authenticator or recovery code",
+  profileMfaCodePlaceholder: "6-digit code or recovery code",
+  profileMfaEnable: "Enable MFA",
+  profileMfaDisable: "Disable MFA",
+  profileMfaRegenerateCodes: "New recovery codes",
+  profileMfaRecoveryCodes: "Recovery codes",
+  profileMfaRecoveryCodesHelp: "Save these now. Each code can be used once if you lose access to your authenticator app.",
+  profileMfaSetupSuccess: "MFA is now enabled.",
+  profileMfaDisableSuccess: "MFA has been disabled.",
+  profileMfaRegenerateSuccess: "Recovery codes regenerated.",
   // Footer
   footerTagline: "Providing refuge, healing, and hope to trafficked and abused children in Colombia.",
   footerOrganization: "Organization",
@@ -741,6 +788,13 @@ export const en: Translations = {
   loginSigningIn: "Signing in...",
   loginSignInBtn: "Sign in",
   loginCreateAccount: "Create account",
+  loginMfaHeadline: "Check your authenticator app.",
+  loginMfaSub: "Enter the 6-digit code from your authenticator app. Recovery codes also work here.",
+  loginMfaCodeLabel: "Authentication code",
+  loginMfaCodeHelp: "Use a current authenticator code or one of your saved recovery codes.",
+  loginMfaVerify: "Verify code",
+  loginMfaVerifying: "Verifying...",
+  loginMfaBack: "Back",
   // Register page
   registerHeadline: "Create an account to get involved with North Star.",
   registerSub:
@@ -1207,6 +1261,26 @@ export const es: Translations = {
   profileErrNewPwdLen: "La nueva contraseña debe tener al menos 6 caracteres.",
   profileErrPwdMismatch: "Las nuevas contraseñas no coinciden.",
   profileErrFailed: "Error al actualizar.",
+  profileSecurity: "Seguridad",
+  profileMfaTitle: "Autenticación de Dos Factores",
+  profileMfaEnabled: "MFA está activado en esta cuenta.",
+  profileMfaDisabled: "Proteja esta cuenta con un código de 6 dígitos de Google Authenticator o cualquier app compatible.",
+  profileMfaSetupPasswordLabel: "Contraseña para acciones MFA",
+  profileMfaPasswordHelp: "Ingrese su contraseña actual para iniciar la configuración, desactivar MFA o regenerar códigos de recuperación.",
+  profileMfaStartSetup: "Iniciar configuración MFA",
+  profileMfaSetupReady: "Clave de configuración lista",
+  profileMfaSetupHint: "En su aplicación autenticadora, elija configuración manual e ingrese esta clave secreta. Luego escriba abajo el código actual de 6 dígitos.",
+  profileMfaManualKey: "Clave de ingreso manual",
+  profileMfaCode: "Código autenticador o de recuperación",
+  profileMfaCodePlaceholder: "Código de 6 dígitos o de recuperación",
+  profileMfaEnable: "Activar MFA",
+  profileMfaDisable: "Desactivar MFA",
+  profileMfaRegenerateCodes: "Nuevos códigos de recuperación",
+  profileMfaRecoveryCodes: "Códigos de recuperación",
+  profileMfaRecoveryCodesHelp: "Guárdelos ahora. Cada código se puede usar una sola vez si pierde acceso a su aplicación autenticadora.",
+  profileMfaSetupSuccess: "MFA ya está activado.",
+  profileMfaDisableSuccess: "MFA ha sido desactivado.",
+  profileMfaRegenerateSuccess: "Códigos de recuperación regenerados.",
   // Footer
   footerTagline:
     "Brindando refugio, sanación y esperanza a niños víctimas de trata y abuso en Colombia.",
@@ -1348,6 +1422,13 @@ export const es: Translations = {
   loginSigningIn: "Iniciando sesión...",
   loginSignInBtn: "Iniciar sesión",
   loginCreateAccount: "Crear cuenta",
+  loginMfaHeadline: "Revise su aplicación autenticadora.",
+  loginMfaSub: "Ingrese el código de 6 dígitos de su aplicación autenticadora. Los códigos de recuperación también funcionan aquí.",
+  loginMfaCodeLabel: "Código de autenticación",
+  loginMfaCodeHelp: "Use un código actual de su autenticador o uno de sus códigos de recuperación guardados.",
+  loginMfaVerify: "Verificar código",
+  loginMfaVerifying: "Verificando...",
+  loginMfaBack: "Volver",
   // Register page
   registerHeadline: "Cree una cuenta para involucrarse con North Star.",
   registerSub:

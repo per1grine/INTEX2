@@ -1,11 +1,27 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiGetMe, apiLogin, apiRegister, apiUpdateProfile, type UserDto } from "@/utils/api";
+import {
+  apiDisableMfa,
+  apiEnableMfa,
+  apiGetMe,
+  apiLogin,
+  apiRegister,
+  apiRegenerateRecoveryCodes,
+  apiSetupMfa,
+  apiUpdateProfile,
+  apiVerifyMfaLogin,
+  type UserDto,
+} from "@/utils/api";
+
+type LoginResult =
+  | { status: "authenticated"; user: UserDto }
+  | { status: "mfa_required"; mfaToken: string };
 
 type AuthState = {
   user: UserDto | null;
   token: string | null;
-  login: (username: string, password: string) => Promise<UserDto>;
+  login: (username: string, password: string) => Promise<LoginResult>;
+  verifyMfaLogin: (mfaToken: string, code: string) => Promise<UserDto>;
   register: (
     firstName: string,
     email: string,
@@ -24,6 +40,10 @@ type AuthState = {
     currentPassword?: string;
     newPassword?: string;
   }) => Promise<UserDto>;
+  setupMfa: (currentPassword: string) => Promise<{ manualEntryKey: string; otpAuthUri: string }>;
+  enableMfa: (currentPassword: string, code: string) => Promise<string[]>;
+  disableMfa: (currentPassword: string, code: string) => Promise<UserDto>;
+  regenerateRecoveryCodes: (currentPassword: string, code: string) => Promise<string[]>;
 };
 
 const AuthContext = createContext<AuthState | undefined>(undefined);
@@ -66,6 +86,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function login(username: string, password: string) {
     const res = await apiLogin({ username, password });
+    if (res.requiresMfa) {
+      if (!res.mfaToken) throw new Error("MFA challenge token missing");
+      return { status: "mfa_required", mfaToken: res.mfaToken } satisfies LoginResult;
+    }
+
+    if (!res.auth) throw new Error("Authentication response missing");
+    persist(res.auth.token, res.auth.user);
+    return { status: "authenticated", user: res.auth.user } satisfies LoginResult;
+  }
+
+  async function verifyMfaLogin(mfaToken: string, code: string) {
+    const res = await apiVerifyMfaLogin({ mfaToken, code });
     persist(res.token, res.user);
     return res.user;
   }
@@ -110,6 +142,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return res.user;
   }
 
+  async function setupMfa(currentPassword: string) {
+    if (!token) throw new Error("Not authenticated");
+    return apiSetupMfa(token, { currentPassword });
+  }
+
+  async function enableMfa(currentPassword: string, code: string) {
+    if (!token) throw new Error("Not authenticated");
+    const res = await apiEnableMfa(token, { currentPassword, code });
+    await refreshMe();
+    return res.recoveryCodes;
+  }
+
+  async function disableMfa(currentPassword: string, code: string) {
+    if (!token) throw new Error("Not authenticated");
+    const res = await apiDisableMfa(token, { currentPassword, code });
+    persist(res.token, res.user);
+    return res.user;
+  }
+
+  async function regenerateRecoveryCodes(currentPassword: string, code: string) {
+    if (!token) throw new Error("Not authenticated");
+    const res = await apiRegenerateRecoveryCodes(token, { currentPassword, code });
+    return res.recoveryCodes;
+  }
+
   async function refreshMe() {
     if (!token) {
       if (user) {
@@ -131,7 +188,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
-  const value: AuthState = { user, token, login, register, logout, refreshMe, updateProfile };
+  const value: AuthState = {
+    user,
+    token,
+    login,
+    verifyMfaLogin,
+    register,
+    logout,
+    refreshMe,
+    updateProfile,
+    setupMfa,
+    enableMfa,
+    disableMfa,
+    regenerateRecoveryCodes,
+  };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

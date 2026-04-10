@@ -25,6 +25,7 @@ const Register = () => {
   const [showAdminCode, setShowAdminCode] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [usernameError, setUsernameError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const passwordsMatch = password === confirmPassword;
@@ -56,11 +57,18 @@ const Register = () => {
                     event.preventDefault();
                     setError(null);
                     setEmailError(null);
+                    setUsernameError(null);
                     setLoading(true);
 
                     try {
                       if (!isValidEmail(email)) {
                         setEmailError("Please enter a valid email address (e.g. name@example.com).");
+                        setLoading(false);
+                        return;
+                      }
+
+                      if (username.trim().length < 3) {
+                        setUsernameError("Username must be at least 3 characters.");
                         setLoading(false);
                         return;
                       }
@@ -135,10 +143,16 @@ const Register = () => {
                     <Input
                       id="new-username"
                       value={username}
-                      onChange={(event) => setUsername(event.target.value)}
+                      onChange={(event) => {
+                        setUsername(event.target.value);
+                        setUsernameError(null);
+                      }}
                       autoComplete="username"
                       required
                     />
+                    {usernameError && (
+                      <p className="text-xs text-destructive">{usernameError}</p>
+                    )}
                   </div>
 
                   <div className="grid gap-5 sm:grid-cols-2">

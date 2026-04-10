@@ -47,6 +47,18 @@ namespace IntexApi.Data.Migrations
                     b.Property<bool>("IsDonor")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("MfaEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("MfaPendingSecretProtected")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MfaRecoveryCodesJson")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MfaSecretProtected")
+                        .HasColumnType("text");
+
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("text");
@@ -64,7 +76,7 @@ namespace IntexApi.Data.Migrations
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("users");
                 });
 #pragma warning restore 612, 618
         }

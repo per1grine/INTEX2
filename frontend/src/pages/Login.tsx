@@ -9,7 +9,7 @@ import { useAuth } from "@/state/auth";
 import { useLanguage } from "@/state/language";
 
 const Login = () => {
-  const { login } = useAuth();
+  const { login, verifyMfaLogin } = useAuth();
   const { t } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,6 +20,8 @@ const Login = () => {
 
   const [username, setUsername] = useState(prefilledUsername);
   const [password, setPassword] = useState("");
+  const [mfaCode, setMfaCode] = useState("");
+  const [mfaToken, setMfaToken] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -44,8 +46,8 @@ const Login = () => {
 
             <Card className="border-border/80 bg-card/90 shadow-none">
               <CardHeader>
-                <CardTitle>{t("loginSignIn")}</CardTitle>
-                <CardDescription>{t("loginAccessTools")}</CardDescription>
+                <CardTitle>{mfaToken ? t("loginMfaHeadline") : t("loginSignIn")}</CardTitle>
+                <CardDescription>{mfaToken ? t("loginMfaSub") : t("loginAccessTools")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <form
@@ -56,8 +58,20 @@ const Login = () => {
                     setLoading(true);
 
                     try {
-                      const user = await login(username, password);
-                      navigate(user.isAdmin ? "/admin" : user.isDonor ? "/donor" : "/");
+                      if (mfaToken) {
+                        const user = await verifyMfaLogin(mfaToken, mfaCode);
+                        navigate(user.isAdmin ? "/admin" : user.isDonor ? "/donor" : "/");
+                        return;
+                      }
+
+                      const result = await login(username, password);
+                      if (result.status === "mfa_required") {
+                        setMfaToken(result.mfaToken);
+                        setMfaCode("");
+                        return;
+                      }
+
+                      navigate(result.user.isAdmin ? "/admin" : result.user.isDonor ? "/donor" : "/");
                     } catch (err) {
                       setError(err instanceof Error ? err.message : "Login failed");
                     } finally {
@@ -65,46 +79,64 @@ const Login = () => {
                     }
                   }}
                 >
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground" htmlFor="username">
-                      {t("loginUsernameLabel")}
-                    </label>
-                    <Input
-                      id="username"
-                      value={username}
-                      onChange={(event) => setUsername(event.target.value)}
-                      autoComplete="username"
-                      required
-                    />
-                  </div>
+                  {!mfaToken ? (
+                    <>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-foreground" htmlFor="username">
+                          {t("loginUsernameLabel")}
+                        </label>
+                        <Input
+                          id="username"
+                          value={username}
+                          onChange={(event) => setUsername(event.target.value)}
+                          autoComplete="username"
+                          required
+                        />
+                      </div>
 
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground" htmlFor="password">
-                      {t("loginPasswordLabel")}
-                    </label>
-                    <div className="relative">
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-foreground" htmlFor="password">
+                          {t("loginPasswordLabel")}
+                        </label>
+                        <div className="relative">
+                          <Input
+                            id="password"
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)}
+                            autoComplete="current-password"
+                            required
+                            className="pr-10"
+                            autoFocus={prefilledUsername.length > 0}
+                          />
+                          <button
+                            type="button"
+                            className="absolute inset-y-0 right-0 flex items-center pr-3 text-muted-foreground hover:text-foreground"
+                            onClick={() => setShowPassword(!showPassword)}
+                            aria-label={showPassword ? "Hide password" : "Show password"}
+                            aria-pressed={showPassword}
+                            aria-controls="password"
+                          >
+                            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground" htmlFor="mfa-code">
+                        {t("loginMfaCodeLabel")}
+                      </label>
                       <Input
-                        id="password"
-                        type={showPassword ? "text" : "password"}
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                        autoComplete="current-password"
+                        id="mfa-code"
+                        value={mfaCode}
+                        onChange={(event) => setMfaCode(event.target.value)}
                         required
-                        className="pr-10"
-                        autoFocus={prefilledUsername.length > 0}
+                        autoFocus
                       />
-                      <button
-                        type="button"
-                        className="absolute inset-y-0 right-0 flex items-center pr-3 text-muted-foreground hover:text-foreground"
-                        onClick={() => setShowPassword(!showPassword)}
-                        aria-label={showPassword ? "Hide password" : "Show password"}
-                        aria-pressed={showPassword}
-                        aria-controls="password"
-                      >
-                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                      </button>
+                      <p className="text-xs text-muted-foreground">{t("loginMfaCodeHelp")}</p>
                     </div>
-                  </div>
+                  )}
 
                   {error ? (
                     <div className="rounded-md border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive">
@@ -114,11 +146,28 @@ const Login = () => {
 
                   <div className="flex flex-col gap-3 sm:flex-row">
                     <Button type="submit" className="sm:flex-1" disabled={loading}>
-                      {loading ? t("loginSigningIn") : t("loginSignInBtn")}
+                      {loading
+                        ? (mfaToken ? t("loginMfaVerifying") : t("loginSigningIn"))
+                        : (mfaToken ? t("loginMfaVerify") : t("loginSignInBtn"))}
                     </Button>
-                    <Button type="button" variant="outline" asChild className="sm:flex-1">
-                      <Link to="/register">{t("loginCreateAccount")}</Link>
-                    </Button>
+                    {mfaToken ? (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="sm:flex-1"
+                        onClick={() => {
+                          setMfaToken(null);
+                          setMfaCode("");
+                          setError(null);
+                        }}
+                      >
+                        {t("loginMfaBack")}
+                      </Button>
+                    ) : (
+                      <Button type="button" variant="outline" asChild className="sm:flex-1">
+                        <Link to="/register">{t("loginCreateAccount")}</Link>
+                      </Button>
+                    )}
                   </div>
                 </form>
               </CardContent>

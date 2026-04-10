@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { Menu, X, UserCircle, Eye, EyeOff } from "lucide-react";
+import { toast } from "sonner";
 import { useAuth } from "@/state/auth";
 import { useLanguage } from "@/state/language";
 
@@ -9,7 +10,7 @@ type NavItem = { to: string; label: string };
 const Navbar = () => {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { user, logout, updateProfile } = useAuth();
+  const { user, logout, updateProfile, setupMfa, enableMfa, disableMfa, regenerateRecoveryCodes } = useAuth();
   const { lang, setLang, t } = useLanguage();
 
   const [profileOpen, setProfileOpen] = useState(false);
@@ -26,6 +27,12 @@ const Navbar = () => {
   const [profileSaving, setProfileSaving] = useState(false);
   const [profileSuccess, setProfileSuccess] = useState(false);
   const [showProxyNav, setShowProxyNav] = useState(false);
+  const [mfaPassword, setMfaPassword] = useState("");
+  const [mfaCode, setMfaCode] = useState("");
+  const [mfaSetupKey, setMfaSetupKey] = useState("");
+  const [recoveryCodes, setRecoveryCodes] = useState<string[]>([]);
+  const [mfaError, setMfaError] = useState("");
+  const [mfaLoading, setMfaLoading] = useState(false);
 
   const headerRef = useRef<HTMLElement>(null);
   const desktopPanelRef = useRef<HTMLDivElement>(null);
@@ -45,6 +52,11 @@ const Navbar = () => {
     setShowConfirm(false);
     setProfileError("");
     setProfileSuccess(false);
+    setMfaPassword("");
+    setMfaCode("");
+    setMfaSetupKey("");
+    setRecoveryCodes([]);
+    setMfaError("");
   }, [user]);
 
   useEffect(() => {
@@ -136,6 +148,99 @@ const Navbar = () => {
       setProfileError(err instanceof Error ? err.message : t("profileErrFailed"));
     } finally {
       setProfileSaving(false);
+    }
+  };
+
+  const handleMfaSetup = async () => {
+    if (!mfaPassword) {
+      setMfaError(t("profileErrCurrentPwd"));
+      return;
+    }
+
+    setMfaLoading(true);
+    setMfaError("");
+    try {
+      const setup = await setupMfa(mfaPassword);
+      setMfaSetupKey(setup.manualEntryKey);
+      setRecoveryCodes([]);
+    } catch (err: unknown) {
+      setMfaError(err instanceof Error ? err.message : t("profileErrFailed"));
+    } finally {
+      setMfaLoading(false);
+    }
+  };
+
+  const handleMfaEnable = async () => {
+    if (!mfaPassword) {
+      setMfaError(t("profileErrCurrentPwd"));
+      return;
+    }
+    if (!mfaCode.trim()) {
+      setMfaError(t("loginMfaCodeHelp"));
+      return;
+    }
+
+    setMfaLoading(true);
+    setMfaError("");
+    try {
+      const codes = await enableMfa(mfaPassword, mfaCode);
+      setRecoveryCodes(codes);
+      setMfaSetupKey("");
+      setMfaCode("");
+      toast.success(t("profileMfaSetupSuccess"));
+    } catch (err: unknown) {
+      setMfaError(err instanceof Error ? err.message : t("profileErrFailed"));
+    } finally {
+      setMfaLoading(false);
+    }
+  };
+
+  const handleMfaDisable = async () => {
+    if (!mfaPassword) {
+      setMfaError(t("profileErrCurrentPwd"));
+      return;
+    }
+    if (!mfaCode.trim()) {
+      setMfaError(t("loginMfaCodeHelp"));
+      return;
+    }
+
+    setMfaLoading(true);
+    setMfaError("");
+    try {
+      await disableMfa(mfaPassword, mfaCode);
+      setMfaCode("");
+      setMfaSetupKey("");
+      setRecoveryCodes([]);
+      toast.success(t("profileMfaDisableSuccess"));
+    } catch (err: unknown) {
+      setMfaError(err instanceof Error ? err.message : t("profileErrFailed"));
+    } finally {
+      setMfaLoading(false);
+    }
+  };
+
+  const handleRecoveryCodesRegenerate = async () => {
+    if (!mfaPassword) {
+      setMfaError(t("profileErrCurrentPwd"));
+      return;
+    }
+    if (!mfaCode.trim()) {
+      setMfaError(t("loginMfaCodeHelp"));
+      return;
+    }
+
+    setMfaLoading(true);
+    setMfaError("");
+    try {
+      const codes = await regenerateRecoveryCodes(mfaPassword, mfaCode);
+      setRecoveryCodes(codes);
+      setMfaCode("");
+      toast.success(t("profileMfaRegenerateSuccess"));
+    } catch (err: unknown) {
+      setMfaError(err instanceof Error ? err.message : t("profileErrFailed"));
+    } finally {
+      setMfaLoading(false);
     }
   };
 
@@ -352,8 +457,128 @@ const Navbar = () => {
         </div>
       </div>
 
+      <div className="border-t border-border mt-4 pt-4">
+        <p className="text-xs font-semibold text-foreground mb-1">{t("profileSecurity")}</p>
+        <p className="text-xs text-muted-foreground mb-3">{t("profileMfaTitle")}</p>
+        <p className="text-xs text-muted-foreground mb-3">
+          {user?.mfaEnabled ? t("profileMfaEnabled") : t("profileMfaDisabled")}
+        </p>
+
+        <div className="space-y-3">
+          <div>
+            <label className="block text-xs font-medium text-muted-foreground mb-1">
+              {t("profileMfaSetupPasswordLabel")}
+            </label>
+            <input
+              type="password"
+              className={inputClass}
+              value={mfaPassword}
+              onChange={(e) => setMfaPassword(e.target.value)}
+            />
+            <p className="text-[11px] text-muted-foreground mt-1">{t("profileMfaPasswordHelp")}</p>
+          </div>
+
+          {!user?.mfaEnabled && (
+            <>
+              <button
+                type="button"
+                onClick={handleMfaSetup}
+                disabled={mfaLoading}
+                className="w-full text-sm font-medium px-3 py-2 border border-border rounded-md hover:bg-secondary transition-colors disabled:opacity-50"
+              >
+                {t("profileMfaStartSetup")}
+              </button>
+
+              {mfaSetupKey && (
+                <div className="rounded-md border border-border bg-secondary/50 p-3 space-y-2">
+                  <p className="text-xs font-semibold text-foreground">{t("profileMfaSetupReady")}</p>
+                  <p className="text-xs text-muted-foreground">{t("profileMfaSetupHint")}</p>
+                  <div>
+                    <p className="text-[11px] font-medium text-muted-foreground mb-1">{t("profileMfaManualKey")}</p>
+                    <code className="block break-all rounded bg-background px-2 py-2 text-xs text-foreground">
+                      {mfaSetupKey}
+                    </code>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-muted-foreground mb-1">
+                      {t("profileMfaCode")}
+                    </label>
+                    <input
+                      type="text"
+                      className={inputClass}
+                      value={mfaCode}
+                      onChange={(e) => setMfaCode(e.target.value)}
+                      placeholder={t("profileMfaCodePlaceholder")}
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleMfaEnable}
+                    disabled={mfaLoading}
+                    className="w-full text-sm font-medium px-3 py-2 bg-accent text-accent-foreground rounded-md hover:bg-gold-dark transition-colors disabled:opacity-50"
+                  >
+                    {t("profileMfaEnable")}
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+
+          {user?.mfaEnabled && (
+            <>
+              <div>
+                <label className="block text-xs font-medium text-muted-foreground mb-1">
+                  {t("profileMfaCode")}
+                </label>
+                <input
+                  type="text"
+                  className={inputClass}
+                  value={mfaCode}
+                  onChange={(e) => setMfaCode(e.target.value)}
+                  placeholder={t("profileMfaCodePlaceholder")}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 gap-2">
+                <button
+                  type="button"
+                  onClick={handleRecoveryCodesRegenerate}
+                  disabled={mfaLoading}
+                  className="text-sm font-medium px-3 py-2 border border-border rounded-md hover:bg-secondary transition-colors disabled:opacity-50"
+                >
+                  {t("profileMfaRegenerateCodes")}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleMfaDisable}
+                  disabled={mfaLoading}
+                  className="text-sm font-medium px-3 py-2 border border-destructive/30 text-destructive rounded-md hover:bg-destructive/5 transition-colors disabled:opacity-50"
+                >
+                  {t("profileMfaDisable")}
+                </button>
+              </div>
+            </>
+          )}
+
+          {recoveryCodes.length > 0 && (
+            <div className="rounded-md border border-border bg-secondary/50 p-3 space-y-2">
+              <p className="text-xs font-semibold text-foreground">{t("profileMfaRecoveryCodes")}</p>
+              <p className="text-xs text-muted-foreground">{t("profileMfaRecoveryCodesHelp")}</p>
+              <div className="grid grid-cols-2 gap-2">
+                {recoveryCodes.map((code) => (
+                  <code key={code} className="rounded bg-background px-2 py-1.5 text-xs text-foreground">
+                    {code}
+                  </code>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
       {profileError && <p className="text-xs text-red-500 mt-3">{profileError}</p>}
       {profileSuccess && <p className="text-xs text-green-600 mt-3">{t("profileUpdated")}</p>}
+      {mfaError && <p className="text-xs text-red-500 mt-3">{mfaError}</p>}
 
       <div className="flex gap-2 mt-4">
         <button

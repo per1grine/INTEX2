@@ -49,6 +49,7 @@ if (builder.Environment.IsDevelopment())
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddDataProtection();
 
 builder.Services.AddControllers(opts =>
 {
@@ -145,6 +146,10 @@ builder.Configuration["Jwt:Key"] = ResolveJwtKey(builder);
 
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Jwt"));
 builder.Services.AddSingleton<IJwtTokenService, JwtTokenService>();
+builder.Services.AddSingleton<IMfaTotpService, MfaTotpService>();
+builder.Services.AddSingleton<IMfaSecretProtector, MfaSecretProtector>();
+builder.Services.AddSingleton<IMfaChallengeService, MfaChallengeService>();
+builder.Services.AddSingleton<IMfaRecoveryCodeService, MfaRecoveryCodeService>();
 builder.Services.AddScoped<DonorSupporterLinker>();
 
 builder.Services.AddSingleton<IntexApi.Services.ImpactCacheService>();

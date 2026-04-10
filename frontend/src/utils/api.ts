@@ -5,6 +5,7 @@ export type UserDto = {
   username: string;
   isDonor: boolean;
   isAdmin: boolean;
+  mfaEnabled: boolean;
 };
 
 export type AuthResponse = {
@@ -12,12 +13,39 @@ export type AuthResponse = {
   user: UserDto;
 };
 
+export type LoginResponse = {
+  requiresMfa: boolean;
+  mfaToken: string | null;
+  auth: AuthResponse | null;
+};
+
+export type MfaSetupResponse = {
+  manualEntryKey: string;
+  otpAuthUri: string;
+};
+
+export type MfaRecoveryCodesResponse = {
+  recoveryCodes: string[];
+};
+
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:5180";
 
 async function readErrorMessage(res: Response): Promise<string> {
   try {
-    const body = (await res.json()) as { message?: string };
-    return body.message ?? `Request failed (${res.status})`;
+    const body = (await res.json()) as {
+      message?: string;
+      title?: string;
+      errors?: Record<string, string[]>;
+    };
+
+    if (body.message) return body.message;
+
+    if (body.errors) {
+      const messages = Object.values(body.errors).flat().filter(Boolean);
+      if (messages.length > 0) return messages.join(" ");
+    }
+
+    return body.title ?? `Request failed (${res.status})`;
   } catch {
     return `Request failed (${res.status})`;
   }
@@ -48,8 +76,25 @@ export async function apiRegister(input: {
 export async function apiLogin(input: {
   username: string;
   password: string;
-}): Promise<AuthResponse> {
+}): Promise<LoginResponse> {
   const res = await fetch(`${API_URL}/api/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(input),
+  });
+
+  if (!res.ok) {
+    throw new Error(await readErrorMessage(res));
+  }
+
+  return (await res.json()) as LoginResponse;
+}
+
+export async function apiVerifyMfaLogin(input: {
+  mfaToken: string;
+  code: string;
+}): Promise<AuthResponse> {
+  const res = await fetch(`${API_URL}/api/auth/login/mfa`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(input),
@@ -98,6 +143,86 @@ export async function apiUpdateProfile(
   }
 
   return (await res.json()) as AuthResponse;
+}
+
+export async function apiSetupMfa(
+  token: string,
+  input: { currentPassword: string },
+): Promise<MfaSetupResponse> {
+  const res = await fetch(`${API_URL}/api/auth/mfa/setup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(input),
+  });
+
+  if (!res.ok) {
+    throw new Error(await readErrorMessage(res));
+  }
+
+  return (await res.json()) as MfaSetupResponse;
+}
+
+export async function apiEnableMfa(
+  token: string,
+  input: { currentPassword: string; code: string },
+): Promise<MfaRecoveryCodesResponse> {
+  const res = await fetch(`${API_URL}/api/auth/mfa/enable`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(input),
+  });
+
+  if (!res.ok) {
+    throw new Error(await readErrorMessage(res));
+  }
+
+  return (await res.json()) as MfaRecoveryCodesResponse;
+}
+
+export async function apiDisableMfa(
+  token: string,
+  input: { currentPassword: string; code: string },
+): Promise<AuthResponse> {
+  const res = await fetch(`${API_URL}/api/auth/mfa/disable`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(input),
+  });
+
+  if (!res.ok) {
+    throw new Error(await readErrorMessage(res));
+  }
+
+  return (await res.json()) as AuthResponse;
+}
+
+export async function apiRegenerateRecoveryCodes(
+  token: string,
+  input: { currentPassword: string; code: string },
+): Promise<MfaRecoveryCodesResponse> {
+  const res = await fetch(`${API_URL}/api/auth/mfa/recovery-codes`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(input),
+  });
+
+  if (!res.ok) {
+    throw new Error(await readErrorMessage(res));
+  }
+
+  return (await res.json()) as MfaRecoveryCodesResponse;
 }
 
 export type SafehouseOccupancy = {

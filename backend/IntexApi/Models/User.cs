@@ -18,10 +18,17 @@ public sealed class User
     [Required]
     public string PasswordHash { get; set; } = "";
 
+    public bool MfaEnabled { get; set; } = false;
+
+    public string? MfaSecretProtected { get; set; }
+
+    public string? MfaPendingSecretProtected { get; set; }
+
+    public string? MfaRecoveryCodesJson { get; set; }
+
     public bool IsDonor { get; set; } = false;
 
     public bool IsAdmin { get; set; } = false;
 
     public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
 }
-
