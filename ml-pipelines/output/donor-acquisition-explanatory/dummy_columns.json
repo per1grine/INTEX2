@@ -19,6 +19,7 @@
   "first_channel_source_Direct",
   "first_channel_source_Event",
   "first_channel_source_Partnerreferral",
+  "first_channel_source_Simulated",
   "first_channel_source_Socialmedia",
   "campaign_x_channel_Other"
 ]

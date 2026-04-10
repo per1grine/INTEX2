@@ -1,0 +1,14 @@
+model_name: Random Forest
+features_used: 15
+reduced_model: True
+test_roc_auc: 0.6496
+test_f1: 0.6265
+test_precision: 0.6842
+test_recall: 0.5778
+test_accuracy: 0.5867
+optimal_threshold: 0.3500000000000001
+cv_roc_auc_mean: 0.7181
+cv_roc_auc_std: 0.0717
+churn_horizon_days: 90
+training_windows: ['2024-04-09', '2024-07-09', '2024-10-09', '2025-01-09', '2025-04-09', '2025-07-09']
+test_windows: ['2025-10-09', '2026-01-09']

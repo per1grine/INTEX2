@@ -1,12 +1,12 @@
 [
   "v_days_between_contributions_avg_log",
   "ix_breadth_x_tenure",
-  "v_total_contributions",
   "v_avg_estimated_value_log",
+  "v_total_contributions",
   "v_tenure_days",
-  "v_value_last_90d_log",
-  "v_value_trend",
   "ix_campaign_frequency",
+  "v_value_trend",
+  "v_value_last_90d_log",
   "v_contributions_last_180d",
-  "v_partner_assignment_count"
+  "v_partner_tenure_days"
 ]

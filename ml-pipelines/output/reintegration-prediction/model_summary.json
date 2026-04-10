@@ -28,7 +28,7 @@
   "config_snapshot": {
     "data_source": "sql",
     "sql_connection_string": "postgresql://postgres:admin@localhost:5432/intex",
-    "csv_dir": "C:\\Users\\camjw\\OneDrive\\Desktop\\BYU\\9. Winter 2026\\Intex2\\Intex2\\INTEX2\\ml-pipelines\\pipeline\\newData",
+    "csv_dir": "c:\\Users\\camjw\\OneDrive\\Desktop\\BYU\\9. Winter 2026\\Intex2\\Intex2\\INTEX2\\ml-pipelines\\pipeline\\newData",
     "residents": "residents.csv",
     "process_recordings": "process_recordings.csv",
     "home_visitations": "home_visitations.csv",
@@ -102,6 +102,35 @@
       "Building Readiness": 0.45,
       "Early Signals": 0.25,
       "Not Yet Indicated": 0.0
+    },
+    "domain_weights": {
+      "emotional": 0.16666666666666666,
+      "family": 0.16666666666666666,
+      "therapeutic": 0.16666666666666666,
+      "behavioral": 0.16666666666666666,
+      "health": 0.16666666666666666,
+      "educational": 0.16666666666666666
+    },
+    "domain_feature_prefixes": {
+      "emotional": [
+        "ew_"
+      ],
+      "family": [
+        "fe_"
+      ],
+      "therapeutic": [
+        "tp_",
+        "ar_"
+      ],
+      "behavioral": [
+        "bs_"
+      ],
+      "health": [
+        "ph_"
+      ],
+      "educational": [
+        "ed_"
+      ]
     },
     "output_dir": "..\\output\\reintegration-prediction",
     "models_dir": "..\\output\\reintegration-prediction",

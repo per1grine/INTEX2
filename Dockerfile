@@ -12,8 +12,8 @@ RUN apt-get update && apt-get install -y \
     libgssapi-krb5-2 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY ml-pipelines/requirements.txt ./ml-pipelines/requirements.txt
-RUN pip3 install --break-system-packages -r ml-pipelines/requirements.txt
+COPY ml-pipelines/environment/requirements.txt ./ml-pipelines/environment/requirements.txt
+RUN pip3 install --break-system-packages -r ml-pipelines/environment/requirements.txt
 
 COPY --from=build /app/out .
 COPY ml-pipelines/ ./ml-pipelines/

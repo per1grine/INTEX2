@@ -2,18 +2,18 @@
   "ols": {
     "adj_r_squared": NaN,
     "f_pvalue": NaN,
-    "aic": -681.5,
-    "bic": -672.5,
-    "n_features": 41,
+    "aic": -718.0,
+    "bic": -705.6,
+    "n_features": 40,
     "n_significant": 0,
-    "n_observations": 14
+    "n_observations": 16
   },
   "logit": {
-    "pseudo_r_squared": 0.3589,
-    "aic": 53.5,
-    "bic": 65.9,
-    "n_features": 41,
-    "n_significant": 2,
+    "pseudo_r_squared": 0.3758,
+    "aic": 55.0,
+    "bic": 67.5,
+    "n_features": 40,
+    "n_significant": 0,
     "n_observations": 59
   }
 }

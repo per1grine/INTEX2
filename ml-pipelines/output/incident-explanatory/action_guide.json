@@ -1,16 +1,208 @@
 [
   {
+    "feature": "current_occupancy",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 0.00023017194643856341,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Address safehouse overcrowding when occupancy exceeds 90% of capacity."
+  },
+  {
+    "feature": "avg_health_score",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 1.871931487618373e-18,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Flag declining health scores for immediate case conference review."
+  },
+  {
+    "feature": "process_recording_count",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 0.006569476267246917,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Develop targeted protocol based on this factor."
+  },
+  {
+    "feature": "home_visitation_count",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 6526.566115240358,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Develop targeted protocol based on this factor."
+  },
+  {
+    "feature": "occupancy_rate",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 0.023981943646650093,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Address safehouse overcrowding when occupancy exceeds 90% of capacity."
+  },
+  {
     "feature": "days_since_last_session",
     "model": "Logistic (Part A)",
-    "odds_ratio": 98680.62154997907,
-    "p_value": 0.0,
+    "odds_ratio": 7813.9395011719525,
+    "p_value": NaN,
     "classification": "MODIFIABLE",
     "protocol_recommendation": "Ensure no gap longer than 14 days between counseling sessions for residents with flagged concerns."
   },
   {
+    "feature": "session_count_last_14d",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 6.26972732690349e+21,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Ensure no gap longer than 14 days between counseling sessions for residents with flagged concerns."
+  },
+  {
+    "feature": "session_count_last_30d",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 514.8811380656083,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Ensure no gap longer than 14 days between counseling sessions for residents with flagged concerns."
+  },
+  {
+    "feature": "active_plan_count",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 2.0409424431289323e-05,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Review all intervention plans monthly; prioritize immediate follow-up on stalled Safety-category plans."
+  },
+  {
+    "feature": "stalled_plan_count",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 4.638734039891798e-16,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Review all intervention plans monthly; prioritize immediate follow-up on stalled Safety-category plans."
+  },
+  {
+    "feature": "latest_health_score",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 2.7905703122320783e-14,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Flag declining health scores for immediate case conference review."
+  },
+  {
+    "feature": "latest_sleep_quality_score",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 3.034256281231272e-15,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Screen for sleep quality issues and provide sleep hygiene support."
+  },
+  {
+    "feature": "latest_attendance_rate",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 4.141330952285195e-06,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Investigate barriers to education attendance when rates drop below 50%."
+  },
+  {
+    "feature": "education_progress_trend",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 19.06300018990787,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Develop targeted protocol based on this factor."
+  },
+  {
+    "feature": "session_gap_concerning",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 2.202071993074328e-08,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Ensure no gap longer than 14 days between counseling sessions for residents with flagged concerns."
+  },
+  {
+    "feature": "stalled_safety_plan",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 0.0007187201420754931,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Review all intervention plans monthly; prioritize immediate follow-up on stalled Safety-category plans."
+  },
+  {
+    "feature": "intervention_intensity",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 2.0409424431296248e-05,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Develop targeted protocol based on this factor."
+  },
+  {
+    "feature": "emotional_state_score",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 64738.653273950265,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "When counseling sessions end with concerning emotional states, schedule a follow-up within 48 hours."
+  },
+  {
+    "feature": "health_declining",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 474636686.2756023,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Flag declining health scores for immediate case conference review."
+  },
+  {
+    "feature": "multi_domain_decline",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 0.015479313283625463,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "When health and education are declining simultaneously, escalate to multi-disciplinary team review."
+  },
+  {
+    "feature": "sleep_quality_low",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 26501.03571712278,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Screen for sleep quality issues and provide sleep hygiene support."
+  },
+  {
+    "feature": "safehouse_understaffed",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 3.4723629608737068,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Monitor environmental factors monthly and flag safehouses exceeding capacity or incident thresholds."
+  },
+  {
+    "feature": "risk_x_occupancy",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 2.833033578699806e-22,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Address safehouse overcrowding when occupancy exceeds 90% of capacity."
+  },
+  {
+    "feature": "concerns_x_session_gap",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 0.004119464427151969,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "Ensure no gap longer than 14 days between counseling sessions for residents with flagged concerns."
+  },
+  {
+    "feature": "emotional_declining",
+    "model": "Logistic (Part A)",
+    "odds_ratio": 3.058921075915166e-11,
+    "p_value": NaN,
+    "classification": "MODIFIABLE",
+    "protocol_recommendation": "When counseling sessions end with concerning emotional states, schedule a follow-up within 48 hours."
+  },
+  {
     "feature": "reintegration_x_emotional",
     "model": "Logistic (Part A)",
-    "odds_ratio": 0.0021232062580665663,
+    "odds_ratio": 0.005434425184718767,
     "p_value": NaN,
     "classification": "MODIFIABLE",
     "protocol_recommendation": "When counseling sessions end with concerning emotional states, schedule a follow-up within 48 hours."

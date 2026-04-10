@@ -1,0 +1,16 @@
+{
+  "selected_model": "reduced",
+  "adj_r_squared": 0.8669049799990377,
+  "r_squared": 0.9300687183045792,
+  "f_pvalue": 2.5907584233151585e-11,
+  "n_features": 32,
+  "n_obs": 60,
+  "obs_per_feature": 2.142857142857143,
+  "condition_number": 4.707800077701031e+16,
+  "aic": 74.52529461298697,
+  "bic": 135.26128691742787,
+  "robust_se": false,
+  "significance_level": 0.05,
+  "logit_converged": true,
+  "logit_pseudo_r2": 0.9999999423312929
+}

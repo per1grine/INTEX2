@@ -1,103 +1,100 @@
 ========================================================================
 Incident Explanatory Pipeline — OLS Model Summary
-Generated: 2026-04-08 16:21:49
+Generated: 2026-04-09 20:37:20
 ========================================================================
 
                                  OLS Regression Results                                
 =======================================================================================
-Dep. Variable:     monthly_high_incident_count   R-squared:                       0.849
-Model:                                     OLS   Adj. R-squared:                  0.467
-Method:                          Least Squares   F-statistic:                -9.034e+10
-Date:                         Wed, 08 Apr 2026   Prob (F-statistic):               1.00
-Time:                                 16:21:49   Log-Likelihood:                 27.962
-No. Observations:                           93   AIC:                             78.08
-Df Residuals:                               26   BIC:                             247.8
-Df Model:                                   66                                         
+Dep. Variable:     monthly_high_incident_count   R-squared:                       0.831
+Model:                                     OLS   Adj. R-squared:                  0.423
+Method:                          Least Squares   F-statistic:                 7.407e+10
+Date:                         Thu, 09 Apr 2026   Prob (F-statistic):           1.04e-42
+Time:                                 20:37:20   Log-Likelihood:                 22.572
+No. Observations:                           93   AIC:                             86.86
+Df Residuals:                               27   BIC:                             254.0
+Df Model:                                   65                                         
 Covariance Type:                       cluster                                         
 ===============================================================================================================
                                                   coef    std err          z      P>|z|      [0.025      0.975]
 ---------------------------------------------------------------------------------------------------------------
-resolved                                        0.6699      0.262      2.558      0.011       0.157       1.183
-follow_up_required                              0.9156      0.275      3.335      0.001       0.378       1.454
-is_pwd                                          1.3290      0.673      1.975      0.048       0.010       2.648
-has_special_needs                              -1.5430      0.591     -2.612      0.009      -2.701      -0.385
-family_is_4ps                                  -0.7495      0.598     -1.254      0.210      -1.921       0.422
-family_solo_parent                              1.0340      0.957      1.081      0.280      -0.841       2.909
-family_indigenous                               0.0470      0.167      0.281      0.779      -0.281       0.375
-family_parent_pwd                              -0.2848      1.074     -0.265      0.791      -2.390       1.820
-family_informal_settler                         0.1338      0.413      0.324      0.746      -0.676       0.944
-trauma_complexity_index                         0.1056      0.195      0.541      0.589      -0.277       0.488
-capacity_girls                                 -0.0522      0.931     -0.056      0.955      -1.877       1.773
-capacity_staff                                  0.1526      0.311      0.491      0.623      -0.457       0.762
-current_occupancy                              -0.2889      0.349     -0.827      0.408      -0.973       0.396
-active_residents                                0.5836      2.385      0.245      0.807      -4.090       5.257
-avg_health_score                               -0.1253      0.562     -0.223      0.824      -1.227       0.976
-home_visitation_count                          -0.0676      0.054     -1.248      0.212      -0.174       0.039
-incident_count                                 -0.0782      0.356     -0.219      0.826      -0.777       0.620
-occupancy_rate                                 -0.0174     22.186     -0.001      0.999     -43.502      43.467
-session_count_last_14d                          0.0825      0.094      0.879      0.380      -0.102       0.267
-any_concerns_flagged_last_30d                   0.1354      0.528      0.257      0.797      -0.899       1.170
-any_referral_made_last_30d                     -0.2135      0.217     -0.984      0.325      -0.639       0.212
-active_plan_count                              -0.3964      0.231     -1.715      0.086      -0.849       0.057
-any_safety_plan                                -0.2726      0.872     -0.313      0.754      -1.981       1.436
-stalled_plan_count                              0.0334      0.206      0.163      0.871      -0.370       0.436
-latest_health_score                            -0.5014      0.625     -0.802      0.422      -1.726       0.723
-latest_nutrition_score                         -0.2789      0.613     -0.455      0.649      -1.481       0.923
-latest_sleep_quality_score                      0.1857      1.029      0.180      0.857      -1.831       2.202
-health_trend                                   -1.1502      2.104     -0.547      0.585      -5.274       2.974
-latest_attendance_rate                         -1.3409      1.682     -0.797      0.425      -4.638       1.956
-is_enrolled                                     4.1882      6.467      0.648      0.517      -8.487      16.864
-initial_risk_level_numeric                     -0.1927      0.402     -0.479      0.632      -0.981       0.596
-current_risk_level_numeric                      0.6613      0.781      0.846      0.397      -0.870       2.193
-last_emotional_state_numeric                    0.0249      0.065      0.386      0.700      -0.102       0.152
-age_upon_admission_months                      -0.0300      0.024     -1.262      0.207      -0.077       0.017
-present_age_months                              0.0163      0.038      0.425      0.671      -0.059       0.091
-is_pwd_or_special_needs                        -0.2139      0.435     -0.492      0.623      -1.066       0.638
-family_vulnerability_index                      0.1806      0.205      0.882      0.378      -0.221       0.582
-session_gap_concerning                          0.5113      0.536      0.955      0.340      -0.538       1.561
-stalled_safety_plan                             0.2652      0.547      0.485      0.628      -0.806       1.337
-intervention_intensity                         -0.3964      0.231     -1.715      0.086      -0.849       0.057
-emotional_state_score                           0.0249      0.065      0.386      0.700      -0.102       0.152
-health_declining                               -0.2214      0.281     -0.788      0.431      -0.773       0.330
-education_disengaged                           -0.0564      1.055     -0.053      0.957      -2.125       2.012
-multi_domain_decline                           -0.0872      0.168     -0.518      0.604      -0.417       0.243
-sleep_quality_low                              -0.2208      0.223     -0.991      0.322      -0.657       0.216
-safehouse_high_incident_month                  -0.0544      0.448     -0.121      0.904      -0.933       0.825
-safehouse_understaffed                         -2.0450      2.901     -0.705      0.481      -7.730       3.640
-risk_x_occupancy                               -1.0443      1.071     -0.975      0.330      -3.144       1.056
-concerns_x_session_gap                         -0.0226      0.040     -0.565      0.572      -0.101       0.056
-reintegration_in_progress                      -0.2695      0.704     -0.383      0.702      -1.649       1.110
-reintegration_x_emotional                       0.2628      0.369      0.712      0.476      -0.460       0.986
-decline_x_trauma                               -0.1745      0.337     -0.518      0.604      -0.834       0.485
-incident_type_ConflictWithPeer                 -0.3171      0.373     -0.850      0.395      -1.048       0.414
-incident_type_Medical                          -0.2520      0.303     -0.832      0.405      -0.845       0.341
-incident_type_PropertyDamage                    0.0844      0.636      0.133      0.894      -1.161       1.330
-incident_type_Security                         -0.3029      0.372     -0.815      0.415      -1.031       0.426
-incident_type_SelfHarm                          0.1997      0.246      0.813      0.416      -0.282       0.681
-case_category_Foundling                         1.2867      1.395      0.923      0.356      -1.447       4.020
-case_category_Neglected                         1.0161      0.456      2.227      0.026       0.122       1.910
-case_category_Surrendered                       1.4109      0.847      1.665      0.096      -0.250       3.071
-reintegration_type_Adoption (Inter-Country)     0.8367      0.522      1.603      0.109      -0.186       1.860
-reintegration_type_Family Reunification         0.4524      0.735      0.615      0.538      -0.989       1.894
-reintegration_type_Foster Care                  1.4331      1.835      0.781      0.435      -2.164       5.030
-reintegration_type_Independent Living           1.4252      0.714      1.995      0.046       0.025       2.825
-reintegration_type_None                         2.4831      1.014      2.449      0.014       0.495       4.471
-reintegration_status_In Progress               -0.2695      0.704     -0.383      0.702      -1.649       1.110
-reintegration_status_Not Started               -0.5367      1.094     -0.490      0.624      -2.681       1.608
-reintegration_status_On Hold                   -1.0909      1.224     -0.891      0.373      -3.491       1.309
-referral_source_Court Order                    -0.5452      0.752     -0.725      0.468      -2.019       0.929
-referral_source_Government Agency               1.2565      1.368      0.919      0.358      -1.424       3.938
-referral_source_NGO                             1.5423      1.191      1.295      0.195      -0.791       3.876
-referral_source_Police                         -0.2972      1.118     -0.266      0.790      -2.488       1.894
-referral_source_Self-Referral                  -0.3882      0.861     -0.451      0.652      -2.075       1.299
+resolved                                        0.7297      0.248      2.938      0.003       0.243       1.216
+follow_up_required                              0.9083      0.265      3.423      0.001       0.388       1.428
+is_pwd                                          0.8666      0.500      1.731      0.083      -0.114       1.848
+has_special_needs                              -0.8159      0.376     -2.169      0.030      -1.553      -0.079
+family_is_4ps                                  -0.3283      0.439     -0.748      0.454      -1.188       0.531
+family_solo_parent                              0.4547      0.285      1.596      0.111      -0.104       1.013
+family_indigenous                              -0.1009      0.465     -0.217      0.828      -1.012       0.810
+family_parent_pwd                               0.0248      0.820      0.030      0.976      -1.582       1.632
+trauma_complexity_index                         0.0949      0.163      0.582      0.560      -0.225       0.414
+capacity_girls                                 -0.3076      0.301     -1.021      0.307      -0.898       0.283
+current_occupancy                              -0.1520      0.134     -1.137      0.256      -0.414       0.110
+active_residents                                0.9082      0.567      1.603      0.109      -0.202       2.019
+avg_health_score                               -0.0622      0.512     -0.121      0.903      -1.065       0.941
+process_recording_count                        -0.0185      0.018     -1.039      0.299      -0.053       0.016
+home_visitation_count                          -0.0656      0.049     -1.338      0.181      -0.162       0.031
+incident_count                                  0.1192      0.236      0.506      0.613      -0.343       0.581
+occupancy_rate                                 -6.1634      6.611     -0.932      0.351     -19.122       6.795
+session_count_last_14d                          0.0856      0.085      1.012      0.311      -0.080       0.251
+session_count_last_30d                         -0.0293      0.033     -0.888      0.375      -0.094       0.035
+any_concerns_flagged_last_30d                   0.1145      0.327      0.350      0.726      -0.526       0.755
+any_referral_made_last_30d                     -0.0951      0.204     -0.466      0.641      -0.495       0.305
+active_plan_count                              -0.2234      0.136     -1.639      0.101      -0.491       0.044
+latest_health_score                             0.2708      0.380      0.713      0.476      -0.474       1.015
+latest_nutrition_score                         -0.3347      0.460     -0.728      0.467      -1.236       0.567
+latest_sleep_quality_score                      0.3806      0.676      0.563      0.573      -0.944       1.705
+health_trend                                   -1.3375      1.478     -0.905      0.365      -4.234       1.559
+latest_attendance_rate                         -1.0034      1.133     -0.885      0.376      -3.225       1.218
+is_enrolled                                     2.1267      2.650      0.803      0.422      -3.067       7.320
+initial_risk_level_numeric                     -0.0353      0.160     -0.221      0.825      -0.349       0.279
+current_risk_level_numeric                      0.2787      0.347      0.803      0.422      -0.402       0.959
+is_pwd_or_special_needs                         0.0507      0.232      0.218      0.827      -0.404       0.505
+family_vulnerability_index                      0.0359      0.333      0.108      0.914      -0.616       0.688
+session_gap_concerning                          0.3785      0.522      0.725      0.468      -0.644       1.401
+stalled_safety_plan                             0.2491      0.304      0.820      0.412      -0.346       0.844
+intervention_intensity                         -0.2234      0.136     -1.639      0.101      -0.491       0.044
+emotional_state_score                           0.0091      0.115      0.079      0.937      -0.216       0.235
+health_declining                               -0.1013      0.215     -0.471      0.637      -0.523       0.320
+education_disengaged                            0.0804      0.790      0.102      0.919      -1.468       1.629
+multi_domain_decline                           -0.1212      0.072     -1.683      0.092      -0.262       0.020
+sleep_quality_low                              -0.1466      0.224     -0.653      0.514      -0.587       0.293
+safehouse_high_incident_month                  -0.3303      0.324     -1.019      0.308      -0.966       0.305
+safehouse_understaffed                         -0.0134      1.107     -0.012      0.990      -2.183       2.156
+risk_x_occupancy                               -0.4736      0.499     -0.950      0.342      -1.451       0.504
+concerns_x_session_gap                         -0.0167      0.033     -0.513      0.608      -0.081       0.047
+reintegration_in_progress                      -0.0044      0.172     -0.026      0.979      -0.341       0.332
+emotional_declining                            -0.0909      0.328     -0.277      0.782      -0.734       0.552
+reintegration_x_emotional                       0.3388      0.280      1.210      0.226      -0.210       0.888
+decline_x_trauma                               -0.2424      0.144     -1.683      0.092      -0.525       0.040
+incident_type_ConflictWithPeer                 -0.1868      0.305     -0.612      0.540      -0.785       0.411
+incident_type_Medical                          -0.4016      0.284     -1.414      0.157      -0.958       0.155
+incident_type_PropertyDamage                   -0.0238      0.446     -0.053      0.957      -0.898       0.851
+incident_type_RunawayAttempt                    0.0360      0.354      0.102      0.919      -0.657       0.730
+incident_type_Security                         -0.2309      0.250     -0.924      0.355      -0.720       0.259
+incident_type_SelfHarm                          0.2564      0.259      0.990      0.322      -0.251       0.764
+case_category_Foundling                         0.7917      0.391      2.024      0.043       0.025       1.558
+case_category_Neglected                         0.5074      0.596      0.852      0.394      -0.660       1.675
+case_category_Surrendered                       0.6768      0.272      2.485      0.013       0.143       1.211
+reintegration_type_Adoption (Inter-Country)     0.4348      0.274      1.585      0.113      -0.103       0.972
+reintegration_type_Family Reunification        -0.3399      0.384     -0.886      0.376      -1.092       0.412
+reintegration_type_Foster Care                  0.3630      0.232      1.563      0.118      -0.092       0.818
+reintegration_type_Independent Living           0.4977      0.507      0.982      0.326      -0.496       1.491
+reintegration_type_None                         1.1077      0.845      1.312      0.190      -0.548       2.763
+reintegration_status_In Progress               -0.0044      0.172     -0.026      0.979      -0.341       0.332
+reintegration_status_Not Started               -0.2018      0.268     -0.752      0.452      -0.728       0.324
+reintegration_status_On Hold                   -0.3655      0.337     -1.084      0.278      -1.026       0.295
+referral_source_Court Order                     0.0629      0.516      0.122      0.903      -0.947       1.073
+referral_source_Government Agency               1.0299      0.890      1.157      0.247      -0.715       2.775
+referral_source_NGO                             0.9086      0.738      1.232      0.218      -0.537       2.354
+referral_source_Police                          0.1073      0.534      0.201      0.841      -0.940       1.154
+referral_source_Self-Referral                   0.2662      0.582      0.458      0.647      -0.874       1.407
 ==============================================================================
-Omnibus:                        1.069   Durbin-Watson:                   2.587
-Prob(Omnibus):                  0.586   Jarque-Bera (JB):                1.155
-Skew:                           0.201   Prob(JB):                        0.561
-Kurtosis:                       2.631   Cond. No.                     1.21e+16
+Omnibus:                        2.053   Durbin-Watson:                   2.547
+Prob(Omnibus):                  0.358   Jarque-Bera (JB):                2.009
+Skew:                           0.348   Prob(JB):                        0.366
+Kurtosis:                       2.813   Cond. No.                     1.20e+16
 ==============================================================================
 
 Notes:
 [1] Standard Errors are robust to cluster correlation (cluster)
-[2] The smallest eigenvalue is 4.41e-26. This might indicate that there are
+[2] The smallest eigenvalue is 3.54e-28. This might indicate that there are
 strong multicollinearity problems or that the design matrix is singular.

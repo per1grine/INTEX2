@@ -1,0 +1,8 @@
+{
+  "tiers": {
+    "High Risk": 0.7,
+    "Medium Risk": 0.4,
+    "Low Risk": 0.0
+  },
+  "optimal_threshold": 0.3500000000000001
+}

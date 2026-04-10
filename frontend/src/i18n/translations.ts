@@ -1045,7 +1045,7 @@ export const en: Translations = {
   donorsDeleteTitle: "Delete Donor",
   donorsDeleteConfirm: "Are you sure you want to delete this donor?",
   // Caseload extras
-  caseloadSubtitle: "Resident profiles following Philippine social welfare agency standards.",
+  caseloadSubtitle: "Resident profiles following Columbia's social welfare agency standards.",
   caseloadNewRecord: "New Record",
   caseloadNewResidentRecord: "New Resident Record",
   caseloadNoRecordsFound: "No records found",

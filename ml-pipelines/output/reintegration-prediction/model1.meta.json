@@ -1,15 +1,60 @@
 {
-  "selected_model_name": "Random Forest",
-  "target_col": "readiness_will_transition_180d",
-  "prediction_horizon_days": 180,
+  "selected_model_name": "Composite Readiness Score",
+  "scoring_method": "composite_readiness",
+  "target_col": "composite_readiness_score",
   "readiness_categories": {
     "Approaching Readiness": 0.7,
     "Building Readiness": 0.45,
     "Early Signals": 0.25,
     "Not Yet Indicated": 0.0
   },
-  "uncertainty_band_width_threshold": 0.3,
-  "single_class_training": true,
+  "domain_weights": {
+    "emotional": 0.16666666666666666,
+    "family": 0.16666666666666666,
+    "therapeutic": 0.16666666666666666,
+    "behavioral": 0.16666666666666666,
+    "health": 0.16666666666666666,
+    "educational": 0.16666666666666666
+  },
+  "domain_feature_prefixes": {
+    "emotional": [
+      "ew_"
+    ],
+    "family": [
+      "fe_"
+    ],
+    "therapeutic": [
+      "tp_",
+      "ar_"
+    ],
+    "behavioral": [
+      "bs_"
+    ],
+    "health": [
+      "ph_"
+    ],
+    "educational": [
+      "ed_"
+    ]
+  },
+  "flip_columns": [
+    "ew_days_since_last_session",
+    "ew_concern_flagged_last_30d",
+    "ew_referral_made_last_90d",
+    "fe_days_since_last_visit",
+    "fe_safety_concerns_ever",
+    "fe_safety_concerns_last_90d",
+    "fe_follow_up_needed_last_visit",
+    "tp_has_overdue_plan",
+    "tp_days_since_last_case_conference",
+    "tp_days_since_last_plan_update",
+    "bs_total_incidents",
+    "bs_incidents_last_30d",
+    "bs_incidents_last_90d",
+    "bs_high_severity_count",
+    "bs_has_unresolved_incident",
+    "ph_days_since_last_health_record"
+  ],
   "feature_count": 89,
   "features": [
     "ew_sessions_last_30d",
@@ -195,12 +240,5 @@
   "train_size": 220,
   "test_size": 127,
   "train_cutoff_boundary": "2025-07-01",
-  "cv_folds": 5,
-  "test_metrics": {
-    "accuracy": 1.0,
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1": 0.0
-  },
   "saved_model": "model1.sav"
 }

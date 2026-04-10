@@ -1,6 +1,6 @@
 {
   "pipeline": "Reintegration Readiness Explanatory",
-  "date_fitted": "2026-04-08 16:28:02.282176",
+  "date_fitted": "2026-04-09 20:46:51.057651",
   "n_observations": 60,
   "primary_model": {
     "type": "Logistic Regression",
@@ -13,6 +13,6 @@
   "tertiary_model": {
     "type": "OLS Regression",
     "available": true,
-    "adj_r2": -0.0403
+    "adj_r2": -0.0415
   }
 }

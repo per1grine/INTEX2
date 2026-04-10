@@ -1,17 +1,17 @@
 {
   "logistic_regression": {
-    "pseudo_r_squared": 0.99999991892332,
-    "aic": 136.0000089359462,
-    "bic": 313.1515815831364,
+    "pseudo_r_squared": 0.9999976785612328,
+    "aic": 134.0002558596618,
+    "bic": 308.5466583208639,
     "n_observations": 100,
-    "significant_features": 0
+    "significant_features": -1
   },
   "ols_regression": {
-    "r_squared": 0.84932437497419,
-    "adj_r_squared": 0.46684009606251853,
-    "aic": 78.07532098856237,
-    "bic": 247.75948702983052,
+    "r_squared": 0.8308069362774964,
+    "adj_r_squared": 0.42349030138998756,
+    "aic": 86.8550536839526,
+    "bic": 254.00662023206755,
     "n_observations": 93,
-    "significant_features": 6
+    "significant_features": 4
   }
 }

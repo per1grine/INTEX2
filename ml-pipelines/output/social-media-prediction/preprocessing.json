@@ -1,0 +1,80 @@
+{
+  "imputation_map": {},
+  "log_transformed": {
+    "mentions_count": "log1p_mentions_count",
+    "boost_budget_php": "log1p_boost_budget_php",
+    "campaign_hist_avg_donation": "log1p_campaign_hist_avg_donation",
+    "platform_avg_donation_last_30d": "log1p_platform_avg_donation_last_30d",
+    "org_total_donation_value_last_30d": "log1p_org_total_donation_value_last_30d",
+    "org_avg_donation_value_last_90d": "log1p_org_avg_donation_value_last_90d",
+    "active_supporters_count": "log1p_active_supporters_count"
+  },
+  "known_categories": {
+    "platform": [
+      "Tiktok",
+      "Twitter",
+      "Youtube",
+      "Whatsapp",
+      "Linkedin",
+      "Instagram",
+      "Facebook"
+    ],
+    "post_type": [
+      "Campaign",
+      "Thankyou",
+      "Eventpromotion",
+      "Educationalcontent",
+      "Fundraisingappeal",
+      "Impactstory"
+    ],
+    "media_type": [
+      "Reel",
+      "Video",
+      "Text",
+      "Carousel",
+      "Photo"
+    ],
+    "sentiment_tone": [
+      "Grateful",
+      "Urgent",
+      "Informative",
+      "Hopeful",
+      "Celebratory",
+      "Emotional"
+    ],
+    "content_topic": [
+      "Donorimpact",
+      "Eventrecap",
+      "Safehouselife",
+      "Campaignlaunch",
+      "Education",
+      "Awarenessraising",
+      "Reintegration",
+      "Gratitude",
+      "Health"
+    ],
+    "call_to_action_type": [
+      "Sharestory",
+      "None",
+      "Learnmore",
+      "Signup",
+      "Donatenow"
+    ],
+    "campaign_name": [
+      "Givingtuesday",
+      "Summer Of Safety",
+      "Year-End Hope",
+      "Back To School",
+      "Nocampaign"
+    ],
+    "day_of_week": [
+      "Thursday",
+      "Tuesday",
+      "Monday",
+      "Sunday",
+      "Friday",
+      "Saturday",
+      "Wednesday"
+    ]
+  }
+}

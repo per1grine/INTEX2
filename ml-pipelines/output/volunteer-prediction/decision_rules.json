@@ -2,67 +2,67 @@
   {
     "supporter_id": "22",
     "display_name": "Nico Vasquez",
-    "probability": 0.0192,
+    "probability": 0.014,
     "tier": "Red"
   },
   {
     "supporter_id": "19",
     "display_name": "Nora Singh",
-    "probability": 0.0166,
+    "probability": 0.0135,
     "tier": "Red"
   },
   {
     "supporter_id": "53",
     "display_name": "Dina DelosReyes",
-    "probability": 0.0025,
+    "probability": 0.0034,
     "tier": "Red"
   },
   {
     "supporter_id": "56",
     "display_name": "Lyle Gomez",
-    "probability": 0.0021,
-    "tier": "Red"
-  },
-  {
-    "supporter_id": "9",
-    "display_name": "Sophia Ibrahim",
-    "probability": 0.0017,
+    "probability": 0.0033,
     "tier": "Red"
   },
   {
     "supporter_id": "10",
     "display_name": "Lucas Jones",
-    "probability": 0.0014,
+    "probability": 0.0016,
     "tier": "Red"
   },
   {
-    "supporter_id": "49",
-    "display_name": "Faye Yu",
-    "probability": 0.0006,
-    "tier": "Red"
-  },
-  {
-    "supporter_id": "15",
-    "display_name": "Zoe Ortiz",
-    "probability": 0.0004,
+    "supporter_id": "9",
+    "display_name": "Sophia Ibrahim",
+    "probability": 0.001,
     "tier": "Red"
   },
   {
     "supporter_id": "48",
     "display_name": "Ian Xu",
-    "probability": 0.0004,
+    "probability": 0.0003,
+    "tier": "Red"
+  },
+  {
+    "supporter_id": "15",
+    "display_name": "Zoe Ortiz",
+    "probability": 0.0003,
     "tier": "Red"
   },
   {
     "supporter_id": "2",
     "display_name": "Aria Brown",
-    "probability": 0.0002,
+    "probability": 0.0003,
+    "tier": "Red"
+  },
+  {
+    "supporter_id": "49",
+    "display_name": "Faye Yu",
+    "probability": 0.0003,
     "tier": "Red"
   },
   {
     "supporter_id": "54",
     "display_name": "Sara Escobar",
-    "probability": 0.0002,
+    "probability": 0.0003,
     "tier": "Red"
   },
   {

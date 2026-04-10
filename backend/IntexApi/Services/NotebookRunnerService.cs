@@ -99,6 +99,7 @@ public sealed class NotebookRunnerService(
         // only do a full retrain if any model is missing (first-ever run).
         var nbDir = ResolveDir(mlOptions.Value.NotebooksDir);
         var outputDir = Path.GetFullPath(Path.Combine(nbDir, "..", "output"));
+        // Score-only refresh loads model1.sav from output/<prediction-notebook-key>/ (flat or models/).
         var allModelsExist = PredictionNotebooks.All(nb =>
             File.Exists(Path.Combine(outputDir, nb, "model1.sav"))
             || File.Exists(Path.Combine(outputDir, nb, "models", "model1.sav")));
@@ -158,6 +159,9 @@ public sealed class NotebookRunnerService(
         logger.LogInformation("ML: starting {notebook} ({mode})", notebookKey, mode);
         await SetStatusAsync(notebookKey, "running", null, null);
 
+        // NotebooksDir must be .../ml-pipelines/pipeline (folder containing .ipynb files).
+        // Artifacts are read from ml-pipelines/output/<notebook-key>/ — same names as AllNotebooks
+        // (e.g. donor-acquisition-prediction/model1.sav, donor-acquisition-explanatory/model1.sav).
         var outputRoot = Path.GetFullPath(Path.Combine(nbDir, "..", "output"));
 
         try
@@ -166,6 +170,7 @@ public sealed class NotebookRunnerService(
             if (scoreOnly)
             {
                 var outDir = Path.Combine(outputRoot, notebookKey);
+                // Primary: flat layout (current notebooks write here). Fallback: legacy models/ subfolder.
                 var modelPath = Path.Combine(outDir, "model1.sav");
                 var modelPathAlt = Path.Combine(outDir, "models", "model1.sav");
                 if (!File.Exists(modelPath) && !File.Exists(modelPathAlt))

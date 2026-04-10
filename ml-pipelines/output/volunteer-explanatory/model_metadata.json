@@ -7,7 +7,7 @@
   "n_features_after_vif": 22,
   "vif_threshold": 10,
   "significance_level": 0.05,
-  "ols_r_squared": 0.9798638249691138,
+  "ols_r_squared": 0.979863824969114,
   "ols_features": 22,
   "logit_available": false
 }

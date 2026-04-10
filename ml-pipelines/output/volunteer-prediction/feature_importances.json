@@ -2,425 +2,345 @@
   "growth": [
     {
       "feature": "v_avg_estimated_value_log",
-      "importance": 0.1534245847086532,
+      "importance": 0.1578613435581413,
       "rank": 1
     },
     {
       "feature": "v_days_between_contributions_avg_log",
-      "importance": 0.12659878094957674,
+      "importance": 0.132116540231173,
       "rank": 2
     },
     {
       "feature": "v_value_last_90d_log",
-      "importance": 0.10001426407795887,
+      "importance": 0.1050274032296483,
       "rank": 3
     },
     {
       "feature": "v_days_between_contributions_cv",
-      "importance": 0.08181058057193442,
+      "importance": 0.0836365139725029,
       "rank": 4
     },
     {
-      "feature": "v_total_estimated_value",
-      "importance": 0.06387637137457552,
+      "feature": "ix_breadth_x_tenure",
+      "importance": 0.07643974852536373,
       "rank": 5
     },
     {
-      "feature": "ix_partner_recency",
-      "importance": 0.05860168843430793,
+      "feature": "v_total_estimated_value",
+      "importance": 0.05301315205173417,
       "rank": 6
     },
     {
-      "feature": "v_tenure_days",
-      "importance": 0.05666290347495053,
+      "feature": "ix_partner_recency",
+      "importance": 0.047677369822395115,
       "rank": 7
     },
     {
-      "feature": "ix_breadth_x_tenure",
-      "importance": 0.04368088541707845,
+      "feature": "v_tenure_days",
+      "importance": 0.04731085728122451,
       "rank": 8
     },
     {
       "feature": "v_avg_item_value",
-      "importance": 0.04361307331419302,
+      "importance": 0.04298742319879722,
       "rank": 9
     },
     {
       "feature": "v_contributions_last_180d",
-      "importance": 0.04278132670729874,
+      "importance": 0.0396835847944672,
       "rank": 10
     },
     {
-      "feature": "v_contributions_last_90d",
-      "importance": 0.041216711333301286,
+      "feature": "v_distinct_program_areas",
+      "importance": 0.03928755993286244,
       "rank": 11
     },
     {
       "feature": "v_total_contributions",
-      "importance": 0.0402808406438084,
+      "importance": 0.03659386083178312,
       "rank": 12
     },
     {
-      "feature": "v_campaign_response_rate_last_180d",
-      "importance": 0.023874467353681393,
+      "feature": "v_days_since_last_contribution",
+      "importance": 0.03469901758196599,
       "rank": 13
     },
     {
-      "feature": "ix_campaign_frequency",
-      "importance": 0.020977119603763385,
+      "feature": "v_contributions_last_90d",
+      "importance": 0.03446523107978361,
       "rank": 14
     },
     {
-      "feature": "v_distinct_program_areas",
-      "importance": 0.020070956933174795,
+      "feature": "v_campaign_response_rate_last_180d",
+      "importance": 0.030174443335535202,
       "rank": 15
     },
     {
-      "feature": "v_days_since_last_contribution",
-      "importance": 0.019513347673933222,
+      "feature": "v_distinct_donation_types",
+      "importance": 0.015416255119393598,
       "rank": 16
     },
     {
-      "feature": "v_distinct_donation_types",
-      "importance": 0.016820793673050356,
+      "feature": "v_total_in_kind_value_log",
+      "importance": 0.010438891046802762,
       "rank": 17
     },
     {
-      "feature": "v_relationship_type_local",
-      "importance": 0.014337344485892717,
+      "feature": "v_partner_tenure_days",
+      "importance": 0.004596702683515991,
       "rank": 18
     },
     {
-      "feature": "v_acquisition_channel_event",
-      "importance": 0.010997535190162095,
+      "feature": "ix_campaign_frequency",
+      "importance": 0.0035944410797420553,
       "rank": 19
     },
     {
-      "feature": "v_total_in_kind_value_log",
-      "importance": 0.003976816885446688,
+      "feature": "v_partner_assignment_count",
+      "importance": 0.0024524730527749035,
       "rank": 20
     },
     {
-      "feature": "v_partner_tenure_days",
-      "importance": 0.0038453365297680215,
+      "feature": "v_value_trend",
+      "importance": 0.001524531602514911,
       "rank": 21
     },
     {
-      "feature": "v_supporter_type_volunteer",
-      "importance": 0.003136680360335713,
+      "feature": "v_campaigns_participated",
+      "importance": 0.0004061546144813631,
       "rank": 22
     },
     {
-      "feature": "v_partner_assignment_count",
-      "importance": 0.002949867747762921,
+      "feature": "v_in_kind_contribution_count",
+      "importance": 0.0002651194111753555,
       "rank": 23
     },
     {
-      "feature": "v_country_philippines",
-      "importance": 0.0025930084871010803,
+      "feature": "v_distinct_item_categories",
+      "importance": 0.0001646130951542588,
       "rank": 24
     },
     {
-      "feature": "v_value_trend",
-      "importance": 0.0013643093783038127,
+      "feature": "v_has_skills_donation",
+      "importance": 0.00012488191112608232,
       "rank": 25
     },
     {
-      "feature": "v_acquisition_channel_partnerreferral",
-      "importance": 0.001049092496820495,
+      "feature": "v_has_monetary_donation",
+      "importance": 4.120476500736812e-05,
       "rank": 26
     },
     {
-      "feature": "v_has_skills_donation",
-      "importance": 0.0005464081669563477,
-      "rank": 27
-    },
-    {
-      "feature": "v_region_visayas",
-      "importance": 0.00047268275277518733,
-      "rank": 28
-    },
-    {
       "feature": "v_has_in_kind_donation",
-      "importance": 0.00046432055460037295,
-      "rank": 29
-    },
-    {
-      "feature": "v_in_kind_contribution_count",
-      "importance": 0.00023583548417920256,
-      "rank": 30
-    },
-    {
-      "feature": "v_distinct_item_categories",
-      "importance": 0.00010981875997872432,
-      "rank": 31
-    },
-    {
-      "feature": "v_campaigns_participated",
-      "importance": 0.00010224647467636988,
-      "rank": 32
-    },
-    {
-      "feature": "v_has_monetary_donation",
-      "importance": 0.0,
-      "rank": 33
+      "importance": 6.82190933559259e-07,
+      "rank": 27
     },
     {
       "feature": "v_frequency_trend",
       "importance": 0.0,
-      "rank": 34
+      "rank": 28
     },
     {
-      "feature": "v_country_usa",
+      "feature": "v_acquisition_channel",
       "importance": 0.0,
-      "rank": 35
+      "rank": 29
     },
     {
-      "feature": "v_country_singapore",
+      "feature": "v_relationship_type",
       "importance": 0.0,
-      "rank": 36
+      "rank": 30
     },
     {
-      "feature": "v_relationship_type_partnerorganization",
+      "feature": "v_supporter_type",
       "importance": 0.0,
-      "rank": 37
+      "rank": 31
     },
     {
-      "feature": "v_region_mindanao",
+      "feature": "v_country",
       "importance": 0.0,
-      "rank": 38
+      "rank": 32
     },
     {
-      "feature": "v_acquisition_channel_wordofmouth",
+      "feature": "v_region",
       "importance": 0.0,
-      "rank": 39
-    },
-    {
-      "feature": "v_acquisition_channel_website",
-      "importance": 0.0,
-      "rank": 40
-    },
-    {
-      "feature": "v_acquisition_channel_socialmedia",
-      "importance": 0.0,
-      "rank": 41
+      "rank": 33
     },
     {
       "feature": "ix_engagement_momentum",
       "importance": 0.0,
-      "rank": 42
+      "rank": 34
     }
   ],
   "dropout": [
     {
       "feature": "v_days_between_contributions_avg_log",
-      "importance": 0.2526758212307218,
+      "importance": 0.27048613670719057,
       "rank": 1
     },
     {
       "feature": "ix_breadth_x_tenure",
-      "importance": 0.09181094753432675,
+      "importance": 0.0931516811192484,
       "rank": 2
     },
     {
-      "feature": "v_total_contributions",
-      "importance": 0.07817908383916497,
+      "feature": "v_avg_estimated_value_log",
+      "importance": 0.08061402709248516,
       "rank": 3
     },
     {
-      "feature": "v_avg_estimated_value_log",
-      "importance": 0.07816363981588843,
+      "feature": "v_total_contributions",
+      "importance": 0.07591435518790093,
       "rank": 4
     },
     {
       "feature": "v_tenure_days",
-      "importance": 0.07493043370952002,
+      "importance": 0.0674294957902275,
       "rank": 5
     },
     {
-      "feature": "v_value_last_90d_log",
-      "importance": 0.04780822969791661,
+      "feature": "ix_campaign_frequency",
+      "importance": 0.04481295452254089,
       "rank": 6
     },
     {
       "feature": "v_value_trend",
-      "importance": 0.04293628763418742,
+      "importance": 0.04160241907564635,
       "rank": 7
     },
     {
-      "feature": "ix_campaign_frequency",
-      "importance": 0.03186956759660387,
+      "feature": "v_value_last_90d_log",
+      "importance": 0.03937879112888426,
       "rank": 8
     },
     {
       "feature": "v_contributions_last_180d",
-      "importance": 0.031785233280584795,
+      "importance": 0.03670250318068435,
       "rank": 9
     },
     {
-      "feature": "v_partner_assignment_count",
-      "importance": 0.031071117226401882,
+      "feature": "v_partner_tenure_days",
+      "importance": 0.03064422992596341,
       "rank": 10
     },
     {
-      "feature": "v_acquisition_channel_event",
-      "importance": 0.02661470052598408,
+      "feature": "v_distinct_program_areas",
+      "importance": 0.026886523160452997,
       "rank": 11
     },
     {
-      "feature": "v_days_since_last_contribution",
-      "importance": 0.02583495853084138,
+      "feature": "v_contributions_last_90d",
+      "importance": 0.025430382703458397,
       "rank": 12
     },
     {
-      "feature": "v_distinct_program_areas",
-      "importance": 0.0252955635937427,
+      "feature": "v_partner_assignment_count",
+      "importance": 0.024786990678093104,
       "rank": 13
     },
     {
-      "feature": "v_campaign_response_rate_last_180d",
-      "importance": 0.02496859184344555,
+      "feature": "ix_partner_recency",
+      "importance": 0.024705219901146405,
       "rank": 14
     },
     {
-      "feature": "v_contributions_last_90d",
-      "importance": 0.024541881774986014,
+      "feature": "v_campaign_response_rate_last_180d",
+      "importance": 0.023723342319377606,
       "rank": 15
     },
     {
-      "feature": "v_partner_tenure_days",
-      "importance": 0.02285930643237049,
+      "feature": "v_total_estimated_value",
+      "importance": 0.021312583961413722,
       "rank": 16
     },
     {
-      "feature": "ix_partner_recency",
-      "importance": 0.02118003336818484,
+      "feature": "v_avg_item_value",
+      "importance": 0.012265681666364351,
       "rank": 17
     },
     {
-      "feature": "v_total_estimated_value",
-      "importance": 0.019531344275967217,
+      "feature": "v_frequency_trend",
+      "importance": 0.011219143974870872,
       "rank": 18
     },
     {
-      "feature": "v_avg_item_value",
-      "importance": 0.012396850758491212,
+      "feature": "v_has_skills_donation",
+      "importance": 0.01032094750285025,
       "rank": 19
     },
     {
-      "feature": "v_frequency_trend",
-      "importance": 0.011198949851489162,
+      "feature": "v_days_since_last_contribution",
+      "importance": 0.009255930082468123,
       "rank": 20
     },
     {
-      "feature": "v_total_in_kind_value_log",
-      "importance": 0.0068621502582560875,
+      "feature": "v_distinct_donation_types",
+      "importance": 0.008248767538464504,
       "rank": 21
     },
     {
-      "feature": "ix_engagement_momentum",
-      "importance": 0.004521555594438131,
+      "feature": "v_total_in_kind_value_log",
+      "importance": 0.005597942493112687,
       "rank": 22
     },
     {
-      "feature": "v_distinct_donation_types",
-      "importance": 0.0038520489773695796,
+      "feature": "v_distinct_item_categories",
+      "importance": 0.0044518466570568,
       "rank": 23
     },
     {
-      "feature": "v_has_skills_donation",
-      "importance": 0.0021919631202909763,
+      "feature": "ix_engagement_momentum",
+      "importance": 0.004197473300718054,
       "rank": 24
     },
     {
-      "feature": "v_acquisition_channel_partnerreferral",
-      "importance": 0.0015809729115022805,
+      "feature": "v_days_between_contributions_cv",
+      "importance": 0.0035435916715657635,
       "rank": 25
     },
     {
-      "feature": "v_days_between_contributions_cv",
-      "importance": 0.0015584667776433355,
+      "feature": "v_in_kind_contribution_count",
+      "importance": 0.0031851661676715855,
       "rank": 26
     },
     {
-      "feature": "v_distinct_item_categories",
-      "importance": 0.0015002820960234304,
+      "feature": "v_campaigns_participated",
+      "importance": 0.00013187249014306193,
       "rank": 27
-    },
-    {
-      "feature": "v_region_visayas",
-      "importance": 0.0008434988259140595,
-      "rank": 28
-    },
-    {
-      "feature": "v_supporter_type_volunteer",
-      "importance": 0.0006370755154166991,
-      "rank": 29
-    },
-    {
-      "feature": "v_relationship_type_local",
-      "importance": 0.00046792246031668896,
-      "rank": 30
-    },
-    {
-      "feature": "v_in_kind_contribution_count",
-      "importance": 0.00033152094200960956,
-      "rank": 31
     },
     {
       "feature": "v_has_monetary_donation",
       "importance": 0.0,
-      "rank": 32
-    },
-    {
-      "feature": "v_campaigns_participated",
-      "importance": 0.0,
-      "rank": 33
+      "rank": 28
     },
     {
       "feature": "v_has_in_kind_donation",
       "importance": 0.0,
+      "rank": 29
+    },
+    {
+      "feature": "v_acquisition_channel",
+      "importance": 0.0,
+      "rank": 30
+    },
+    {
+      "feature": "v_supporter_type",
+      "importance": 0.0,
+      "rank": 31
+    },
+    {
+      "feature": "v_country",
+      "importance": 0.0,
+      "rank": 32
+    },
+    {
+      "feature": "v_region",
+      "importance": 0.0,
+      "rank": 33
+    },
+    {
+      "feature": "v_relationship_type",
+      "importance": 0.0,
       "rank": 34
-    },
-    {
-      "feature": "v_country_usa",
-      "importance": 0.0,
-      "rank": 35
-    },
-    {
-      "feature": "v_country_singapore",
-      "importance": 0.0,
-      "rank": 36
-    },
-    {
-      "feature": "v_country_philippines",
-      "importance": 0.0,
-      "rank": 37
-    },
-    {
-      "feature": "v_region_mindanao",
-      "importance": 0.0,
-      "rank": 38
-    },
-    {
-      "feature": "v_relationship_type_partnerorganization",
-      "importance": 0.0,
-      "rank": 39
-    },
-    {
-      "feature": "v_acquisition_channel_wordofmouth",
-      "importance": 0.0,
-      "rank": 40
-    },
-    {
-      "feature": "v_acquisition_channel_socialmedia",
-      "importance": 0.0,
-      "rank": 41
-    },
-    {
-      "feature": "v_acquisition_channel_website",
-      "importance": 0.0,
-      "rank": 42
     }
   ]
 }

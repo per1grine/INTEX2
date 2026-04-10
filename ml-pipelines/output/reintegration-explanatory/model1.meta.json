@@ -1,0 +1,22 @@
+{
+  "pipeline": "ReintegrationExplanatory",
+  "model_type": "Logistic Regression (statsmodels, cluster-robust SE)",
+  "target_variable": "is_reintegration_active",
+  "pseudo_r_squared": 0.019287246632913257,
+  "log_likelihood": -37.454253755950624,
+  "n_obs": 60,
+  "n_features": 4,
+  "aic": 84.90850751190125,
+  "bic": 95.38023032301174,
+  "features": [
+    "recent_psych_checkup",
+    "composite_health_trend",
+    "current_attendance_rate",
+    "attendance_slope_3m"
+  ],
+  "saved_model": "model1.sav",
+  "secondary_model": "multinomial_result (reintegration_type, saved in Section 36)",
+  "tertiary_model": "ols_result (log_days_to_reintegration, saved in Section 36)",
+  "clustering": "safehouse_id (cluster-robust standard errors)",
+  "ethical_note": "Explanatory only \u2014 associations, not predictions. Do NOT use for individual risk scoring."
+}

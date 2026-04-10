@@ -1,0 +1,17 @@
+{
+  "days_since_last_donation": 0.077351,
+  "was_ever_recurring": 0.062958,
+  "ix__donor_tenure_days_x_recent_activity_vs_historical_avg": 0.056678,
+  "total_donation_count": 0.051646,
+  "days_since_last_campaign_donation": 0.048216,
+  "total_lifetime_value": 0.044337,
+  "ix__days_since_last_donation_x_donation_count_12m": 0.040942,
+  "days_since_last_inkind": 0.040455,
+  "inkind_category_count": 0.038472,
+  "donor_tenure_days": 0.037824,
+  "recent_activity_vs_historical_avg": 0.034199,
+  "supporter_type_MonetaryDonor": 0.034116,
+  "avg_inter_donation_days": 0.032843,
+  "max_gap_days": 0.029392,
+  "campaign_donation_pct": 0.028583
+}
